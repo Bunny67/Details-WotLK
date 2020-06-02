@@ -4063,6 +4063,11 @@ function _detalhes:RunScheduledEventsAfterCombat(OnRegenEnabled)
 	end
 end
 
+local function sair_do_combate()
+	_detalhes.tabela_vigente.playing_solo = true
+	_detalhes:SairDoCombate()
+end
+
 function _detalhes.parser_functions:PLAYER_REGEN_ENABLED(...)
 	if _detalhes.debug then
 		_detalhes:Msg("(debug) |cFFFFFF00PLAYER_REGEN_ENABLED|r event triggered.")
@@ -4086,8 +4091,7 @@ function _detalhes.parser_functions:PLAYER_REGEN_ENABLED(...)
 
 	--> playing alone, just finish the combat right now
 	if not _IsInGroup() and not IsInRaid() then
-		_detalhes.tabela_vigente.playing_solo = true
-		_detalhes:SairDoCombate()
+		C_Timer:After(1, sair_do_combate)
 	else
 		--is in a raid or party group
 		C_Timer:After(1, function()
