@@ -349,7 +349,7 @@ local check_for_encounter_start = function()
 			if bossindex and UnitAffectingCombat(unit_id) then
 				local _, _, _, _, maxPlayers = GetInstanceInfo()
 				local difficulty = GetInstanceDifficulty()
-				_detalhes.parser_functions:ENCOUNTER_START(encounterID, _detalhes:GetBossName(mapid, bossindex), difficulty, maxPlayers)
+				_detalhes.parser_functions:ENCOUNTER_START(_detalhes:GetBossEncounter(mapid, bossindex), _detalhes:GetBossName(mapid, bossindex), difficulty, maxPlayers)
 				break
 			elseif bossindex then
 				return true
