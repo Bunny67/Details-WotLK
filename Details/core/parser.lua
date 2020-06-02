@@ -771,7 +771,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		if(not spell) then
 			spell = este_jogador.spells:PegaHabilidade(spellid, true, token)
 			spell.spellschool = spelltype or school
-			if(_current_combat.is_boss and who_flags and _bit_band(who_flags, OBJECT_TYPE_ENEMY) ~= 0) then
+			if spellname and (_current_combat.is_boss and who_flags and _bit_band(who_flags, OBJECT_TYPE_ENEMY) ~= 0) then
 				_detalhes.spell_school_cache[spellname] = spelltype or school
 			end
 		end
@@ -1520,7 +1520,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			if(is_shield) then
 				spell.is_shield = true
 			end
-			if(_current_combat.is_boss and who_flags and _bit_band(who_flags, OBJECT_TYPE_ENEMY) ~= 0) then
+			if spellname and (_current_combat.is_boss and who_flags and _bit_band(who_flags, OBJECT_TYPE_ENEMY) ~= 0) then
 				_detalhes.spell_school_cache[spellname] = spelltype or school
 			end
 		end
