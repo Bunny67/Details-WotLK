@@ -713,14 +713,6 @@ DF.FlaskIDs = {
 	[60347] = true, -- Elixir of Mighty Thoughts
 	[53763] = true, -- Elixir of Protection
 	[53747] = true, -- Elixir of Spirit
-
-	-- Custom
-	[270006] = true, -- Настой сопротивления
-	[270007] = true, -- Настой Драконьего разума
-	[270008] = true, -- Настой Сила титана
-	[270009] = true, -- Настой Текущей воды
-	[270010] = true, -- Настой Стальной Кожи
-	[270011] = true, -- Настой Крепости
 }
 
 DF.FoodIDs = {
@@ -740,9 +732,6 @@ DF.FoodIDs = {
 	[57327] = 40, -- Firecracker Salmon/Tender Shoveltusk Steak
 	[57325] = 40, -- Mega Mammoth Meal/Poached Northern Sculpin
 	[57334] = 40, -- Mighty Rhino Dogs/Spicy Fried Herring
-
-	-- Custom
-	[300094] = 80, -- Рыбный пир со специями
 }
 
 DF.PotionIDs = {

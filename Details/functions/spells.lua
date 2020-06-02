@@ -1027,14 +1027,6 @@ do
 		[67260] = 15, -- 300000
 		[67259] = 15, -- 700000
 		[67261] = 15, -- 1200000
-
-		-- Custom
-		[304736] = 10, -- Priest, Divine Charm (T4), T4
-		[305082] = 30, -- Priest, Power Word: Shield (T4), T4
-		[308143] = 30, -- Priest, Power Word: Shield, Rank 15, T5
-		[307921] = 30, -- Paladin, Holy Barrier, T5
-		[308125] = 10, -- Death Knight, Ice Armor, T5
-		[308159] = 10, -- Live Barrier, Trinket
 	}
 
 	-- ~cooldown 1 self
