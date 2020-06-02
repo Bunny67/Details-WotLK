@@ -288,7 +288,7 @@ _detalhes.PrintEncounterRecord = function(self)
 	local encounterID = self.Boss
 	local diff = self.Diff
 
---	if(diff == 15 or diff == 16) then
+	if(diff == 15 or diff == 16) then
 
 		local value, rank, combatTime = 0, 0, 0
 
@@ -331,7 +331,7 @@ _detalhes.PrintEncounterRecord = function(self)
 			_detalhes:Msg("|cFFFF3300you may need sync the rank within the guild, type '|cFFFFFF00/details rank|r'|r") --> localize-me
 			_detalhes.SyncWarning = true
 		end
---	end
+	end
 
 end
 

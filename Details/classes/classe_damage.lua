@@ -34,7 +34,7 @@
 	local _string_replace = _detalhes.string.replace --details api
 
 	--show more information about spells
-	local debugmode = true
+	local debugmode = false
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --> constants
