@@ -31,7 +31,7 @@ ALPHA_BLEND_AMOUNT = 0.8400251
 
 DF.AuthorInfo = {
 	Name = "Terciob",
-	Discord = "https://discord.gg/Cbc6KUP",
+	Discord = "https://discord.gg/UXSc7nt",
 }
 
 function DF.IsClassicWow()

@@ -165,7 +165,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 		_detalhes:OpenNewsWindow()
 
 	elseif (command == "discord") then
-		_detalhes:CopyPaste ("https://discord.gg/Cbc6KUP")
+		_detalhes:CopyPaste ("https://discord.gg/UXSc7nt")
 
 
 	elseif (command == "debugwindow") then
