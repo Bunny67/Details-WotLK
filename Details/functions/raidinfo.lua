@@ -394,6 +394,7 @@ do --> data for Karazhan
 
 		boss_ids = {
 			[15550] = 1, --Attumen the Huntsman
+			[16151] = 1, --Midnight
 			[15687] = 2, --Moroes
 			[16457] = 3, --Maiden of Virtue
 			[17535] = 4, --Dorothee
