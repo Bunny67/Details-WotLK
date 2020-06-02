@@ -18,6 +18,7 @@ local _bit_band = bit.band --lua local
 
 local _GetInstanceInfo = GetInstanceInfo --wow api local
 local _GetCurrentMapAreaID = GetCurrentMapAreaID --wow api local
+local _GetRealZoneText = GetRealZoneText --wow api local
 local _GetInstanceDifficulty = GetInstanceDifficulty --wow api local
 local _UnitExists = UnitExists --wow api local
 local _UnitGUID = UnitGUID --wow api local
@@ -317,7 +318,16 @@ local check_for_encounter_start = function()
 	local mapid = _GetCurrentMapAreaID()
 	local boss_ids = _detalhes:GetBossIds(mapid)
 	if not boss_ids then
-		return
+		local mapname = _GetRealZoneText()
+		for id, data in _pairs(_detalhes.EncounterInformation) do
+			if data.name == mapname then
+				boss_ids = _detalhes:GetBossIds(id)
+				break
+			end
+		end
+		if not boss_ids then
+			return
+		end
 	end
 
 	local unit_id = ((GetNumRaidMembers() == 0) and "party") or "raid"
