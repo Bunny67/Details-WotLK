@@ -4521,8 +4521,8 @@ function DF:CreateKeybindBox (parent, name, data, callback, width, height, line_
 		self.MyObject.selectedTexture:Show()
 
 		--feedback ao jogador uma vez que as keybinds podem ter o mesmo valor
-		C_Timer:After (.04, function() new_keybind_frame:Hide() end)
-		C_Timer:After (.06, function() new_keybind_frame:Show() end)
+		C_Timer.After (.04, function() new_keybind_frame:Hide() end)
+		C_Timer.After (.06, function() new_keybind_frame:Show() end)
 
 		--atualiza a scroll
 		keybindScroll:UpdateScroll()
@@ -7938,7 +7938,7 @@ DF.CastFrameFunctions = {
 			self.scheduledHideTime:Cancel()
 		end
 
-		self.scheduledHideTime = C_Timer:NewTicker (delay, self.DoScheduledHide, 1)
+		self.scheduledHideTime = C_Timer.NewTicker (delay, self.DoScheduledHide, 1)
 		self.scheduledHideTime.castBar = self
 	end,
 

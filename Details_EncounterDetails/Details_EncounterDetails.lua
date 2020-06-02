@@ -442,7 +442,7 @@ local function CreatePluginFrames (data)
 	end
 	
 	EncounterDetailsFrame:HookScript ("OnShow", function()
-		C_Timer:After (0.1, function()
+		C_Timer.After (0.1, function()
 			if (not EncounterDetails.LastOpenedTime or EncounterDetails.LastOpenedTime + 2 < GetTime()) then
 				if (_detalhes.AddOnStartTime and _detalhes.AddOnStartTime + 30 < GetTime()) then
 					EncounterDetails:OpenAndRefresh()
@@ -483,7 +483,7 @@ local function CreatePluginFrames (data)
 			end
 		end
 
-		C_Timer:After (3, function() EncounterDetails:ShowTutorial() end)
+		C_Timer.After (3, function() EncounterDetails:ShowTutorial() end)
 
 		DetailsPluginContainerWindow.OpenPlugin (EncounterDetails)
 		
@@ -588,7 +588,7 @@ local function CreatePluginFrames (data)
 	_detalhes.EncounterDetailsTempWindow = nil
 	
 	--> ~remover ~autoabrir �brir ~abrir ~auto
-	--C_Timer:After (.5, EncounterDetails.OpenWindow)
+	--C_Timer.After (.5, EncounterDetails.OpenWindow)
 	
 	
 end

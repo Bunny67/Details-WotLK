@@ -80,7 +80,7 @@ function _G._detalhes:Start()
 			self:InitializeRaidHistoryWindow()
 			self:InitializeOptionsWindow()
 
-			C_Timer:After (2, function()
+			C_Timer.After (2, function()
 				self:InitializeAuraCreationWindow()
 			end)
 
@@ -374,7 +374,7 @@ function _G._detalhes:Start()
 			if (lower_instance) then
 				lower_instance = _detalhes:GetInstance (lower_instance)
 				if (lower_instance and _detalhes.latest_news_saw ~= _detalhes.userversion) then
-					C_Timer:After (10, function()
+					C_Timer.After (10, function()
 						if (lower_instance:IsEnabled()) then
 							lower_instance:InstanceAlert (Loc ["STRING_VERSION_UPDATE"], {[[Interface\GossipFrame\AvailableQuestIcon]], 16, 16, false}, 60, {_detalhes.OpenNewsWindow}, true)
 							Details:Msg ("A new version has been installed: /details news")
@@ -387,7 +387,7 @@ function _G._detalhes:Start()
 			_detalhes:AddDefaultCustomDisplays()
 
 			if (_detalhes_database.last_realversion and _detalhes_database.last_realversion < 134 and enable_reset_warning) then
-				C_Timer:After (10, function()
+				C_Timer.After (10, function()
 					for ID, instance in _detalhes:ListInstances() do
 						if (instance:IsEnabled()) then
 							local lineHeight = instance.row_info.height
@@ -407,7 +407,7 @@ function _G._detalhes:Start()
 
 				--> BFA launch
 
-				C_Timer:After (5, function()
+				C_Timer.After (5, function()
 
 					--_detalhes:Msg ("Some settings has been reseted for 8.0.1 patch.")
 
@@ -468,7 +468,7 @@ function _G._detalhes:Start()
 					bg:SetTexture ([[Interface\GLUES\AccountUpgrade\upgrade-texture.blp]])
 					bg:SetTexCoord (0/1024, 785/1024, 192/1024, 708/1024)
 					bg:SetSize (785, 516)
-					C_Timer:After (1, function ()f:Show()end)
+					C_Timer.After (1, function ()f:Show()end)
 
 					local logo = f:CreateTexture (nil, "artwork")
 					logo:SetPoint ("TOPLEFT", f, "TOPLEFT", 40, -60)
@@ -511,7 +511,7 @@ function _G._detalhes:Start()
 					closebutton:SetPoint ("TOPLEFT", bg, "TOPLEFT", 400, -405)
 					closebutton:InstallCustomTexture()
 
-					C_Timer:After (5, function()
+					C_Timer.After (5, function()
 						local StreamerPlugin = _detalhes:GetPlugin ("DETAILS_PLUGIN_STREAM_OVERLAY")
 						if (StreamerPlugin) then
 							local tPluginSettings = _detalhes:GetPluginSavedTable ("DETAILS_PLUGIN_STREAM_OVERLAY")
@@ -743,7 +743,7 @@ function _G._detalhes:Start()
 
 	--> open welcome
 	if (self.is_first_run) then
-		C_Timer:After (1, function() --wait details full load the rest of the systems before executing the welcome window
+		C_Timer.After (1, function() --wait details full load the rest of the systems before executing the welcome window
 			_detalhes:OpenWelcomeWindow()
 		end)
 	end
@@ -775,7 +775,7 @@ function _G._detalhes:Start()
 	end
 
 	--> get the player spec
-	C_Timer:After (2, _detalhes.parser_functions.ACTIVE_TALENT_GROUP_CHANGED)
+	C_Timer.After (2, _detalhes.parser_functions.ACTIVE_TALENT_GROUP_CHANGED)
 
 	_detalhes.chat_embed:CheckChatEmbed (true)
 
@@ -840,7 +840,7 @@ function _G._detalhes:Start()
 		local reset_player_detail_window = function()
 			_detalhes:ApplyPDWSkin ("ElvUI")
 		end
-		C_Timer:After (2, reset_player_detail_window)
+		C_Timer.After (2, reset_player_detail_window)
 	end
 
 	--enforce to show 6 abilities on the tooltip
@@ -939,7 +939,7 @@ function _G._detalhes:Start()
 			if (event == "ACTIVE_TALENT_GROUP_CHANGED") then
 				--> create a trigger for the event, many times it is triggered more than once
 				--> so if the event is triggered a second time, it will be ignored
-				local newTimer = C_Timer:NewTicker (1, function()
+				local newTimer = C_Timer.NewTicker (1, function()
 					_detalhes:DispatchAutoRunCode ("on_specchanged")
 
 					--> clear and invalidate the timer
@@ -955,7 +955,7 @@ function _G._detalhes:Start()
 		auto_run_code_dispatch:SetScript ("OnEvent", auto_run_code_dispatch.OnEventFunc)
 
 		--> dispatch scripts at startup
-		C_Timer:After (2, function()
+		C_Timer.After (2, function()
 			_detalhes:DispatchAutoRunCode ("on_init")
 			_detalhes:DispatchAutoRunCode ("on_specchanged")
 			_detalhes:DispatchAutoRunCode ("on_zonechanged")
@@ -970,7 +970,7 @@ function _G._detalhes:Start()
 		end)
 
 	--> Plater integration
-		C_Timer:After (2, function()
+		C_Timer.After (2, function()
 			_detalhes:RefreshPlaterIntegration()
 		end)
 

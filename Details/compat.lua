@@ -113,7 +113,7 @@ if not C_Timer or C_Timer._version ~= 2 then
 		return ticker
 	end
 
-	function C_Timer:After(duration, callback)
+	function C_Timer.After(duration, callback)
 		AddDelayedCall({
 			_remainingIterations = 1,
 			_delay = duration,
@@ -121,11 +121,11 @@ if not C_Timer or C_Timer._version ~= 2 then
 		})
 	end
 
-	function C_Timer:NewTimer(duration, callback)
+	function C_Timer.NewTimer(duration, callback)
 		return CreateTicker(duration, callback, 1)
 	end
 
-	function C_Timer:NewTicker(duration, callback, iterations)
+	function C_Timer.NewTicker(duration, callback, iterations)
 		return CreateTicker(duration, callback, iterations)
 	end
 

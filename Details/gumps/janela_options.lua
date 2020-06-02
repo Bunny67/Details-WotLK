@@ -2206,7 +2206,7 @@ function window:CreateFrame18()
 						--> config button
 						local configure_streamer_plugin = function()
 							StreamerPlugin.OpenOptionsPanel (true)
-							C_Timer:After (0.2, function()
+							C_Timer.After (0.2, function()
 								window:Hide()
 							end)
 						end
@@ -2286,7 +2286,7 @@ function window:CreateFrame18()
 			--> configure feature button
 				local configure_event_tracker = function()
 					_detalhes:OpenEventTrackerOptions (true)
-					C_Timer:After (0.2, function()
+					C_Timer.After (0.2, function()
 						window:Hide()
 					end)
 				end
@@ -2325,7 +2325,7 @@ function window:CreateFrame18()
 			--> configure feature button
 				local configure_current_dps = function()
 					_detalhes:OpenCurrentRealDPSOptions (true)
-					C_Timer:After (0.2, function()
+					C_Timer.After (0.2, function()
 						window:Hide()
 					end)
 				end

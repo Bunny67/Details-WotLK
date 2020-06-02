@@ -403,7 +403,7 @@ end
 			ChartViewer.current_on_combat = true
 			ChartViewer.capturing_data = true
 			
-			C_Timer:After (1, check_for_boss)
+			C_Timer.After (1, check_for_boss)
 		end
 	
 ----------> Icon show functions
@@ -1301,7 +1301,7 @@ function ChartViewer:OnEvent (_, event, ...)
 					DetailsPluginContainerWindow.EmbedPlugin (ChartViewer, ChartViewerWindowFrame)
 				end
 				
-				C_Timer:After (5, function()
+				C_Timer.After (5, function()
 					--> adjust the size of the chart frame
 					local height = ChartViewerWindowFrame:GetHeight()
 					ChartViewerWindowFrameChartFrame:SetSize (ChartViewerWindowFrame:GetWidth()-20, height-100)

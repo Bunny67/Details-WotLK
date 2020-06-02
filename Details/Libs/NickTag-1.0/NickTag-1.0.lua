@@ -224,7 +224,7 @@ NickTag.EventFrame.InfoSendCooldown = 0
 function NickTag.OnEvent(self, event, ...)
 	if(NickTag.EventFrame.InfoSendCooldown > time()) then
 		if(not NickTag.EventFrame.ScheduledSend or NickTag.EventFrame.ScheduledSend._cancelled) then
-			NickTag.EventFrame.ScheduledSend = C_Timer:NewTicker(30, NickTag.SendPersona, 1)
+			NickTag.EventFrame.ScheduledSend = C_Timer.NewTicker(30, NickTag.SendPersona, 1)
 		end
 	else
 		NickTag:SendPersona()
@@ -292,7 +292,7 @@ function NickTag:ResetPlayerPersona()
 			playerPersona[CONST_INDEX_BACKGROUND_COLOR] = false
 			playerPersona[CONST_INDEX_REVISION] = playerPersona[CONST_INDEX_REVISION] + 1
 
-			C_Timer:After(1, NickTag.SendPersona)
+			C_Timer.After(1, NickTag.SendPersona)
 		end
 	end
 end

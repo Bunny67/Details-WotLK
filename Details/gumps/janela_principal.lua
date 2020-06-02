@@ -3141,7 +3141,7 @@ local function CreateAlertFrame(baseframe, instancia)
 	end
 
 	function alert_bg:DoFlash()
-		C_Timer:After(0.23, do_flash)
+		C_Timer.After(0.23, do_flash)
 	end
 
 	alert_bg.text = text
@@ -6835,7 +6835,7 @@ end
 local updateClickThroughListener = _detalhes:CreateEventListener()
 function updateClickThroughListener:EnterCombat()
 	_detalhes:InstanceCall(function(instance)
-		C_Timer:After(1.5, function()
+		C_Timer.After(1.5, function()
 			instance:UpdateClickThrough()
 		end)
 	end)
@@ -6843,7 +6843,7 @@ end
 
 function updateClickThroughListener:LeaveCombat()
 	_detalhes:InstanceCall(function(instance)
-		C_Timer:After(1.5, function()
+		C_Timer.After(1.5, function()
 			instance:UpdateClickThrough()
 		end)
 	end)

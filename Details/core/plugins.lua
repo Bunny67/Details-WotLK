@@ -514,7 +514,7 @@
 		--> scripts
 			f:SetScript ("OnShow", function()
 				--check if the window isn't out of screen
-				C_Timer:After (1, function()
+				C_Timer.After (1, function()
 					local right = f:GetRight()
 					if (right and right > GetScreenWidth() + 500) then
 						f:ClearAllPoints()
@@ -573,7 +573,7 @@
 
 			--> re set the point of the frame within the main plugin window
 			f.RefreshFrame (pluginObject.__var_Frame)
-			C_Timer:After (0.016, function ()
+			C_Timer.After (0.016, function ()
 				f.RefreshFrame (pluginObject.__var_Frame)
 			end)
 

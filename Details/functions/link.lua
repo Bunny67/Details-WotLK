@@ -4868,7 +4868,7 @@ function Details:RefreshPlaterIntegration()
 		end
 
 		--> cleanup the old tables
-		plater_integration_frame.CleanUpTimer = C_Timer:NewTicker (10, function()
+		plater_integration_frame.CleanUpTimer = C_Timer.NewTicker (10, function()
 			local now = time()
 			for GUID, damageTable in pairs (plater_integration_frame.DamageTaken) do
 				if (damageTable.LastEvent + 9.9 < now) then
@@ -4935,7 +4935,7 @@ detailsOnDeathMenu.warningLabel:Hide()
 
 detailsOnDeathMenu:SetScript ("OnEvent", function (self, event, ...)
 	if (event == "PLAYER_REGEN_ENABLED") then --event == "ENCOUNTER_END" or
-		C_Timer:After (0.5, detailsOnDeathMenu.ShowPanel)
+		C_Timer.After (0.5, detailsOnDeathMenu.ShowPanel)
 	end
 end)
 
@@ -4943,7 +4943,7 @@ function detailsOnDeathMenu.OpenEncounterBreakdown()
 	if (not _detalhes:GetPlugin ("DETAILS_PLUGIN_ENCOUNTER_DETAILS")) then
 		detailsOnDeathMenu.warningLabel.text = "Encounter Breakdown plugin is disabled! Please enable it in the Addon Control Panel."
 		detailsOnDeathMenu.warningLabel:Show()
-		C_Timer:After (5, function()
+		C_Timer.After (5, function()
 			detailsOnDeathMenu.warningLabel:Hide()
 		end)
 	end
@@ -4957,14 +4957,14 @@ function detailsOnDeathMenu.OpenPlayerEndurance()
 	if (not _detalhes:GetPlugin ("DETAILS_PLUGIN_DEATH_GRAPHICS")) then
 		detailsOnDeathMenu.warningLabel.text = "Advanced Death Logs plugin is disabled! Please enable it (or download) in the Addon Control Panel."
 		detailsOnDeathMenu.warningLabel:Show()
-		C_Timer:After (5, function()
+		C_Timer.After (5, function()
 			detailsOnDeathMenu.warningLabel:Hide()
 		end)
 	end
 
 	DetailsPluginContainerWindow.OnMenuClick (nil, nil, "DETAILS_PLUGIN_DEATH_GRAPHICS", true)
 
-	C_Timer:After (0, function()
+	C_Timer.After (0, function()
 		local a = Details_DeathGraphsModeEnduranceButton and Details_DeathGraphsModeEnduranceButton.MyObject:Click()
 	end)
 
@@ -5150,13 +5150,13 @@ function detailsOnDeathMenu.CanShowPanel()
 				--> check if all players in the raid are out of combat
 				for i = 1, GetNumGroupMembers() do
 					if (UnitAffectingCombat ("raid" .. i)) then
-						C_Timer:After (0.5, detailsOnDeathMenu.ShowPanel)
+						C_Timer.After (0.5, detailsOnDeathMenu.ShowPanel)
 						return false
 					end
 				end
 
 				if (_detalhes.in_combat) then
-					C_Timer:After (0.5, detailsOnDeathMenu.ShowPanel)
+					C_Timer.After (0.5, detailsOnDeathMenu.ShowPanel)
 					return false
 				end
 
@@ -5206,7 +5206,7 @@ hooksecurefunc ("StaticPopup_Show", function (which, text_arg1, text_arg2, data,
 	if (which == "DEATH") then
 		--StaticPopup1
 		if (detailsOnDeathMenu.Debug) then
-			C_Timer:After (0.5, detailsOnDeathMenu.ShowPanel)
+			C_Timer.After (0.5, detailsOnDeathMenu.ShowPanel)
 		end
 	end
 end)

@@ -263,7 +263,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 --		b:SetTarget (texture) -- TEMP
 		A:Play()
 
-		C_Timer:NewTicker (1, function()
+		C_Timer.NewTicker (1, function()
 			texture:SetTexCoord (math.random(), math.random(), math.random(), math.random(), math.random(), math.random(), math.random(), math.random())
 		end)
 
@@ -832,31 +832,31 @@ function SlashCmdList.DETAILS (msg, editbox)
 
 		print (Loc ["STRING_DETAILS1"] .. "highfive sent, HI!")
 
-		C_Timer:After (0.3, function()
+		C_Timer.After (0.3, function()
 			Details.RefreshUserList()
 		end)
-		C_Timer:After (0.6, function()
+		C_Timer.After (0.6, function()
 			Details.RefreshUserList (true)
 		end)
-		C_Timer:After (0.9, function()
+		C_Timer.After (0.9, function()
 			Details.RefreshUserList (true)
 		end)
-		C_Timer:After (1.3, function()
+		C_Timer.After (1.3, function()
 			Details.RefreshUserList (true)
 		end)
-		C_Timer:After (1.6, function()
+		C_Timer.After (1.6, function()
 			Details.RefreshUserList (true)
 		end)
-		C_Timer:After (3, function()
+		C_Timer.After (3, function()
 			Details.RefreshUserList (true)
 		end)
-		C_Timer:After (4, function()
+		C_Timer.After (4, function()
 			Details.RefreshUserList (true)
 		end)
-		C_Timer:After (5, function()
+		C_Timer.After (5, function()
 			Details.RefreshUserList (true)
 		end)
-		C_Timer:After (8, function()
+		C_Timer.After (8, function()
 			Details.RefreshUserList (true)
 		end)
 
@@ -1262,7 +1262,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 
 		bar:SetTimer (start, fim)
 
-		--C_Timer:After (5, function() bar:CancelTimerBar() end)
+		--C_Timer.After (5, function() bar:CancelTimerBar() end)
 
 
 	elseif (msg == "q") then
@@ -1512,7 +1512,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 
 
 			_detalhes.ScheduleLoadStorage()
-			_detalhes.TellDamageRecord = C_Timer:NewTicker (0.6, _detalhes.PrintEncounterRecord, 1)
+			_detalhes.TellDamageRecord = C_Timer.NewTicker (0.6, _detalhes.PrintEncounterRecord, 1)
 			_detalhes.TellDamageRecord.Boss = 2032
 			_detalhes.TellDamageRecord.Diff = 16
 
@@ -1570,7 +1570,7 @@ Damage Update Status: @INSTANCEDAMAGESTATUS
 						t1 [key] = t1 [key] or {}
 
 						--print (key, value)
-						--local d = C_Timer:NewTicker (1, f.copy, 1)
+						--local d = C_Timer.NewTicker (1, f.copy, 1)
 						--d.t1 = t1 [key]
 						--d.t2 = t2 [key]
 						--d.Timer = true

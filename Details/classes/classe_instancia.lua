@@ -618,7 +618,7 @@ end
 			if (_detalhes.WindowAutoHideTick [self.meu_id]) then
 				_detalhes.WindowAutoHideTick [self.meu_id]:Cancel()
 			end
-			_detalhes.WindowAutoHideTick [self.meu_id] = C_Timer:NewTicker (10, function()
+			_detalhes.WindowAutoHideTick [self.meu_id] = C_Timer.NewTicker (10, function()
 				if (self.last_interaction) then
 					if (self.last_interaction + 10 < _detalhes._tempo) then
 						self:SetCombatAlpha (nil, nil, true)
@@ -3372,7 +3372,7 @@ function _detalhes:envia_relatorio (linhas, custom)
 			end
 
 			local channelName = GetChannelName (channel)
-			local timer = C_Timer:NewTicker (i * delay / 1000, send_report_channel, 1)
+			local timer = C_Timer.NewTicker (i * delay / 1000, send_report_channel, 1)
 			timer.Arg1 = linhas[i]
 			timer.Arg2 = "CHANNEL"
 			timer.Arg3 = nil
@@ -3387,7 +3387,7 @@ function _detalhes:envia_relatorio (linhas, custom)
 		local presenceID = tonumber (id)
 
 		for i = 1, #linhas do
-			local timer = C_Timer:NewTicker (i * delay / 1000, send_report_bnet, 1)
+			local timer = C_Timer.NewTicker (i * delay / 1000, send_report_bnet, 1)
 			timer.Arg1 = presenceID
 			timer.Arg2 = linhas[i]
 		end
@@ -3404,7 +3404,7 @@ function _detalhes:envia_relatorio (linhas, custom)
 		end
 
 		for i = 1, #linhas do
-			local timer = C_Timer:NewTicker (i * delay / 1000, send_report_channel, 1)
+			local timer = C_Timer.NewTicker (i * delay / 1000, send_report_channel, 1)
 			timer.Arg1 = linhas[i]
 			timer.Arg2 = to_who
 			timer.Arg3 = nil
@@ -3433,7 +3433,7 @@ function _detalhes:envia_relatorio (linhas, custom)
 		end
 
 		for i = 1, #linhas do
-			local timer = C_Timer:NewTicker (i * delay / 1000, send_report_channel, 1)
+			local timer = C_Timer.NewTicker (i * delay / 1000, send_report_channel, 1)
 			timer.Arg1 = linhas[i]
 			timer.Arg2 = to_who
 			timer.Arg3 = nil
@@ -3444,7 +3444,7 @@ function _detalhes:envia_relatorio (linhas, custom)
 	end
 
 	for i = 1, #linhas do
-		local timer = C_Timer:NewTicker (i * delay / 1000, send_report_channel, 1)
+		local timer = C_Timer.NewTicker (i * delay / 1000, send_report_channel, 1)
 		timer.Arg1 = linhas[i]
 		timer.Arg2 = to_who
 		timer.Arg3 = nil

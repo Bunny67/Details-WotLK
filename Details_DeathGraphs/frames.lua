@@ -118,7 +118,7 @@ do
 		c:GetNormalTexture():SetDesaturated (true)
 		c:SetAlpha (1)
 		
-		C_Timer:After (0.05, function()
+		C_Timer.After (0.05, function()
 			f:SetBackdrop ({edgeFile = [[Interface\Buttons\WHITE8X8]], edgeSize = 1, bgFile = [[Interface\AddOns\Details\images\background]], tileSize = 64, tile = true})
 			f:SetBackdropColor (0.2, 0.2, 0.2, .6)
 			f:SetBackdropBorderColor (0, 0, 0, 1)

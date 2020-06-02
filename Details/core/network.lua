@@ -409,7 +409,7 @@ function _detalhes.network.GuildSync (player, realm, core_version, type, data)
 		local EncounterData = _detalhes.storage:BuildEncounterDataToGuildSync (data)
 
 		if (EncounterData and EncounterData [1]) then
-			local task = C_Timer:NewTicker (4, function (task)
+			local task = C_Timer.NewTicker (4, function (task)
 				task.TickID = task.TickID + 1
 				local data = task.EncounterData [task.TickID]
 

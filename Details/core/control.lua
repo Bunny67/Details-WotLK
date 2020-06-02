@@ -357,7 +357,7 @@ function _detalhes:EntrarEmCombate(...)
 
 	local check_combat = check_for_encounter_start()
 	if check_combat then
-		C_Timer:After(3, check_for_encounter_start)
+		C_Timer.After(3, check_for_encounter_start)
 	end
 
 	if not _detalhes.tabela_historico.tabelas[1] then
@@ -616,7 +616,7 @@ function _detalhes:SairDoCombate(bossKilled, from_encounter_end)
 	end
 
 	--> send item level after a combat if is in raid or party group
-	C_Timer:After(1, _detalhes.ScheduleSyncPlayerActorData)
+	C_Timer.After(1, _detalhes.ScheduleSyncPlayerActorData)
 
 	--if this segment isn't a boss fight
 	if not _detalhes.tabela_vigente.is_boss then
