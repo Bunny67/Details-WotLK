@@ -322,6 +322,7 @@ local check_for_encounter_start = function()
 		for id, data in _pairs(_detalhes.EncounterInformation) do
 			if data.name == mapname then
 				boss_ids = _detalhes:GetBossIds(id)
+				mapid = id
 				break
 			end
 		end
