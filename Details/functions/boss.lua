@@ -217,6 +217,10 @@ do
 		return _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].boss_names[bossindex]
 	end
 
+	function _detalhes:GetBossEncounter(mapid, bossindex)
+		return _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids2[bossindex]
+	end
+
 	--> same thing as GetBossDetails, just a alias
 	function _detalhes:GetBossEncounterDetails(mapid, bossindex)
 		return _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounters[bossindex]
