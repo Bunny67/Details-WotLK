@@ -12,6 +12,8 @@ end
 DetailsFrameworkCanLoad = true
 local SharedMedia = LibStub:GetLibrary ("LibSharedMedia-3.0")
 
+local LibGroupTalents = LibStub ("LibGroupTalents-1.0")
+
 local _
 local _type = type
 local _unpack = unpack
@@ -43,12 +45,23 @@ function DF.IsClassicWow()
 end
 
 function DF.UnitGroupRolesAssigned (unitId)
-	if (UnitGroupRolesAssigned) then
-		return UnitGroupRolesAssigned (unitId)
+	-- this always seems to return [false, false, false] regardless of content. 
+	--if (UnitGroupRolesAssigned) then
+	--	return UnitGroupRolesAssigned (unitId)
+	--else
+	
+	-- use LibGroupTalents to find the role 
+	local role = LibGroupTalents:GetUnitRole(unitId) 
+	if role then 
+		if role == "melee" or role == "cater" then 
+			role = "DAMAGER"
+		else if role == "tank" then 
+			role = "TANK"
+		else if role == "healer" then 
+			role = "HEALER"
+		end
+		return role
 	else
-		--attempt to guess the role by the player spec
-
-		--at the moment just return none
 		return "NONE"
 	end
 end
