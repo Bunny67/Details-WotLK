@@ -2089,7 +2089,7 @@ local icon_frame_on_enter = function(self)
 			end
 			_detalhes:AddTooltipHeaderStatusbar()
 
-			local talent_string = ""
+			local talent_string = talents or ""
 --[[ -- TEMP
 			if(talents) then
 				for i = 1, #talents do
@@ -2100,13 +2100,17 @@ local icon_frame_on_enter = function(self)
 ]]
 			-- TEMP
 			local got_info
+			local prefix = "Average Item Level"
 			if(ilvl) then
-				GameCooltip:AddLine("STAT_AVERAGE_ITEM_LEVEL" .. ":" , ilvl and "|T:" .. 24 .. ":" .. 24 ..":0:0:64:64:4:60:4:60|t" .. _math_floor(ilvl.ilvl) or "|T:" .. 24 .. ":" .. 24 ..":0:0:64:64:4:60:4:60|t ??") --> Loc from GlobalStrings.lua
+				if GearScore_GetScore then 
+					prefix = "Gearscore"
+				end
+				GameCooltip:AddLine(prefix .. ":" , ilvl and "|T:" .. 24 .. ":" .. 24 ..":0:0:64:64:4:60:4:60|t" .. _math_floor(ilvl.ilvl) or "|T:" .. 24 .. ":" .. 24 ..":0:0:64:64:4:60:4:60|t ??") --> Loc from GlobalStrings.lua
 				GameCooltip:AddIcon([[]], 1, 1, 1, 20)
 				_detalhes:AddTooltipBackgroundStatusbar()
 				got_info = true
 			else
-				GameCooltip:AddLine("STAT_AVERAGE_ITEM_LEVEL" .. ":" , 0)
+				GameCooltip:AddLine(prefix .. ":" , 0)
 				GameCooltip:AddIcon([[]], 1, 1, 1, 20)
 				_detalhes:AddTooltipBackgroundStatusbar()
 				got_info = true
