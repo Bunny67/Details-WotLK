@@ -1531,7 +1531,7 @@ function _detalhes:StoreEncounter (combat)
 
 		for i = 1, GetNumGroupMembers() do
 
-			local role = "DAMAGER" -- UnitGroupRolesAssigned ("raid" .. i)
+			local role = UnitGroupRolesAssigned("raid" .. i)
 
 			if (UnitIsInMyGuild ("raid" .. i)) then
 				if (role == "DAMAGER" or role == "TANK") then
@@ -1570,7 +1570,7 @@ function _detalhes:StoreEncounter (combat)
 			print ("|cFFFFFF00Details! Storage|r: combat data added to encounter database.")
 		end
 
-		local myrole = "DAMAGER" --UnitGroupRolesAssigned ("player")
+		local myrole =  UnitGroupRolesAssigned("player")
 		local mybest, onencounter = _detalhes.storage:GetBestFromPlayer (diff, encounter_id, myrole, _detalhes.playername, true) --> get dps or hps
 		local myBestDps = mybest [1] / onencounter.elapsed
 
@@ -1597,7 +1597,7 @@ function _detalhes:StoreEncounter (combat)
 		if (lower_instance) then
 			local instance = _detalhes:GetInstance (lower_instance)
 			if (instance) then
-				local my_role = "DAMAGER" -- UnitGroupRolesAssigned ("player")
+				local my_role = UnitGroupRolesAssigned("player")
 				if (my_role == "TANK") then
 					my_role = "DAMAGER"
 				end
@@ -1715,38 +1715,42 @@ function ilvl_core:CalcItemLevel (unitid, guid, shout)
 	end
 
 	if (CheckInteractDistance (unitid, 1)) then
+		local average = 0
 
-		--> 16 = all itens including main and off hand
-		local item_amount = 16
-		local item_level = 0
-		local failed = 0
+		if GearScore_GetScore then -- replace ilvl with gearscore if available
+			average = GearScore_GetScore(UnitName(unitid), unitid)
+		else
+			--> 16 = all itens including main and off hand
+			local item_amount = 16
+			local item_level = 0
+			local failed = 0
 
-		for equip_id = 1, 17 do
-			if (equip_id ~= 4) then --shirt slot
-				local item = GetInventoryItemLink (unitid, equip_id)
-				if (item) then
-					local _, _, itemRarity, iLevel, _, _, _, _, equipSlot = GetItemInfo (item)
-					if (iLevel) then
-						item_level = item_level + iLevel
+			for equip_id = 1, 17 do
+				if (equip_id ~= 4) then --shirt slot
+					local item = GetInventoryItemLink (unitid, equip_id)
+					if (item) then
+						local _, _, itemRarity, iLevel, _, _, _, _, equipSlot = GetItemInfo (item)
+						if (iLevel) then
+							item_level = item_level + iLevel
 
-						--> 16 = main hand 17 = off hand
-						-->  if using a two-hand, ignore the off hand slot
-						if (equip_id == 16 and two_hand [equipSlot]) then
-							item_amount = 15
+							--> 16 = main hand 17 = off hand
+							-->  if using a two-hand, ignore the off hand slot
+							if (equip_id == 16 and two_hand [equipSlot]) then
+								item_amount = 15
+								break
+							end
+						end
+					else
+						failed = failed + 1
+						if (failed > 2) then
 							break
 						end
 					end
-				else
-					failed = failed + 1
-					if (failed > 2) then
-						break
-					end
 				end
 			end
+		 	average = item_level / item_amount
+			--print (UnitName (unitid), "ILVL:", average, unitid, "items:", item_amount)
 		end
-
-		local average = item_level / item_amount
-		--print (UnitName (unitid), "ILVL:", average, unitid, "items:", item_amount)
 
 		--> register
 		if (average > 0) then
