@@ -318,8 +318,8 @@ do --> data for Karazhan
 
 	-- TODO: Opera
 	local ENCOUNTER_ID_CL = {
-		15550, 15687, 16457, 1234567890, 34437, 15688, 16524, 15689, 17225, 15690,
-		[15550] = 1, --Attumen the Huntsman
+		16152, 15687, 16457, 1234567890, 34437, 15688, 16524, 15689, 17225, 15690,
+		[16152] = 1, --Attumen the Huntsman
 		[15687] = 2, --Moroes
 		[16457] = 3, --Maiden of Virtue
 		[17535] = 4, --Dorothee
@@ -393,7 +393,7 @@ do --> data for Karazhan
 		encounters = ENCOUNTERS,
 
 		boss_ids = {
-			[15550] = 1, --Attumen the Huntsman
+			[16152] = 1, --Attumen the Huntsman
 			[16151] = 1, --Midnight
 			[15687] = 2, --Moroes
 			[16457] = 3, --Maiden of Virtue
