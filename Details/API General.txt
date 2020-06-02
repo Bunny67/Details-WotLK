@@ -1,0 +1,85 @@
+
+=======================================
+Background Tasks
+=======================================
+
+Details:RegisterBackgroundTask (name, func, priority, ...)
+register a function to be called while the player isn't in: combat, group, raid instances.
+priority determines the interval time and support "LOW", "MEDIUM", "HIGH" values.
+
+Details:UnregisterBackgroundTask (name)
+unregister a background task.
+
+=======================================
+Item Level
+=======================================
+
+Details.ilevel:IsTrackerEnabled()
+return if the item level tracker is enabled.
+
+Details.ilevel:TrackItemLevel (bool)
+enable or disable the tracker, item level tracker only work when inside a raid instance and out of combat.
+
+Details.ilevel:GetPool()
+return a table containing all tracked players:
+{[GUID] = {["name"] = name-realm, ["ilvl"] = item level, ["time"] = time()}}
+
+Details.ilevel:GetIlvl (guid)
+return the item level table for the requested guid.
+
+Details.ilevel:GetInOrder()
+return a new numeric table with sorted in decreasing order:
+{{name-realm, item level, time()}, {name-realm, item level, time()}}
+
+=======================================
+Raid History
+=======================================
+
+Details.storage:OpenRaidStorage()
+get the table containing all stored data.
+
+Details.storage:ListDiffs()
+return a indexed table with dificulty numbers.
+
+Details.storage:ListEncounters (diff)
+return a indexed table with all encounters stored for the dificulty.
+
+Details.storage:GetEncounterData (diff, encounterId, guildname)
+return a indexed table with encounter tables playd by the guild.
+
+Details.storage:GetPlayerData (diff, encounterId, playername)
+return a indexed table with player tables for the player.
+
+Details.storage:GetBestFromPlayer (diff, encounterId, role, playername)
+return the best result from the player.
+
+Structure:
+DB = hash{
+	[difficulty index] = hash{
+		[encounter id] = indexed{
+			{
+				--encounter table
+				damage = hash{
+					[playername] = indexed{} --player table
+				}
+				...
+			}--[1]
+		}
+	}
+}
+
+encounter table = hash {["time"] = time(), ["guild"] = guild name, ["date"] = formated date, ["healing"] = {[playername] = playertable}, ["elapsed"] = combat time, ["damage"] = {[playername] = playertable}}
+player table = indexed {total done, item level, class index}
+
+=======================================
+Parser
+=======================================
+
+/dump Details.parser.original_functions
+will tell all internal tokens used by the parser.
+
+Details.parser:SetParserFunction (token, func)
+replaces a original parser function with a customized one.
+If no function passed, it uses the default function.
+
+

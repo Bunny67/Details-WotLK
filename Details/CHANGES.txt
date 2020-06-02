@@ -1,0 +1,28 @@
+lightweight tag bcdd7ae6831b6d4f3436e70f4aad288cae059304 DetailsRetail.8.3.0.7269.140
+Author:	Tercio Jose <terciob19@hotmail.com>
+Date:	Mon Feb 10 20:20:09 2020 -0300
+
+commit bcdd7ae6831b6d4f3436e70f4aad288cae059304
+Author: Tercio Jose <terciob19@hotmail.com>
+Date:   Mon Feb 10 20:20:09 2020 -0300
+
+    Get cached value for the user language
+
+commit 238a4de40f30d7da069df87d6e941350d8c96070
+Author: Denis Kamenskikh <denis.kam@gmail.com>
+Date:   Sun Feb 2 15:47:31 2020 +0300
+
+    Fix gender constants.
+
+commit 238a4de40f30d7da069df87d6e941350d8c96070
+Author: Denis Kamenskikh <denis.kam@gmail.com>
+Date:   Sun Feb 2 15:47:31 2020 +0300
+
+    Fix gender constants.
+
+commit 2d0f5685df2f732518dd24c90ebf77b53bb4d7a1
+Author: Denis Kamenskikh <denis.kam@gmail.com>
+Date:   Sun Feb 2 14:12:32 2020 +0300
+
+    Find pet owner using correct player name declension for ruRU locale.
+

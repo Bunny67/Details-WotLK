@@ -1,0 +1,20 @@
+## Interface: 30300
+## Title: Details!: Time Line (plugin)
+## Notes: Show debuff, cooldown, enemy casts and enemy debuffs on a clear timeline.
+## RequiredDeps: Details
+## OptionalDeps: Ace3
+## SavedVariablesPerCharacter: DetailsTimeLineDB
+
+locales\enUS.lua
+locales\deDE.lua
+locales\esES.lua
+locales\esMX.lua
+locales\frFR.lua
+locales\itIT.lua
+locales\koKR.lua
+locales\ptBR.lua
+locales\ruRU.lua
+locales\zhCN.lua
+locales\zhTW.lua
+
+Details_TimeLine.lua

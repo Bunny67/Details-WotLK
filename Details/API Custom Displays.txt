@@ -1,0 +1,206 @@
+Cstom Display is a special display where users can set their own rules on searching for what show in the window.
+There is 4 scripts which compose the display:
+
+Required:
+Search - this is the main script, it's responsible to build a list of actors to show in the window.
+
+Optional:
+Tooltip - it runs when the user hover over a bar.
+Total - runs when showing the bar, and helps format the total done.
+Percent - also runs when showing the bar, it formats the percentage amount.
+
+
+Search Code:
+- The script receives 3 parameters: *Combat, *CustomContainer and *Instance.
+*Combat - is the reference for the selected combat shown in the window (the one selected on segments menu).
+*CustomContainer - is the place where the display mantain stored the results, Details! get the content inside the container and use to update the window.
+*Instance - is the reference of the window where the custom display is shown.
+
+- Also, the script must return three values: total made by all players, the amount of the top player and the amount of players found by the script.
+- The search script basically begins getting these three parameters and declaring our three return values:
+
+local Combat, CustomContainer, Instance = ...
+local total, top, amount = 0, 0, 0
+
+- Then, we build our search for wherever we want to show, here we are building an example for Damage Done by Pets and Guardians.
+- So, as we are working with damage, we want to get a list of Actors from the Damage Container of the combat and iterate it with ipairs:
+
+local damage_container = combat:GetActorList( DETAILS_ATTRIBUTE_DAMAGE )
+for i, actor in ipairs( damage_container ) do
+	--do stuff
+end
+
+- Actor, can be anything, a monster, player, boss, etc, so, we need to check if actor is a pet:
+
+if (actor:IsPetOrGuardian()) then
+	--do stuff
+end
+
+- Now we found a pet, we need to get the damage done and find who is the owner of this pet, after that, we also need to check if the owner is a player:
+
+local petOwner = actor.owner
+if (petOwner:IsPlayer()) then
+	local petDamage = actor.total
+end
+
+- The next step is add the pet owner into the CustomContainer:
+
+CustomContainer:AddValue (petOwner, petDamage)
+
+- And in the and, we need to get the total, top and amount values. This is generally calculated inside our loop above, but just calling the API for the result is more handy:
+
+total, top = CustomContainer:GetTotalAndHighestValue()
+amount = CustomContainer:GetNumActors()
+return total, top, amount
+
+
+The finished script looks like this:
+
+local Combat, CustomContainer, Instance = ...
+local total, top, amount = 0, 0, 0
+
+local damage_container = Combat:GetActorList( DETAILS_ATTRIBUTE_DAMAGE )
+for i, actor in ipairs( damage_container ) do
+	if (actor:IsPetOrGuardian()) then
+		local petOwner = actor.owner
+		if (petOwner:IsPlayer()) then
+			local petDamage = actor.total
+			CustomContainer:AddValue( petOwner, petDamage )
+		end
+	end
+end
+
+total, top = CustomContainer:GetTotalAndHighestValue()
+amount = CustomContainer:GetNumActors()
+
+return total, top, amount
+
+
+Tooltip Code:
+- The script receives 3 parameters: *Actor, *Combat and *Instance. This script has no return value.
+*Actor - in our case, actor is the petOwner.
+
+local Actor, Combat, Instance = ...
+local Format = Details:GetCurrentToKFunction()
+
+- What we want where is show all pets the player used in the combat and how much damage each one made.
+- The member .pets gives us a table with pet names that belongs to the actor.
+
+local actorPets = Actor.pets
+
+- Next move is iterate this table and get the pet actor from the combat.
+- In Details! always use ">= 1" not "> 0", also when not using our format functions, use at least floor()
+
+for i, petName in ipairs( actorPets ) do
+	local petActor = Combat( DETAILS_ATTRIBUTE_DAMAGE, petName)
+	if (petActor and petActor.total >= 1) then
+		--do stuff
+	end
+end
+
+- With the pet in hands, what we have to do now is add this pet to our tooltip.
+- Details! uses 'GameCooltip' which is slight different than 'GameTooltip':
+
+GameCooltip:AddLine( petName, Format( nil, petActor.total ) )
+Details:AddTooltipBackgroundStatusbar()
+
+
+The finished script looks like this:
+
+local Actor, Combat, Instance = ...
+local Format = Details:GetCurrentToKFunction()
+
+local actorPets = Actor.pets
+
+for i, petName in ipairs( actorPets ) do
+	local petActor = Combat( DETAILS_ATTRIBUTE_DAMAGE, petName)
+	if (petActor and petActor.total >= 1) then
+		GameCooltip:AddLine( petName, Format( nil, petActor.total ) )
+		Details:AddTooltipBackgroundStatusbar()
+	end
+end
+
+
+
+Total Code and Percent Code:
+- Details! build the total and the percent automatically, these scripts are for special cases where you want to show something different, e.g. convert total into seconds/minutes.
+- Both scripts receives 5 parameters, three are new to us:
+*Value - the total made by this actor.
+*Top - the value made by the rank 1 actor.
+*Total - the total made by all actors.
+
+local value, top, total, combat, instance = ...
+local result = floor (value)
+return total
+
+
+Custom Container Object:
+=======================================
+
+A custom container is primarily used when building custom displays.
+Is used to hold values for any kind of actor in Details! and also any other table as long as it has a ".name" or ".id" key.
+
+value = is a number indicating the actor's score, the container doesn't know what kind of actor it is holding, if is a damage actor, energy, a spell, so, it is just nominated 'value'.
+
+container:GetValue ( actor )
+returns the current value for the requested actor.
+
+container:AddValue ( actor, amountToAdd, checkTop, nameComplement )
+actor is any actor object or any other table containing a member "name" or "id", e.g. {name = "Jeff"} {id = 186451}
+amountToAdd is the amount to add to this actor on the container.
+checkTop is for some special cases when the top value needs to be calculated immediately.
+nameComplement is a string to add on the end of the actor's name, for instance, in cases where the actor is a spell and its name is generated by the container.
+returns the current value for the actor.
+
+container:SetValue (actor, amount, nameComplement)
+actor is any actor object or any other table containing a member "name" or "id", e.g. {name = "Jeff"} {id = 186451}
+amount is the amount to set to this actor on the container.
+nameComplement is a string to add on the end of the actor's name, for instance, in cases where the actor is a spell and its name is generated by the container.
+
+container:HasActor (actor)
+return true if the container holds a reference for 'actor'.
+
+container:GetNumActors()
+returns the amount of actors present inside the container.
+
+container:GetTotalAndHighestValue()
+return 'total' and 'top' values.
+total is the total of value of all actors together.
+top is the amount of value of the actor with more value.
+
+container:WipeCustomActorContainer()
+removes all data from a custom container.
+this is automatically performed when the search script runs.
+
+
+Creating Customs from Plugins or 3rd Party Addons
+=======================================
+Custom Displays can be created through the Custom Display Manager accessed by Sword -> Customs -> Custom Display Manager.
+But if you are in a plugin or another addon you'll need to create a hard-coded custom table, and after that, install with InstallCustomObject().
+
+Details:InstallCustomObject (custom_object)
+Adds a custom display on Details!.
+custom_object is a table with several key telling what Details! should do when the user selects this custom on a window:
+
+name = the name of the custom display, is shown when the user is selecting on the list (string).
+icon = icon path, is shown together with the name (string).
+source = set false to use a custom search script (bool).
+attribute = always use false here to be able to use the scripted search (bool).
+spellid = the same as attribute, use false to be able to use the script (bool).
+target = set false here when using script (bool).
+author = who created this custom object (string).
+desc = description of what this display do (string).
+script_version = number to identify the version, when installing, Details! checks for custom displays with the same name and always use with the biggest script_version (number).
+script = the code used when searching for results (string-code).
+total_script = use total script when the result shown in the bar isn't the actor's total, e.g., an actor have 90 as total but you want to show "1min 30sec" instead.
+percent_script = similar to total_script, use when you need the percentage to be something different than the default one.
+tooltip = code ran when the user passes the mouse over a bar.
+
+Details:RemoveCustomObject (name)
+Removes a custom display.
+
+Details:GetCustomObject (name)
+Returns the object of a custom display already installed.
+
+
+

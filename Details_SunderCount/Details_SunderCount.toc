@@ -1,0 +1,7 @@
+## Interface: 30300
+## Title: Details!: SunderCount (plugin)
+## Notes: Shows who uses Sunder Armor.
+## DefaultState: Disabled
+## RequiredDeps: Details
+
+Details_SunderCount.lua

@@ -1,0 +1,165 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+<!--
+*******************************************************************************
+    PortraitFrameTemplate
+	This is an empty frame with space for a portrait/icon in the top left corner.
+*******************************************************************************
+-->
+
+	<Frame name="DetailsPortraitFrameTemplateNoCloseButton" virtual="true">
+		<Size x="338" y="424"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBg" file="Interface\FrameGeneral\UI-Background-Rock" horizTile="true" vertTile="true" parentKey="Bg">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="2" y="-21"/>
+						<Anchor point="BOTTOMRIGHT" x="-2" y="2"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTitleBg" inherits="_UI-Frame-TitleTileBG">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="2" y="-3"/>
+						<Anchor point="TOPRIGHT" x="-25" y="-3"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parentPortraitFrame" inherits="UI-Frame-Portrait" parentKey="portraitFrame">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-14" y="11"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTopRightCorner" inherits="UI-Frame-TopCornerRight">
+					<Anchors>
+						<Anchor point="TOPRIGHT" x="0" y="1"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTopLeftCorner" inherits="UI-Frame-TopLeftCorner" hidden="true" parentKey="topLeftCorner">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-6" y="1"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTopBorder" inherits="_UI-Frame-TitleTile" parentKey="topBorderBar">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentPortraitFrame" relativePoint="TOPRIGHT" x="0" y="-10" />
+						<Anchor point="TOPRIGHT" relativeTo="$parentTopRightCorner" relativePoint="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentTitleText" inherits="GameFontNormal" parentKey="TitleText" wordwrap="false">
+					<Anchors>
+						<Anchor point="TOP" x="0" y="-4"/>
+						<Anchor point="LEFT" x="60"/>
+						<Anchor point="RIGHT" x="-60"/>
+					</Anchors>
+				</FontString>
+				<Texture name="$parentTabardEmblem" file="Interface\GuildFrame\GuildEmblemsLG_01" hidden="true">
+					<Size x="58" y="58"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-5" y="6"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<Texture name="$parentTopTileStreaks" inherits="_UI-Frame-TopTileStreaks" parentKey="TopTileStreaks">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="50" y="-21"/>
+						<Anchor point="TOPRIGHT" x="-2" y="-21"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBotLeftCorner" inherits="UI-Frame-BotCornerLeft">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="-6" y="-5"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBotRightCorner" inherits="UI-Frame-BotCornerRight">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="0" y="-5"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBottomBorder" inherits="_UI-Frame-Bot">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentBotLeftCorner" relativePoint="BOTTOMRIGHT" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBotRightCorner" relativePoint="BOTTOMLEFT" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentLeftBorder" inherits="!UI-Frame-LeftTile" parentKey="leftBorderBar">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentPortraitFrame" relativePoint="BOTTOMLEFT" x="8" y="0" />
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentBotLeftCorner" relativePoint="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentRightBorder" inherits="!UI-Frame-RightTile">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentTopRightCorner" relativePoint="BOTTOMRIGHT" x="1"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBotRightCorner" relativePoint="TOPRIGHT"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTabardBackground" file="Interface\GuildFrame\GuildFrame" hidden="true">
+					<Size x="56" y="56"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-3" y="5"/>
+					</Anchors>
+					<TexCoords left="0.63183594" right="0.69238281" top="0.61914063" bottom="0.74023438"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentPortrait" parentKey="portrait">
+					<Size x="61" y="61"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-6" y="8" />
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTabardBorder" file="Interface\GuildFrame\GuildFrame" hidden="true">
+					<Size x="60" y="60"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-6" y="6"/>
+					</Anchors>
+					<TexCoords left="0.63183594" right="0.69238281" top="0.74414063" bottom="0.86523438"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Frame name="DetailsPortraitFrameTemplate" inherits="DetailsPortraitFrameTemplateNoCloseButton" virtual="true">
+		<Frames>
+			<Button name="$parentCloseButton" inherits="UIPanelCloseButton" parentKey="CloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset x="4" y="5"/>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Frame>
+
+	<Frame name="ButtonFrameTemplate" inherits="DetailsPortraitFrameTemplate" virtual="true">
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture name="$parentBtnCornerLeft" inherits="UI-Frame-BtnCornerLeft">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="-2" y="-1"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBtnCornerRight" inherits="UI-Frame-BtnCornerRight">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="0" y="-1"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentButtonBottomBorder" inherits="_UI-Frame-BtnBotTile">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentBtnCornerLeft" relativePoint="BOTTOMRIGHT" y="3"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBtnCornerRight" relativePoint="BOTTOMLEFT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentInset" useParentLevel="true" inherits="InsetFrameTemplate" parentKey="Inset">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="4" y="-60" />
+					<Anchor point="BOTTOMRIGHT" x="-6" y="26" />
+				</Anchors>
+			</Frame>
+		</Frames>
+	</Frame>
+</Ui>
