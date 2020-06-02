@@ -17,6 +17,7 @@ local _UnitGUID = UnitGUID --wow api local
 local _GetUnitName = GetUnitName --wow api local
 local _GetInstanceInfo = GetInstanceInfo --wow api local
 local _GetCurrentMapAreaID = GetCurrentMapAreaID --wow api local
+local _GetRealZoneText = GetRealZoneText --wow api local
 local _IsInRaid = IsInRaid --wow api local
 local _IsInGroup = IsInGroup --wow api local
 local _GetNumGroupMembers = GetNumGroupMembers --wow api local
@@ -3077,7 +3078,17 @@ local energy_types = {
 			local mapid = _GetCurrentMapAreaID()
 			local boss_ids = _detalhes:GetBossIds(mapid)
 			if not boss_ids then
-				return
+				local mapname = _GetRealZoneText()
+				for id, data in _pairs(_detalhes.EncounterInformation) do
+					if data.name == mapname then
+						boss_ids = _detalhes:GetBossIds(id)
+						mapid = id
+						break
+					end
+				end
+				if not boss_ids then
+					return
+				end
 			end
 
 			local bossindex = boss_ids[encounterID]
