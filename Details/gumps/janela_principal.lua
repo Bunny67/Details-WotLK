@@ -2299,14 +2299,22 @@ end
 local icon_frame_on_click_down = function(self)
 	local instanceID = self.instance_id
 	local instanceObject = Details:GetInstance(instanceID)
-	self:GetParent():GetParent().icone_classe:SetPoint("left", self:GetParent():GetParent(), "left", instanceObject.row_info.icon_offset[1] + 1, instanceObject.row_info.icon_offset[2] + -1)
+	local point = "left" 
+	if instanceObject.bars_inverted then 
+		point = "right"
+	end
+	self:GetParent():GetParent().icone_classe:SetPoint(point, self:GetParent():GetParent(), point, instanceObject.row_info.icon_offset[1] + 1, instanceObject.row_info.icon_offset[2] + -1)
 end
 
 local icon_frame_on_click_up = function(self, button)
 
 	local instanceID = self.instance_id
 	local instanceObject = Details:GetInstance(instanceID)
-	self:GetParent():GetParent().icone_classe:SetPoint("left", self:GetParent():GetParent(), "left", instanceObject.row_info.icon_offset[1], instanceObject.row_info.icon_offset[2])
+	local point = "left" 
+	if instanceObject.bars_inverted then 
+		point = "right"
+	end
+	self:GetParent():GetParent().icone_classe:SetPoint(point, self:GetParent():GetParent(), point, instanceObject.row_info.icon_offset[1], instanceObject.row_info.icon_offset[2])
 
 	if(button == "LeftButton") then
 		--> open the rank panel
