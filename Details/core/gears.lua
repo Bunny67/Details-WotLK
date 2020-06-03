@@ -1647,6 +1647,7 @@ end
 
 local inspect_frame = CreateFrame ("Frame")
 inspect_frame:RegisterEvent ("INSPECT_TALENT_READY")
+inspect_frame:RegisterEvent ("UPDATE_MOUSEOVER_UNIT")
 
 local two_hand = {
 	["INVTYPE_2HWEAPON"] = true,
@@ -1816,7 +1817,17 @@ end
 _detalhes.ilevel.CalcItemLevel = ilvl_core.CalcItemLevel
 
 inspect_frame:SetScript ("OnEvent", function (self, event, ...)
-	local guid = UnitGUID("mouseover")
+	local guid = ""
+
+	for queue_guid in pairs(inspecting) do -- get first guid 
+		guid = queue_guid 
+		break 
+	end
+
+	if guid == "" then 
+		guid = UnitGUID("mouseover")
+	end
+
 	if (inspecting [guid]) then
 		local unitid, cancel_tread = inspecting [guid] [1], inspecting [guid] [2]
 		inspecting [guid] = nil
