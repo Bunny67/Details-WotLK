@@ -117,6 +117,14 @@ function DF.GetSpecializationRole (...)
 	return nil
 end
 
+function DF.GetGUIDTalentString(guid)
+	local _, tree1, tree2, tree3 = LibGroupTalents:GetGUIDTalentSpec(guid)
+	if tree1 and tree2 and tree3 then 
+		return tree1 .. "/" .. tree2 .. "/" .. tree3
+	end
+	return ""
+end
+
 --build dummy encounter journal functions if they doesn't exists
 --this is done for compatibility with classic and if in the future EJ_ functions are moved to C_
 DF.EncounterJournal = {

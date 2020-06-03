@@ -4,10 +4,13 @@ local Loc = LibStub ("AceLocale-3.0"):GetLocale ( "Details" )
 local UnitName = UnitName
 local UnitGUID = UnitGUID
 local UnitGroupRolesAssigned = DetailsFramework.UnitGroupRolesAssigned
+local GetGUIDTalentString = DetailsFramework.GetGUIDTalentString
 local select = select
 local floor = floor
 
 local GetNumGroupMembers = GetNumGroupMembers
+local GetNumRaidMembers = GetNumRaidMembers
+local GetNumPartyMembers = GetNumPartyMembers
 
 local LibGroupInSpecT = LibStub ("LibGroupInSpecT-1.1") --disabled due to classic wow
 
@@ -1763,7 +1766,8 @@ function ilvl_core:CalcItemLevel (unitid, guid, shout)
 				_detalhes.item_level_pool [guid] = {name = name, ilvl = average, time = time()}
 			end
 		end
-
+		local talents = GetGUIDTalentString(guid)
+		_detalhes.cached_talents [guid] = talents
 --[[
 		local spec
 		local talents = {}
@@ -1812,8 +1816,7 @@ end
 _detalhes.ilevel.CalcItemLevel = ilvl_core.CalcItemLevel
 
 inspect_frame:SetScript ("OnEvent", function (self, event, ...)
-	local guid = select (1, ...)
-
+	local guid = UnitGUID("mouseover")
 	if (inspecting [guid]) then
 		local unitid, cancel_tread = inspecting [guid] [1], inspecting [guid] [2]
 		inspecting [guid] = nil
@@ -1832,13 +1835,20 @@ inspect_frame:SetScript ("OnEvent", function (self, event, ...)
 		end
 	else
 		if (IsInRaid()) then
-			--get the unitID
-			local serial = ...
-			if (serial and type (serial) == "string") then
-				for i = 1, GetNumGroupMembers() do
-					if (UnitGUID ("raid" .. i) == serial) then
-						ilvl_core:ScheduleTimer ("CalcItemLevel", 2, {"raid" .. i, serial})
-						ilvl_core:ScheduleTimer ("CalcItemLevel", 4, {"raid" .. i, serial})
+			if (guid and type (guid) == "string") then
+				for i = 1, GetNumRaidMembers() do
+					if (UnitGUID ("raid" .. i) == guid) then
+						ilvl_core:ScheduleTimer ("CalcItemLevel", 2, {"raid" .. i, guid})
+						ilvl_core:ScheduleTimer ("CalcItemLevel", 4, {"raid" .. i, guid})
+					end
+				end
+			end
+		elseif (IsInGroup()) then
+			if (guid and type (guid) == "string") then
+				for i = 1, GetNumPartyMembers() do
+					if (UnitGUID ("party" .. i) == guid) then
+						ilvl_core:ScheduleTimer ("CalcItemLevel", 2, {"party" .. i, guid})
+						ilvl_core:ScheduleTimer ("CalcItemLevel", 4, {"party" .. i, guid})
 					end
 				end
 			end
@@ -1874,11 +1884,14 @@ function ilvl_core:GetItemLevel (unitid, guid, is_forced, try_number)
 		end
 		return
 	end
+	if unitid == "player" then -- bypass inspecting for updating the player
+		ilvl_core:ScheduleTimer ("CalcItemLevel", 0.5, {unitid, guid})
+	else
+		inspecting [guid] = {unitid, ilvl_core:ScheduleTimer ("InspectTimeOut", 12, guid)}
+		ilvl_core.amt_inspecting = ilvl_core.amt_inspecting + 1
 
-	inspecting [guid] = {unitid, ilvl_core:ScheduleTimer ("InspectTimeOut", 12, guid)}
-	ilvl_core.amt_inspecting = ilvl_core.amt_inspecting + 1
-
-	NotifyInspect (unitid)
+		NotifyInspect (unitid)
+	end
 end
 
 local NotifyInspectHook = function (unitid)
@@ -1914,16 +1927,17 @@ end
 
 function ilvl_core:QueryInspect (unitName, callback, param1)
 	local unitid
-
-	if (IsInRaid()) then
-		for i = 1, GetNumGroupMembers() do
+	if (unitName == UnitName("player")) then
+		unitid = "player"
+	elseif (IsInRaid()) then
+		for i = 1, GetNumRaidMembers() do
 			if (GetUnitName ("raid" .. i, true) == unitName) then
 				unitid = "raid" .. i
 				break
 			end
 		end
 	elseif (IsInGroup()) then
-		for i = 1, GetNumGroupMembers()-1 do
+		for i = 1, GetNumPartyMembers() do
 			if (GetUnitName ("party" .. i, true) == unitName) then
 				unitid = "party" .. i
 				break
@@ -1947,7 +1961,6 @@ function ilvl_core:QueryInspect (unitName, callback, param1)
 	if (inspecting [guid]) then
 		return true
 	end
-
 	ilvl_core.forced_inspects [guid] = {callback = callback, param1 = param1}
 	ilvl_core:GetItemLevel (unitid, guid, true)
 
