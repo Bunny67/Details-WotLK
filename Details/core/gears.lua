@@ -1543,7 +1543,8 @@ function _detalhes:StoreEncounter (combat)
 						player_name = player_name .. "-" .. player_realm
 					end
 
-					local _, _, class = UnitClass (player_name)
+					local _, className = UnitClass (player_name)
+					local class = DetailsFramework.ClassFileNameToIndex[className]
 
 					local damage_actor = damage_container_pool [damage_container_hash [player_name]]
 					if (damage_actor) then
@@ -1556,7 +1557,8 @@ function _detalhes:StoreEncounter (combat)
 						player_name = player_name .. "-" .. player_realm
 					end
 
-					local _, _, class = UnitClass (player_name)
+					local _, className = UnitClass (player_name)
+					local class = DetailsFramework.ClassFileNameToIndex[className]
 
 					local heal_actor = healing_container_pool [healing_container_hash [player_name]]
 					if (heal_actor) then
