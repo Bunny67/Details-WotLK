@@ -299,7 +299,7 @@ _detalhes.PrintEncounterRecord = function(self)
 		else
 			local db = _detalhes.GetStorage()
 
-			local role = "DAMAGER" --_UnitGroupRolesAssigned("player")
+			local role = UnitGroupRolesAssigned("player")
 			local isDamage = (role == "DAMAGER") or (role == "TANK") --or true
 			local bestRank, encounterTable = _detalhes.storage:GetBestFromPlayer(diff, encounterID, isDamage and "damage" or "healing", _detalhes.playername, true)
 

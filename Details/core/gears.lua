@@ -4,10 +4,13 @@ local Loc = LibStub ("AceLocale-3.0"):GetLocale ( "Details" )
 local UnitName = UnitName
 local UnitGUID = UnitGUID
 local UnitGroupRolesAssigned = DetailsFramework.UnitGroupRolesAssigned
+local GetGUIDTalentString = DetailsFramework.GetGUIDTalentString
 local select = select
 local floor = floor
 
 local GetNumGroupMembers = GetNumGroupMembers
+local GetNumRaidMembers = GetNumRaidMembers
+local GetNumPartyMembers = GetNumPartyMembers
 
 local LibGroupInSpecT = LibStub ("LibGroupInSpecT-1.1") --disabled due to classic wow
 
@@ -1531,7 +1534,7 @@ function _detalhes:StoreEncounter (combat)
 
 		for i = 1, GetNumGroupMembers() do
 
-			local role = "DAMAGER" -- UnitGroupRolesAssigned ("raid" .. i)
+			local role = UnitGroupRolesAssigned("raid" .. i)
 
 			if (UnitIsInMyGuild ("raid" .. i)) then
 				if (role == "DAMAGER" or role == "TANK") then
@@ -1540,7 +1543,8 @@ function _detalhes:StoreEncounter (combat)
 						player_name = player_name .. "-" .. player_realm
 					end
 
-					local _, _, class = UnitClass (player_name)
+					local _, className = UnitClass (player_name)
+					local class = DetailsFramework.ClassFileNameToIndex[className]
 
 					local damage_actor = damage_container_pool [damage_container_hash [player_name]]
 					if (damage_actor) then
@@ -1553,7 +1557,8 @@ function _detalhes:StoreEncounter (combat)
 						player_name = player_name .. "-" .. player_realm
 					end
 
-					local _, _, class = UnitClass (player_name)
+					local _, className = UnitClass (player_name)
+					local class = DetailsFramework.ClassFileNameToIndex[className]
 
 					local heal_actor = healing_container_pool [healing_container_hash [player_name]]
 					if (heal_actor) then
@@ -1570,7 +1575,7 @@ function _detalhes:StoreEncounter (combat)
 			print ("|cFFFFFF00Details! Storage|r: combat data added to encounter database.")
 		end
 
-		local myrole = "DAMAGER" --UnitGroupRolesAssigned ("player")
+		local myrole =  UnitGroupRolesAssigned("player")
 		local mybest, onencounter = _detalhes.storage:GetBestFromPlayer (diff, encounter_id, myrole, _detalhes.playername, true) --> get dps or hps
 		local myBestDps = mybest [1] / onencounter.elapsed
 
@@ -1597,7 +1602,7 @@ function _detalhes:StoreEncounter (combat)
 		if (lower_instance) then
 			local instance = _detalhes:GetInstance (lower_instance)
 			if (instance) then
-				local my_role = "DAMAGER" -- UnitGroupRolesAssigned ("player")
+				local my_role = UnitGroupRolesAssigned("player")
 				if (my_role == "TANK") then
 					my_role = "DAMAGER"
 				end
@@ -1644,6 +1649,7 @@ end
 
 local inspect_frame = CreateFrame ("Frame")
 inspect_frame:RegisterEvent ("INSPECT_TALENT_READY")
+inspect_frame:RegisterEvent ("UPDATE_MOUSEOVER_UNIT")
 
 local two_hand = {
 	["INVTYPE_2HWEAPON"] = true,
@@ -1715,38 +1721,42 @@ function ilvl_core:CalcItemLevel (unitid, guid, shout)
 	end
 
 	if (CheckInteractDistance (unitid, 1)) then
+		local average = 0
 
-		--> 16 = all itens including main and off hand
-		local item_amount = 16
-		local item_level = 0
-		local failed = 0
+		if GearScore_GetScore then -- replace ilvl with gearscore if available
+			average = GearScore_GetScore(UnitName(unitid), unitid)
+		else
+			--> 16 = all itens including main and off hand
+			local item_amount = 16
+			local item_level = 0
+			local failed = 0
 
-		for equip_id = 1, 17 do
-			if (equip_id ~= 4) then --shirt slot
-				local item = GetInventoryItemLink (unitid, equip_id)
-				if (item) then
-					local _, _, itemRarity, iLevel, _, _, _, _, equipSlot = GetItemInfo (item)
-					if (iLevel) then
-						item_level = item_level + iLevel
+			for equip_id = 1, 17 do
+				if (equip_id ~= 4) then --shirt slot
+					local item = GetInventoryItemLink (unitid, equip_id)
+					if (item) then
+						local _, _, itemRarity, iLevel, _, _, _, _, equipSlot = GetItemInfo (item)
+						if (iLevel) then
+							item_level = item_level + iLevel
 
-						--> 16 = main hand 17 = off hand
-						-->  if using a two-hand, ignore the off hand slot
-						if (equip_id == 16 and two_hand [equipSlot]) then
-							item_amount = 15
+							--> 16 = main hand 17 = off hand
+							-->  if using a two-hand, ignore the off hand slot
+							if (equip_id == 16 and two_hand [equipSlot]) then
+								item_amount = 15
+								break
+							end
+						end
+					else
+						failed = failed + 1
+						if (failed > 2) then
 							break
 						end
 					end
-				else
-					failed = failed + 1
-					if (failed > 2) then
-						break
-					end
 				end
 			end
+		 	average = item_level / item_amount
+			--print (UnitName (unitid), "ILVL:", average, unitid, "items:", item_amount)
 		end
-
-		local average = item_level / item_amount
-		--print (UnitName (unitid), "ILVL:", average, unitid, "items:", item_amount)
 
 		--> register
 		if (average > 0) then
@@ -1759,7 +1769,8 @@ function ilvl_core:CalcItemLevel (unitid, guid, shout)
 				_detalhes.item_level_pool [guid] = {name = name, ilvl = average, time = time()}
 			end
 		end
-
+		local talents = GetGUIDTalentString(guid)
+		_detalhes.cached_talents [guid] = talents
 --[[
 		local spec
 		local talents = {}
@@ -1808,7 +1819,16 @@ end
 _detalhes.ilevel.CalcItemLevel = ilvl_core.CalcItemLevel
 
 inspect_frame:SetScript ("OnEvent", function (self, event, ...)
-	local guid = select (1, ...)
+	local guid = ""
+
+	for queue_guid in pairs(inspecting) do -- get first guid 
+		guid = queue_guid 
+		break 
+	end
+
+	if guid == "" then 
+		guid = UnitGUID("mouseover")
+	end
 
 	if (inspecting [guid]) then
 		local unitid, cancel_tread = inspecting [guid] [1], inspecting [guid] [2]
@@ -1828,13 +1848,20 @@ inspect_frame:SetScript ("OnEvent", function (self, event, ...)
 		end
 	else
 		if (IsInRaid()) then
-			--get the unitID
-			local serial = ...
-			if (serial and type (serial) == "string") then
-				for i = 1, GetNumGroupMembers() do
-					if (UnitGUID ("raid" .. i) == serial) then
-						ilvl_core:ScheduleTimer ("CalcItemLevel", 2, {"raid" .. i, serial})
-						ilvl_core:ScheduleTimer ("CalcItemLevel", 4, {"raid" .. i, serial})
+			if (guid and type (guid) == "string") then
+				for i = 1, GetNumRaidMembers() do
+					if (UnitGUID ("raid" .. i) == guid) then
+						ilvl_core:ScheduleTimer ("CalcItemLevel", 2, {"raid" .. i, guid})
+						ilvl_core:ScheduleTimer ("CalcItemLevel", 4, {"raid" .. i, guid})
+					end
+				end
+			end
+		elseif (IsInGroup()) then
+			if (guid and type (guid) == "string") then
+				for i = 1, GetNumPartyMembers() do
+					if (UnitGUID ("party" .. i) == guid) then
+						ilvl_core:ScheduleTimer ("CalcItemLevel", 2, {"party" .. i, guid})
+						ilvl_core:ScheduleTimer ("CalcItemLevel", 4, {"party" .. i, guid})
 					end
 				end
 			end
@@ -1870,11 +1897,14 @@ function ilvl_core:GetItemLevel (unitid, guid, is_forced, try_number)
 		end
 		return
 	end
+	if unitid == "player" then -- bypass inspecting for updating the player
+		ilvl_core:ScheduleTimer ("CalcItemLevel", 0.5, {unitid, guid})
+	else
+		inspecting [guid] = {unitid, ilvl_core:ScheduleTimer ("InspectTimeOut", 12, guid)}
+		ilvl_core.amt_inspecting = ilvl_core.amt_inspecting + 1
 
-	inspecting [guid] = {unitid, ilvl_core:ScheduleTimer ("InspectTimeOut", 12, guid)}
-	ilvl_core.amt_inspecting = ilvl_core.amt_inspecting + 1
-
-	NotifyInspect (unitid)
+		NotifyInspect (unitid)
+	end
 end
 
 local NotifyInspectHook = function (unitid)
@@ -1910,16 +1940,17 @@ end
 
 function ilvl_core:QueryInspect (unitName, callback, param1)
 	local unitid
-
-	if (IsInRaid()) then
-		for i = 1, GetNumGroupMembers() do
+	if (unitName == UnitName("player")) then
+		unitid = "player"
+	elseif (IsInRaid()) then
+		for i = 1, GetNumRaidMembers() do
 			if (GetUnitName ("raid" .. i, true) == unitName) then
 				unitid = "raid" .. i
 				break
 			end
 		end
 	elseif (IsInGroup()) then
-		for i = 1, GetNumGroupMembers()-1 do
+		for i = 1, GetNumPartyMembers() do
 			if (GetUnitName ("party" .. i, true) == unitName) then
 				unitid = "party" .. i
 				break
@@ -1943,7 +1974,6 @@ function ilvl_core:QueryInspect (unitName, callback, param1)
 	if (inspecting [guid]) then
 		return true
 	end
-
 	ilvl_core.forced_inspects [guid] = {callback = callback, param1 = param1}
 	ilvl_core:GetItemLevel (unitid, guid, true)
 

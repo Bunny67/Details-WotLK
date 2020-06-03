@@ -17,10 +17,12 @@
 	<Script file="LibWindow-1.1\LibWindow-1.1.lua"/>
 	<Include file="LibCompress\lib.xml"/>
 	<Include file="LibDeflate\lib.xml"/>
+	<Include file="LibTalentQuery-1.0\lib.xml"/>
+	<Include file="LibGroupTalents-1.0\lib.xml"/>
 	<Include file="LibGroupInSpecT-1.1\lib.xml"/>
 	<Include file="DF\load.xml"/>
 	<Include file="LibTranslit\LibTranslit-1.0.xml"/>
-
+	
 	<Include file="LibBossIDs-1.0\lib.xml"/>
 	<Include file="LibBabble-Boss-3.0\lib.xml" />
 </Ui>
