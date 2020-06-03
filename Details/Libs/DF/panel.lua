@@ -4305,9 +4305,10 @@ DF.ScrollBoxFunctions.SetFramesHeight = function (self, new_height)
 	self:Refresh()
 end
 
-DF.ScrollBoxFunctions.OnSizeChanged = function (self)
+DF.ScrollBoxFunctions.OnSizeChanged = function (self, _, height)
 	if (self.ReajustNumFrames) then
 		--> how many lines the scroll can show
+		if height then self:SetHeight(height) end
 		local amountOfFramesToShow = floor (self:GetHeight() / self.LineHeight)
 
 		--> how many lines the scroll already have
