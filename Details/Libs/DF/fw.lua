@@ -3360,10 +3360,8 @@ DF.ClassFileNameToIndex = {
 	["PRIEST"] = 5,
 	["HUNTER"] = 3,
 	["WARLOCK"] = 9,
-	["DEMONHUNTER"] = 12,
 	["SHAMAN"] = 7,
-	["DRUID"] = 11,
-	["MONK"] = 10,
+	["DRUID"] = 10,
 	["PALADIN"] = 2,
 }
 DF.ClassCache = {}
@@ -3387,28 +3385,6 @@ function DF:GetClassList()
 
 	return DF.ClassCache
 
-end
-
-local classInfo = {
-	[1] = { LOCALIZED_CLASS_NAMES_MALE["WARRIOR"] , "WARRIOR" },
-	[2] = { LOCALIZED_CLASS_NAMES_MALE["PALADIN"] , "PALADIN" },
-	[3] = { LOCALIZED_CLASS_NAMES_MALE["HUNTER"] , "HUNTER" },
-	[4] = { LOCALIZED_CLASS_NAMES_MALE["ROGUE"] , "ROGUE" },
-	[5] = { LOCALIZED_CLASS_NAMES_MALE["PRIEST"] , "PRIEST" },
-	[6] = { LOCALIZED_CLASS_NAMES_MALE["DEATHKNIGHT"] , "DEATHKNIGHT" },
-	[7] = { LOCALIZED_CLASS_NAMES_MALE["SHAMAN"] , "SHAMAN" },
-	[8] = { LOCALIZED_CLASS_NAMES_MALE["MAGE"] , "MAGE" },
-	[9] = { LOCALIZED_CLASS_NAMES_MALE["WARLOCK"] , "WARLOCK" },
-	[11] = { LOCALIZED_CLASS_NAMES_MALE["DRUID"] , "DRUID" },
-}
-
-function DF:GetClassInfo(index)
-	local info = classInfo[index or 0]
-	if info then 
-		return info[1], info[2], index
-	else 
-		return nil, nil, 0
-	end
 end
 
 --hardcoded race list
