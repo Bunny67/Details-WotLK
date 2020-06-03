@@ -55,9 +55,9 @@ function DF.UnitGroupRolesAssigned (unitId)
 	if role then 
 		if role == "melee" or role == "cater" then 
 			role = "DAMAGER"
-		else if role == "tank" then 
+		elseif role == "tank" then 
 			role = "TANK"
-		else if role == "healer" then 
+		elseif role == "healer" then 
 			role = "HEALER"
 		end
 		return role
