@@ -5687,7 +5687,6 @@ local CreateEventTrackerFrame = function (parent, name)
 		local scroll_createline = function (self, index)
 
 			local line = CreateFrame ("Frame", "$parentLine" .. index, self)
-			line:EnableMouse (false)
 			line.Index = index --> hack to not trigger error on UpdateWorldTrackerLines since Index is set after this function is ran
 
 			--> set its backdrop
@@ -5960,8 +5959,6 @@ local CreateEventTrackerFrame = function (parent, name)
 		--> scrollframe
 		local scrollframe = DF:CreateScrollBox (f, "$parentScrollFrame", scroll_refresh, CurrentShowing, scroll_width, 400, scroll_line_amount, _detalhes.event_tracker.line_height, scroll_createline, true, true)
 		scrollframe:SetPoint ("TOPLEFT", f, "TOPLEFT", 0, -header_size)
-		scrollframe:SetPoint ("TOPRIGHT", f, "TOPRIGHT", 0, -header_size)
-		scrollframe:SetPoint ("BOTTOMLEFT", f, "BOTTOMLEFT", 0, 0)
 		scrollframe:SetPoint ("BOTTOMRIGHT", f, "BOTTOMRIGHT", 0, 0)
 
 		--> update line - used by 'UpdateWorldTrackerLines' function
@@ -6017,7 +6014,7 @@ local CreateEventTrackerFrame = function (parent, name)
 				for index, line in ipairs (scrollframe:GetFrames()) do
 					update_line (line)
 				end
-				scrollframe:SetFramesHeight (_detalhes.event_tracker.line_height)
+				scrollframe:SetFramesHeight (_detalhes.event_tracker.line_height+1)
 				scrollframe:Refresh()
 			end
 		end
@@ -6047,12 +6044,10 @@ local CreateEventTrackerFrame = function (parent, name)
 				TitleString:Show()
 				TitleBackground:Show()
 				scrollframe:SetPoint ("TOPLEFT", f, "TOPLEFT", 0, -header_size)
-				scrollframe:SetPoint ("TOPRIGHT", f, "TOPRIGHT", 0, -header_size)
 			else
 				TitleString:Hide()
 				TitleBackground:Hide()
 				scrollframe:SetPoint ("TOPLEFT", f, "TOPLEFT", 0, 0)
-				scrollframe:SetPoint ("TOPRIGHT", f, "TOPRIGHT", 0, 0)
 			end
 
 			f:SetBackdropColor (unpack (_detalhes.event_tracker.frame.backdrop_color))
