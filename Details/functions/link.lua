@@ -2661,20 +2661,6 @@
 				_detalhes.encounter_table.DBM_ModTime = time()
 			end
 
-			local dbm_callback_start = function(event, encounterID, encounterName)
-				local _, _, _, _, maxPlayers = GetInstanceInfo()
-				local difficulty = GetInstanceDifficulty()
-				_detalhes.parser_functions:ENCOUNTER_START(encounterID, LBB[encounterName], difficulty, maxPlayers)
-			end
-
-			local dbm_callback_end = function(event, encounterID, encounterName, endStatus)
-				local _, _, difficultyID, _, maxPlayers = GetInstanceInfo()
-				local difficulty = GetInstanceDifficulty()
-				_detalhes.parser_functions:ENCOUNTER_END(encounterID, LBB[encounterName], difficulty, maxPlayers, endStatus)
-			end
-
-			DBM:RegisterCallback("DBM_EncounterStart", dbm_callback_start)
-			DBM:RegisterCallback("DBM_EncounterEnd", dbm_callback_end)
 			DBM:RegisterCallback("DBM_Announce", dbm_callback_phase)
 			DBM:RegisterCallback("pull", dbm_callback_pull)
 		end
