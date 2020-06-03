@@ -1759,7 +1759,7 @@ function ilvl_core:CalcItemLevel (unitid, guid, shout)
 		end
 
 		--> register
-		if (average > 0) then
+		if (average and average > 0) then
 			if (shout) then
 				_detalhes:Msg (UnitName(unitid) .. " item level: " .. average)
 			end
@@ -1898,7 +1898,7 @@ function ilvl_core:GetItemLevel (unitid, guid, is_forced, try_number)
 		return
 	end
 	if unitid == "player" then -- bypass inspecting for updating the player
-		ilvl_core:ScheduleTimer ("CalcItemLevel", 0.5, {unitid, guid})
+		ilvl_core:ScheduleTimer ("CalcItemLevel", 0.5, {unitid, UnitGUID("player")})
 	else
 		inspecting [guid] = {unitid, ilvl_core:ScheduleTimer ("InspectTimeOut", 12, guid)}
 		ilvl_core.amt_inspecting = ilvl_core.amt_inspecting + 1
