@@ -3354,19 +3354,40 @@ function DF:GetClassList()
 	end
 
 	for className, classIndex in pairs (DF.ClassFileNameToIndex) do
-		local classTable = C_CreatureInfo.GetClassInfo (classIndex)
 		local t = {
 			ID = classIndex,
-			Name = classTable.className,
+			Name = className,
 			Texture = [[Interface\GLUES\CHARACTERCREATE\UI-CharacterCreate-Classes]],
 			TexCoord = CLASS_ICON_TCOORDS [className],
 			FileString = className,
 		}
-		tinsert (DF.ClassCache, t)
+		tinsert (DF.ClassCache, classIndex, t)
 	end
 
 	return DF.ClassCache
 
+end
+
+local classInfo = {
+	[1] = { LOCALIZED_CLASS_NAMES_MALE["WARRIOR"] , "WARRIOR" },
+	[2] = { LOCALIZED_CLASS_NAMES_MALE["PALADIN"] , "PALADIN" },
+	[3] = { LOCALIZED_CLASS_NAMES_MALE["HUNTER"] , "HUNTER" },
+	[4] = { LOCALIZED_CLASS_NAMES_MALE["ROGUE"] , "ROGUE" },
+	[5] = { LOCALIZED_CLASS_NAMES_MALE["PRIEST"] , "PRIEST" },
+	[6] = { LOCALIZED_CLASS_NAMES_MALE["DEATHKNIGHT"] , "DEATHKNIGHT" },
+	[7] = { LOCALIZED_CLASS_NAMES_MALE["SHAMAN"] , "SHAMAN" },
+	[8] = { LOCALIZED_CLASS_NAMES_MALE["MAGE"] , "MAGE" },
+	[9] = { LOCALIZED_CLASS_NAMES_MALE["WARLOCK"] , "WARLOCK" },
+	[11] = { LOCALIZED_CLASS_NAMES_MALE["DRUID"] , "DRUID" },
+}
+
+function DF:GetClassInfo(index)
+	local info = classInfo[index or 0]
+	if info then 
+		return info[1], info[2], index
+	else 
+		return nil, nil, 0
+	end
 end
 
 --hardcoded race list

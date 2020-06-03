@@ -5,6 +5,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --> local pointers
+	local GetClassInfo = DetailsFramework.GetClassInfo
 
 	local _math_floor = math.floor --lua local
 	local _type = type --lua local
@@ -1958,7 +1959,7 @@ local _utf8sub = string.utf8sub
 
 				local sortTable = {}
 				for playerName, t in pairs (playerScore) do
-					local className = select (2, GetClassInfo (t.class or 0))
+					local className = select (2, GetClassInfo(t.class or 0))
 					local classColor = "FFFFFFFF"
 					if (className) then
 						classColor = RAID_CLASS_COLORS [className] and RAID_CLASS_COLORS [className].colorStr
