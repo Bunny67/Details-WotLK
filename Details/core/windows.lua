@@ -1957,7 +1957,7 @@ local _utf8sub = string.utf8sub
 
 				local sortTable = {}
 				for playerName, t in pairs (playerScore) do
-					local className = _detalhes.classid_to_classstring[t.class or 0]
+					local className = t.class
 					local classColor = "FFFFFFFF"
 					if (className) then
 						classColor = RAID_CLASS_COLORS [className] and RAID_CLASS_COLORS [className].colorStr
@@ -2051,7 +2051,7 @@ local _utf8sub = string.utf8sub
 						tinsert (playerTable, "")
 					end
 
-					local className = _detalhes.classid_to_classstring[player_class[playerTable[1]] or 0]
+					local className = player_class[playerTable[1]]
 					if (className) then
 						local playerNameFormated = _detalhes:GetOnlyName (playerTable[1])
 						local classColor = RAID_CLASS_COLORS [className] and RAID_CLASS_COLORS [className].colorStr

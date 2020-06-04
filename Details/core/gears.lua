@@ -1543,13 +1543,12 @@ function _detalhes:StoreEncounter (combat)
 						player_name = player_name .. "-" .. player_realm
 					end
 
-					local _, className = UnitClass (player_name)
-					local class = DetailsFramework.ClassFileNameToIndex[className]
+					local _, class = UnitClass (player_name)
 
 					local damage_actor = damage_container_pool [damage_container_hash [player_name]]
 					if (damage_actor) then
 						local guid = UnitGUID (player_name) or UnitGUID (UnitName ("raid" .. i))
-						this_combat_data.damage [player_name] = {floor (damage_actor.total), (ItemLevelMixIn and ItemLevelMixIn:GetItemLevel(guid)) or _detalhes.item_level_pool [guid] and _detalhes.item_level_pool [guid].ilvl or 0, class or 0}
+						this_combat_data.damage [player_name] = {floor (damage_actor.total), (ItemLevelMixIn and ItemLevelMixIn:GetItemLevel(guid)) or _detalhes.item_level_pool [guid] and _detalhes.item_level_pool [guid].ilvl or 0, class}
 					end
 				elseif (role == "HEALER") then
 					local player_name, player_realm = UnitName ("raid" .. i)
@@ -1557,13 +1556,12 @@ function _detalhes:StoreEncounter (combat)
 						player_name = player_name .. "-" .. player_realm
 					end
 
-					local _, className = UnitClass (player_name)
-					local class = DetailsFramework.ClassFileNameToIndex[className]
+					local _, class = UnitClass (player_name)
 
 					local heal_actor = healing_container_pool [healing_container_hash [player_name]]
 					if (heal_actor) then
 						local guid = UnitGUID (player_name) or UnitGUID (UnitName ("raid" .. i))
-						this_combat_data.healing [player_name] = {floor (heal_actor.total), (ItemLevelMixIn and ItemLevelMixIn:GetItemLevel(guid)) or _detalhes.item_level_pool [guid] and _detalhes.item_level_pool [guid].ilvl or 0, class or 0}
+						this_combat_data.healing [player_name] = {floor (heal_actor.total), (ItemLevelMixIn and ItemLevelMixIn:GetItemLevel(guid)) or _detalhes.item_level_pool [guid] and _detalhes.item_level_pool [guid].ilvl or 0, class}
 					end
 				end
 			end
