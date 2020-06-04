@@ -873,6 +873,58 @@ do
 		[7922]	= true, -- Warbringer
 	}
 
+	_detalhes.MageFireWardSpells = {
+		[543] = 30 , -- Fire Ward (Mage) Rank 1
+		[8457] = 30,
+		[8458] = 30,
+		[10223] = 30,
+		[10225] = 30,
+		[27128] = 30,
+		[43010] = 30, -- Rank 7
+	}
+
+	_detalhes.MageFrostWardSpells = {
+		[6143] = 30, -- Frost Ward (Mage) Rank 1
+		[8461] = 30,
+		[8462] = 30,
+		[10177] = 30,
+		[28609] = 30,
+		[32796] = 30,
+		[43012] = 30, -- Rank 7
+	}
+
+	_detalhes.WarlockShadowWardSpells = {
+		[6229] = 30, -- Shadow Ward (warlock) Rank 1
+		[11739] = 30,
+		[11740] = 30,
+		[28610] = 30,
+		[47890] = 30,
+		[47891] = 30, -- Rank 6
+	}
+
+	_detalhes.MageIceBarrierSpells = {
+		[11426] = 60, -- Ice Barrier (Mage) Rank 1
+		[13031] = 60,
+		[13032] = 60,
+		[13033] = 60,
+		[27134] = 60,
+		[33405] = 60,
+		[43038] = 60,
+		[43039] = 60, -- Rank 8
+	}
+
+	_detalhes.WarlockSacrificeSpells = {
+		[7812] = 30, -- Sacrifice (warlock) Rank 1
+		[19438] = 30,
+		[19440] = 30,
+		[19441] = 30,
+		[19442] = 30,
+		[19443] = 30,
+		[27273] = 30,
+		[47985] = 30,
+		[47986] = 30, -- rank 9
+	}
+
 	_detalhes.AbsorbSpells = {
 		-- Death Knight
 		[48707] = 5, -- Anti-Magic Shell (DK) Rank 1 -- Does not currently seem to show tracable combat log events. It shows energizes which do not reveal the amount of damage absorbed
