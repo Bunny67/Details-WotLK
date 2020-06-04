@@ -2127,7 +2127,6 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 					-- locate buff 
 					for _, applied_absorb in ipairs(escudo[alvo_name]) do 
 						if applied_absorb.serial == who_serial and applied_absorb.spellid == spellid then
-							Details:Msg("Scheduled removal of " .. applied_absorb.spellname .. " from " .. who_name .. " on " .. alvo_name)
 							-- schedule removal of shield buff since absorbed damage is sent after unbuff is called.
 							C_Timer.After(0.1, function() parser:unbuff_shield(alvo_name, who_serial, spellid) end)
 							break
