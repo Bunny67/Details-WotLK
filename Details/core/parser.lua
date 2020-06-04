@@ -1304,12 +1304,9 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 	-- absorb order from trinitycore 
 	local function AbsorbAuraOrderPred(a, b)
 		-- not sure why this can happen but sometimes b can be nil 
-		if not a then
-			return false 
-		end
-		if not b then 
-			return true
-		end
+		-- return true for sorted if either nil.
+		if not a or not b then return true end
+
 		local spellA = a.spellid
 		local spellB = b.spellid
 
