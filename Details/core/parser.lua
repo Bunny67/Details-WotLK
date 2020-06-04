@@ -1303,12 +1303,14 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 	-- https://github.com/TrinityCore/TrinityCore/blob/d81a9e5bc3b3e13b47332b3e7817bd0a0b228cbc/src/server/game/Spells/Auras/SpellAuraEffects.h#L313-L367 
 	-- absorb order from trinitycore 
 	local function AbsorbAuraOrderPred(a, b)
-		-- not sure why this can happen but sometimes b can be nil 
-		-- return true for sorted if either nil.
-		if not a or not b then return true end
 
 		local spellA = a.spellid
 		local spellB = b.spellid
+
+		-- puts oldest absorb first if there is two with the same id.
+		if spellA == spellB then
+			return a.timestamp < b.timestamp
+		end
 
 		--frost ward
 		if frost_ward_absorb_list[spellA] then
@@ -1374,7 +1376,8 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			return false 
 		end
 		
-		return false
+		-- sort oldest buffs to the top
+		return a.timestamp < b.timestamp
 	end
 
 	function parser:heal_absorb(token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, absorbed, spelltype)
