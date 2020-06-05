@@ -1453,7 +1453,7 @@ function _detalhes:CatchRaidBuffUptime (in_or_out)
 		local focus_augmentation = {}
 
 		--party members
-		for groupIndex = 1, _GetNumGroupMembers() - 1 do
+		for groupIndex = 1, _GetNumGroupMembers() do
 			for buffIndex = 1, 41 do
 				local name, _, _, _, _, _, _, unitCaster, _, _, spellid  = _UnitAura ("party"..groupIndex, buffIndex, nil, "HELPFUL")
 				if (name and unitCaster and UnitExists (unitCaster) and UnitExists ("party" .. groupIndex) and UnitIsUnit (unitCaster, "party" .. groupIndex)) then

@@ -273,7 +273,7 @@ local function CreatePluginFrames (data)
 				end
 				
 			elseif (_IsInGroup()) then
-				for i = 1, _GetNumGroupMembers() - 1, 1 do
+				for i = 1, _GetNumGroupMembers(), 1 do
 					local thisplayer_name = GetUnitName ("party"..i)
 					local threat_table_index = ThreatMeter.player_list_hash [thisplayer_name]
 					local threat_table = ThreatMeter.player_list_indexes [threat_table_index]
