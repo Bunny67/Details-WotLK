@@ -1535,6 +1535,31 @@ function _detalhes:StoreEncounter (combat)
 			local role = UnitGroupRolesAssigned("raid" .. i)
 
 			if (UnitIsInMyGuild ("raid" .. i)) then
+				if (role == "NONE") then 
+					-- try and guess role 
+					local player_name, player_realm = UnitName ("raid" .. i)
+					if (player_realm and player_realm ~= "") then
+						player_name = player_name .. "-" .. player_realm
+					end
+					
+					local damage, healing = 0, 0
+					local damage_actor = damage_container_pool [damage_container_hash [player_name]]
+					if (damage_actor) then
+						damage = damage_actor.total
+					end 
+
+					local heal_actor = healing_container_pool [healing_container_hash [player_name]] 
+					if (heal_actor) then 
+						healing = heal_actor.total
+					end
+
+					if (healing > damage) then
+						role = "HEALER"
+					else
+						role = "DAMAGER"
+					end
+				end
+
 				if (role == "DAMAGER" or role == "TANK") then
 					local player_name, player_realm = UnitName ("raid" .. i)
 					if (player_realm and player_realm ~= "") then
