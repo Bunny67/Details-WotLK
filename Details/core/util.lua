@@ -881,7 +881,7 @@ function _detalhes:EstaEmCombate()
 			end
 		end
 	elseif _IsInGroup() then
-		for i = 1, _GetNumGroupMembers() - 1, 1 do
+		for i = 1, _GetNumGroupMembers(), 1 do
 			if _UnitAffectingCombat("party"..i) then
 				return true
 			end

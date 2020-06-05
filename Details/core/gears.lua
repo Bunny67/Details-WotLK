@@ -9,8 +9,6 @@ local select = select
 local floor = floor
 
 local GetNumGroupMembers = GetNumGroupMembers
-local GetNumRaidMembers = GetNumRaidMembers
-local GetNumPartyMembers = GetNumPartyMembers
 
 local LibGroupInSpecT = LibStub ("LibGroupInSpecT-1.1") --disabled due to classic wow
 
@@ -1849,7 +1847,7 @@ inspect_frame:SetScript ("OnEvent", function (self, event, ...)
 	else
 		if (IsInRaid()) then
 			if (guid and type (guid) == "string") then
-				for i = 1, GetNumRaidMembers() do
+				for i = 1, GetNumGroupMembers() do
 					if (UnitGUID ("raid" .. i) == guid) then
 						ilvl_core:ScheduleTimer ("CalcItemLevel", 2, {"raid" .. i, guid})
 						ilvl_core:ScheduleTimer ("CalcItemLevel", 4, {"raid" .. i, guid})
@@ -1858,7 +1856,7 @@ inspect_frame:SetScript ("OnEvent", function (self, event, ...)
 			end
 		elseif (IsInGroup()) then
 			if (guid and type (guid) == "string") then
-				for i = 1, GetNumPartyMembers() do
+				for i = 1, GetNumGroupMembers() do
 					if (UnitGUID ("party" .. i) == guid) then
 						ilvl_core:ScheduleTimer ("CalcItemLevel", 2, {"party" .. i, guid})
 						ilvl_core:ScheduleTimer ("CalcItemLevel", 4, {"party" .. i, guid})

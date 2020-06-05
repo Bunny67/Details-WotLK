@@ -23,7 +23,11 @@ function GetNumSubgroupMembers()
 end
 
 function GetNumGroupMembers()
-	return GetNumRaidMembers()
+	if IsInGroup() then
+		return GetNumPartyMembers()
+	else
+		return GetNumRaidMembers()
+	end
 end
 
 --[[

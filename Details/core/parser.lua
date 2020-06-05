@@ -477,7 +477,6 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			((who_flags and _bit_band(who_flags, AFFILIATION_GROUP) ~= 0 and _UnitAffectingCombat(who_name))
 			or (alvo_flags and _bit_band(alvo_flags, AFFILIATION_GROUP) ~= 0 and _UnitAffectingCombat(alvo_name))
 			or (not _detalhes.in_group and who_flags and _bit_band(who_flags, AFFILIATION_GROUP) ~= 0)) then
-
 			_detalhes:EntrarEmCombate(who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags)
 			
 			--> n�o entra em combate se for DOT
@@ -4758,7 +4757,7 @@ function _detalhes:UptadeRaidMembersCache()
 
 	elseif _IsInGroup() then
 		--party
-		for i = 1, _GetNumGroupMembers() - 1 do
+		for i = 1, _GetNumGroupMembers() do
 			local name = _GetUnitName("party"..i, true)
 
 			raid_members_cache[_UnitGUID("party"..i)] = true
