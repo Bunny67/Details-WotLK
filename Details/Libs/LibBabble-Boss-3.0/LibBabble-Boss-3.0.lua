@@ -4598,7 +4598,7 @@ elseif GAME_LOCALE == "ruRU" then
 	-- ["Ascendant Lord Obsidius"] = "",
 	-- ["Asim al Akir"] = "",
 	["Assault Bot"] = "Штурмовой робот",
-	-- ["Assembly of Iron"] = "",
+	["Assembly of Iron"] = "Железное Собрание",
 	["Atal'alarion"] = "Атал'аларион",
 	["Attumen the Huntsman"] = "Ловчий Аттумен",
 	Auriaya = "Ауриайя",

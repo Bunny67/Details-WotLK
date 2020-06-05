@@ -1173,3 +1173,114 @@ do --> data for The Eye of Eternity
 		},
 	})
 end
+
+do --> data for Ulduar
+	local INSTANCE_EJID = 1000
+	local INSTANCE_MAPID = 530
+	local HDIMAGESPATH = "Details\\images\\raid"
+	local HDFILEPREFIX = "Ulduar"
+	local LOADINGSCREEN_FILE, LOADINGSCREEN_COORDS = "LoadScreenUlduarRaid", {0, 1, 285/1024, 875/1024}
+	local EJ_DUNGEONBG = "ui-ej-dungeonbutton-ulduar"
+	local EJ_LOREBG = "ui-ej-lorebg-ulduar"
+
+	local PORTRAIT_LIST = {
+		"ui-ej-boss-flame leviathan",
+		"ui-ej-boss-ignis the furnace master",
+		"ui-ej-boss-razorscale",
+		"ui-ej-boss-xt 002 deconstructor",
+		"ui-ej-boss-assembly of iron",
+		"ui-ej-boss-kologarn",
+		"ui-ej-boss-auriaya",
+		"ui-ej-boss-hodir",
+		"ui-ej-boss-thorim",
+		"ui-ej-boss-freya",
+		"ui-ej-boss-mimiron",
+		"ui-ej-boss-general vezax",
+		"ui-ej-boss-yogg saron",
+		"ui-ej-boss-algalon the observer",
+	}
+
+	local ENCOUNTER_ID_CL = {
+		33113, 33118, 33186, 33293, 32867, 32930, 33515, 32845, 32865, 32906, 33350, 33271, 33136, 32871,
+		[33113] = 1, --Flame Leviathan
+		[33118] = 2, --Ignis the Furnace Master
+		[33186] = 3, --Razorscale
+		[33293] = 4, --XT-002 Deconstructor
+		[32867] = 5, --Assembly of Iron
+		[32930] = 6, --Kologarn
+		[33515] = 7, --Auriaya
+		[32845] = 8, --Hodir
+		[32865] = 9, --Thorim
+		[32906] = 10, --Freya
+		[33350] = 11, --Mimiron
+		[33271] = 12, --General Vezax
+		[33136] = 13, --Yogg-Saron
+		[32871] = 14, --Algalon the Observer
+	}
+
+	--> install the raid
+	local BOSSNAMES = {
+		LBB["Flame Leviathan"],
+		LBB["Ignis the Furnace Master"],
+		LBB["Razorscale"],
+		LBB["XT-002 Deconstructor"],
+		LBB["Assembly of Iron"],
+		LBB["Kologarn"],
+		LBB["Auriaya"],
+		LBB["Hodir"],
+		LBB["Thorim"],
+		LBB["Freya"],
+		LBB["Mimiron"],
+		LBB["General Vezax"],
+		LBB["Yogg-Saron"],
+		LBB["Algalon the Observer"],
+	}
+
+	local ENCOUNTERS = {}
+
+	for i = 1, #PORTRAIT_LIST do
+		local encounterTable = {
+			boss = BOSSNAMES[i],
+			portrait = "Interface\\EncounterJournal\\"..PORTRAIT_LIST[i],
+		}
+		tinsert(ENCOUNTERS, encounterTable)
+	end
+
+	_detalhes:InstallEncounter({
+		id = INSTANCE_MAPID, --map id
+		ej_id = INSTANCE_EJID, --encounter journal id
+		name = LBZ["Ulduar"],
+		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
+		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
+		is_raid = true,
+		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
+		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
+
+		encounter_ids2 = ENCOUNTER_ID_CL,
+		boss_names = BOSSNAMES,
+		encounters = ENCOUNTERS,
+
+		boss_ids = {
+			[33113] = 1, --Flame Leviathan
+			[33118] = 2, --Ignis the Furnace Master
+			[33186] = 3, --Razorscale
+			[33293] = 4, --XT-002 Deconstructor
+			[32867] = 5, --Steelbreaker
+			[32927] = 5, --Runemaster Molgeim
+			[32857] = 5, --Stormcaller Brundir
+			[32930] = 6, --Kologarn
+			[32933] = 6, --Left Arm
+			[32934] = 6, --Right Arm
+			[33515] = 7, --Auriaya
+			[32845] = 8, --Hodir
+			[32865] = 9, --Thorim
+			[32882] = 9, --Jormungar Behemoth
+			[32906] = 10, --Freya
+			[33350] = 11, --Mimiron
+			[33271] = 12, --General Vezax
+			[33136] = 13, --Guardian of Yogg-Saron
+			[33288] = 13, --Yogg-Saron
+			[32871] = 14, --Algalon the Observer
+		},
+	})
+end
