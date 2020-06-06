@@ -202,6 +202,7 @@ DF.CooldownsBySpec = {
 			[22812] = 2, --Barkskin
 			[48447] = 4, --Tranquility
 			[29166] = 3, --Innervate
+			[48477] = 3, --Rebirth
 		},
 		--feral
 		[103] = {
@@ -210,6 +211,8 @@ DF.CooldownsBySpec = {
 			[77764] = 4, --Stampeding Roar
 			[48447] = 4, --Tranquility
 			[29166] = 3, --Innervate
+			[48477] = 3, --Rebirth
+			[50334] = 1, --Berserk
 		},
 		--restoration
 		[105] = {
@@ -219,8 +222,7 @@ DF.CooldownsBySpec = {
 			[29166] = 3, --Innervate
 
 			[48447] = 4, --Tranquility
-
-			[102793] = 5, --Ursol's Vortex
+			[48477] = 3, --Rebirth
 		},
 
 	--HUNTER
@@ -289,7 +291,8 @@ DF.CooldownsInfo = {
 	--> druid
 	[22812] = {cooldown = 60, duration = 12, talent = false, charges = 1, class = "DRUID", type = 2}, --Barkskin
 	[29166] = {cooldown = 180, duration = 12, talent = false, charges = 1, class = "DRUID", type = 3}, --Innervate
-	[106951] = {cooldown = 180, duration = 15, talent = false, charges = 1, class = "DRUID", type = 1}, --Berserk
+	[48477] = {cooldown = 600, duration = false, talent = false, charges = 1, class = "DRUID", type = 3}, --Rebirth
+	[50334] = {cooldown = 180, duration = 15, talent = false, charges = 1, class = "DRUID", type = 1}, --Berserk
 	[61336] = {cooldown = 120, duration = 6, talent = false, charges = 2, class = "DRUID", type = 2}, --Survival Instincts (2min feral 4min guardian, same spellid)
 	[77764] = {cooldown = 120, duration = 8, talent = false, charges = 1, class = "DRUID", type = 4}, --Stampeding Roar (utility)
 	[48447] = {cooldown = 180, duration = 8, talent = false, charges = 1, class = "DRUID", type = 4}, --Tranquility
