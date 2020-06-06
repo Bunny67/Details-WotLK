@@ -53,7 +53,7 @@ function DF.UnitGroupRolesAssigned (unitId)
 	-- use LibGroupTalents to find the role 
 	local role = LibGroupTalents:GetUnitRole(unitId) 
 	if role then 
-		if role == "melee" or role == "cater" then 
+		if role == "melee" or role == "caster" then 
 			role = "DAMAGER"
 		elseif role == "tank" then 
 			role = "TANK"
