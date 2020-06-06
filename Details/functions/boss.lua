@@ -37,16 +37,6 @@ do
 					end
 				end
 			end
-
-			--encounter journal
-			if encounterEJID then
-				local ejids = raidTable.encounter_ids
-				if ejids then
-					if ejids[encounterEJID] then
-						return raidTable
-					end
-				end
-			end
 		end
 	end
 
@@ -61,14 +51,6 @@ do
 			local ids = instanceTable.encounter_ids2
 			if ids then
 				if ids[encounterid] then
-					return id
-				end
-			end
-
-			--encounter journal id
-			local ids_ej = instanceTable.encounter_ids
-			if ids then
-				if ids_ej[encounterid] then
 					return id
 				end
 			end
@@ -100,25 +82,20 @@ do
 			return
 		end
 
-		local bossindex = _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids and _detalhes.EncounterInformation[mapid].encounter_ids[encounterid]
+		local bossindex = _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids2 and _detalhes.EncounterInformation[mapid].encounter_ids2[encounterid]
 		if bossindex then
 			return _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounters[bossindex], bossindex
-		else
-			local bossindex = _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids2 and _detalhes.EncounterInformation[mapid].encounter_ids2[encounterid]
-			if bossindex then
-				return _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounters[bossindex], bossindex
-			end
 		end
 	end
 
 	--> return the EJ boss id
 	function _detalhes:GetEncounterIdFromBossIndex(mapid, index)
-		return _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids and _detalhes.EncounterInformation[mapid].encounter_ids[index]
+		return _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids2 and _detalhes.EncounterInformation[mapid].encounter_ids2[index]
 	end
 
 	--> return the table which contain information about the start of a encounter
 	function _detalhes:GetEncounterStartInfo(mapid, encounterid)
-		local bossindex = _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids and _detalhes.EncounterInformation[mapid].encounter_ids[encounterid]
+		local bossindex = _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids2 and _detalhes.EncounterInformation[mapid].encounter_ids2[encounterid]
 		if bossindex then
 			return _detalhes.EncounterInformation[mapid].encounters[bossindex] and _detalhes.EncounterInformation[mapid].encounters[bossindex].encounter_start
 		end
@@ -126,7 +103,7 @@ do
 
 	--> return the table which contain information about the end of a encounter
 	function _detalhes:GetEncounterEndInfo(mapid, encounterid)
-		local bossindex = _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids and _detalhes.EncounterInformation[mapid].encounter_ids[encounterid]
+		local bossindex = _detalhes.EncounterInformation[mapid] and _detalhes.EncounterInformation[mapid].encounter_ids2 and _detalhes.EncounterInformation[mapid].encounter_ids2[encounterid]
 		if bossindex then
 			return _detalhes.EncounterInformation[mapid].encounters[bossindex] and _detalhes.EncounterInformation[mapid].encounters[bossindex].encounter_end
 		end
@@ -276,7 +253,7 @@ do
 	function _detalhes:GetBossIndex(mapid, encounterCLID, encounterEJID, encounterName)
 		local raidInfo = _detalhes.EncounterInformation[mapid]
 		if raidInfo then
-			local index = raidInfo.encounter_ids2[encounterCLID] or raidInfo.encounter_ids[encounterEJID]
+			local index = raidInfo.encounter_ids2[encounterCLID]
 			if not index then
 				for i = 1, #raidInfo.boss_names do
 					if raidInfo.boss_names[i] == encounterName then

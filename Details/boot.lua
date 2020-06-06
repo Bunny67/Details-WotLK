@@ -80,7 +80,8 @@ do
 				[536] = true, -- Naxxramas
 				[533] = true, -- Vault of Archavon
 				[532] = true, -- The Obsidian Sanctum
---				[] = true, -- The Eye of Eternity
+				[528] = true, -- The Eye of Eternity
+				[530] = true, -- Ulduar
 			}
 
 			--must fail in map and encounter id to not store data
