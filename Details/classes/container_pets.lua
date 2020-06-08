@@ -222,6 +222,13 @@ end
 function container_pets:Adicionar (pet_serial, pet_nome, pet_flags, dono_serial, dono_nome, dono_flags)
 
 	if (pet_flags and _bit_band (pet_flags, OBJECT_TYPE_PET) ~= 0 and _bit_band (pet_flags, EM_GRUPO) ~= 0) then
+		-- if the summoner is a pet, just add it to that pets owner. 
+		-- Not sure why pets pet doesn't work right but this will fix Fire ele / earth ele
+		if self.pets [dono_serial] then 
+			local dono = self.pets [dono_serial]
+			self.pets [pet_serial] = {dono[1], dono[2], dono[3], dono[4], dono[5], pet_name, pet_serial}
+			return 
+		end
 		self.pets [pet_serial] = {dono_nome, dono_serial, dono_flags, _detalhes._tempo, true, pet_nome, pet_serial}
 		--if (pet_nome == "Guardian of Ancient Kings") then --remover
 		--	print ("SUMMON", "Adicionou ao container")
