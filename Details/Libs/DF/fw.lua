@@ -96,6 +96,10 @@ function DF.GetSpecialization()
 	return specIdx
 end
 
+function DF.GetSpecializationID(class, index)
+	return specIDs[class] and specIDs[class][index]
+end
+
 function DF.GetSpecializationInfoByID (...)
 	if (GetSpecializationInfoByID) then
 		return GetSpecializationInfoByID (...)
