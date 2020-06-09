@@ -1945,11 +1945,11 @@ function _detalhes:AddDefaultCustomDisplays()
 
 			--GC:AddLine(" ")
 
-			GC:AddLine("Multistrike: ", spell.m_amt .. "(" ..floor( spell.m_amt/total_hits*100) .. "%)")
-			GC:AddStatusBar(100, 1, R, G, B, A)
+			--GC:AddLine("Multistrike: ", spell.m_amt .. "(" ..floor( spell.m_amt/total_hits*100) .. "%)")
+			--GC:AddStatusBar(100, 1, R, G, B, A)
 
-			GC:AddLine("On Normal / On Critical:", spell.m_amt - spell.m_crit .. "  / " .. spell.m_crit)
-			GC:AddStatusBar(100, 1, R, G, B, A)
+			--GC:AddLine("On Normal / On Critical:", spell.m_amt - spell.m_crit .. "  / " .. spell.m_crit)
+			--GC:AddStatusBar(100, 1, R, G, B, A)
 
 		elseif(spell.n_curado) then
 
@@ -2012,11 +2012,11 @@ function _detalhes:AddDefaultCustomDisplays()
 
 			--GC:AddLine(" ")
 
-			GC:AddLine("Multistrike: ", spell.m_amt .. "(" ..floor( spell.m_amt/total_hits*100) .. "%)")
-			GC:AddStatusBar(100, 1, R, G, B, A)
+			--GC:AddLine("Multistrike: ", spell.m_amt .. "(" ..floor( spell.m_amt/total_hits*100) .. "%)")
+			--GC:AddStatusBar(100, 1, R, G, B, A)
 
-			GC:AddLine("On Normal / On Critical:", spell.m_amt - spell.m_crit .. "  / " .. spell.m_crit)
-			GC:AddStatusBar(100, 1, R, G, B, A)
+			--GC:AddLine("On Normal / On Critical:", spell.m_amt - spell.m_crit .. "  / " .. spell.m_crit)
+			--GC:AddStatusBar(100, 1, R, G, B, A)
 		end
 		]],
 
