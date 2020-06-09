@@ -75,7 +75,10 @@ do
 		[49050] = 254, -- Aimed Shot, Rank 9
 
 		-- Survival Hunter:
---		[] = 255, -- ???
+		[63672] = 255, -- Black Arrow Rank 6
+		[60053] = 255, -- Explosive Shot Rank 4
+		[34503] = 255, -- Expose Weakness Rank 3
+		
 
 		-- Arcane Mage:
 		[12042] = 62, -- Arcane Power
@@ -118,7 +121,8 @@ do
 
 		-- Holy Priest:
 		[48089] = 257, -- Circle of Healing, Rank 7
-		[48072] = 257, -- Prayer of Healing, Rank 7
+		-- prayer is used by disc as well for aoe healing
+		--[48072] = 257, -- Prayer of Healing, Rank 7
 		[47788] = 257, -- Guardian Spirit
 
 		-- Shadow Priest:
@@ -133,15 +137,22 @@ do
 		[1329] = 259, -- Mutilate
 		[5374] = 259, -- Mutilate
 		[27576] = 259, -- Mutilate Off-Hand
-		[51723] = 259, -- Fan of Knives
-		[703] = 259, -- Garrote
-		[1943] = 259, -- Rupture
+		[14177] = 259, -- Cold Blood
+		[51662] = 259, -- Hunger for Blood
 
-		-- Outlaw Rogue:
-		[48668] = 260, -- Run Through, Rank 12
+		-- Combat Rogue:
+		[51690] = 260, -- Killing Spree
+		[13750] = 260, -- Adrenaline Rush
+		[13877] = 260, -- Blade Flurry
+		[14251] = 260, -- Riposte
+
 
 		-- Subtlety Rogue:
-		[48657] = 261, -- Backstab, Rank 12
+		[48660] = 261, -- Hemorrhage rank 5
+		[14183] = 261, -- Premeditation
+		[14185] = 261, -- Preparation
+		[51713] = 261, -- Shadow Dance
+		[14278] = 261, -- Ghostly Strike
 
 		-- Elemental Shaman:
 		[61882] = 262, -- Earthquake

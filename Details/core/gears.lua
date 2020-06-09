@@ -11,6 +11,7 @@ local floor = floor
 local GetNumGroupMembers = GetNumGroupMembers
 
 local LibGroupInSpecT = LibStub ("LibGroupInSpecT-1.1") --disabled due to classic wow
+local LibGroupTalents = LibStub ("LibGroupTalents-1.0")
 
 local storageDebug = true
 local store_instances = _detalhes.InstancesToStoreData
@@ -2176,7 +2177,32 @@ function _detalhes:LibGroupInSpecT_UpdateReceived (event, guid, unitid, info)
 
 	--print ("LibGroupInSpecT Received from", info.name, info.global_spec_id)
 end
-LibGroupInSpecT.RegisterCallback (_detalhes, "GroupInSpecT_Update", "LibGroupInSpecT_UpdateReceived")
+--LibGroupInSpecT.RegisterCallback (_detalhes, "GroupInSpecT_Update", "LibGroupInSpecT_UpdateReceived")
+
+function _detalhes:LibGroupTalents_Update(event, guid, unit, dominant_tree_id, n1, n2, n3)
+
+	if _detalhes.debug then 
+		_detalhes:Msg("(debug) received LibGroupTalents Update from user", guid)
+	end
+
+	local talent_string = n1.."/"..n2.."/"..n3
+	_detalhes.cached_talents [guid] = talent_string
+	local class, _, _, _, name = select(2, GetPlayerInfoByGUID(guid)) 
+	local specID = DetailsFramework.GetSpecializationID(class, dominant_tree_id) 
+	if specID then 
+		if (not _detalhes.class_specs_coords [specID]) then
+			_detalhes:Msg("(error) Spec ID Invalid: " .. specID .. " for " .. name)
+		else
+			_detalhes.cached_specs [guid] = specID 
+			if _detalhes.debug then 
+				_detalhes:Msg("(debug) saved spec " .. specID .. " for " .. name)
+			end
+		end
+	end
+
+end
+LibGroupTalents.RegisterCallback (_detalhes, "LibGroupTalents_Update")
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
