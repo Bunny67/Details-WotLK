@@ -76,7 +76,7 @@ function container_pets:PegaDono (pet_serial, pet_nome, pet_flags)
 		end
 
 	elseif (_IsInGroup()) then
-		for i = 1, _GetNumGroupMembers()-1 do
+		for i = 1, _GetNumGroupMembers() do
 			if (pet_serial == _UnitGUID ("partypet"..i)) then
 				dono_serial = _UnitGUID ("party"..i)
 				dono_flags = 0x00000417 --> emulate sourceflag flag
@@ -180,7 +180,7 @@ function container_pets:BuscarPets()
 		end
 
 	elseif (_IsInGroup()) then
-		for i = 1, _GetNumGroupMembers()-1, 1 do
+		for i = 1, _GetNumGroupMembers(), 1 do
 			local pet_serial = _UnitGUID ("partypet"..i)
 			if (pet_serial) then
 				if (not _detalhes.tabela_pets.pets [pet_serial]) then
