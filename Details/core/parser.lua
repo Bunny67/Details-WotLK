@@ -194,10 +194,7 @@ local special_damage_spells = {
 }
 
 --> damage spells to ignore
-local spells_to_ignore = _detalhes.spellid_ignored
-
---> expose the ignore spells table to external scripts
-_detalhes.SpellsToIgnore = spells_to_ignore
+local spells_to_ignore = {}
 
 --> is parser allowed to replace spellIDs?
 local is_using_spellId_override = false
@@ -4564,6 +4561,11 @@ local start_details = function()
 
 	_detalhes:UpdateParserGears()
 --	_detalhes:Start()
+
+	--> after loading profile data, load spells to ignore 
+	spells_to_ignore = _detalhes.spellid_ignored
+	--> expose the ignore spells table to external scripts
+	_detalhes.SpellsToIgnore = spells_to_ignore
 end
 
 function _detalhes.parser_functions:ADDON_LOADED(addon_name)
