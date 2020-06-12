@@ -1601,9 +1601,10 @@ function _detalhes:StoreEncounter (combat)
 
 		local myrole =  UnitGroupRolesAssigned("player")
 		local mybest, onencounter = _detalhes.storage:GetBestFromPlayer (diff, encounter_id, myrole, _detalhes.playername, true) --> get dps or hps
-		local myBestDps = mybest [1] / onencounter.elapsed
 
 		if (mybest) then
+			local myBestDps = mybest [1] or 0
+			myBestDps = myBestDps / onencounter.elapsed
 			local d_one = 0
 			if (myrole == "DAMAGER" or myrole == "TANK") then
 				d_one = combat (1, _detalhes.playername) and combat (1, _detalhes.playername).total / combat:GetCombatTime()

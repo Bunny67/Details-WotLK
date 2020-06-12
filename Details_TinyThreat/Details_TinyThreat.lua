@@ -512,7 +512,7 @@ local function CreatePluginFrames (data)
 				end
 				
 			elseif (_IsInGroup()) then
-				for i = 1, _GetNumGroupMembers()-1, 1 do
+				for i = 1, _GetNumGroupMembers(), 1 do
 					local thisplayer_name = GetUnitName ("party"..i, true)
 					local role = _UnitGroupRolesAssigned (thisplayer_name)
 					local _, class = UnitClass (thisplayer_name)

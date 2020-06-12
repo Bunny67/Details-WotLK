@@ -908,7 +908,7 @@ function _detalhes:FindGUIDFromName(name)
 			end
 		end
 	elseif _IsInGroup() then
-		for i = 1, _GetNumGroupMembers()-1, 1 do
+		for i = 1, _GetNumGroupMembers(), 1 do
 			local this_name, _ = UnitName("party"..i)
 			if this_name == name then
 				return UnitGUID("party"..i)

@@ -299,7 +299,7 @@ function _detalhes.network.Cloud_DataReceived	(player, realm, core_version, ...)
 
 				end
 			elseif (IsInGroup()) then
-				for i = 1, GetNumGroupMembers()-1 do
+				for i = 1, GetNumGroupMembers() do
 					if (name:find ("-")) then --> other realm
 						local nname, server = _UnitName ("party"..i)
 						if (server and server ~= "") then

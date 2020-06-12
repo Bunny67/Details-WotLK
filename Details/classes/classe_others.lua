@@ -1317,7 +1317,7 @@ function _detalhes:CatchRaidDebuffUptime (in_or_out) -- "DEBUFF_UPTIME_IN"
 
 		local checked = {}
 
-		for raidIndex = 1, _GetNumGroupMembers()-1 do
+		for raidIndex = 1, _GetNumGroupMembers() do
 			local his_target = _UnitGUID ("party"..raidIndex.."target")
 			local rect = UnitReaction ("party"..raidIndex.."target", "player")
 			if (his_target and not checked [his_target] and rect and rect <= 4) then
