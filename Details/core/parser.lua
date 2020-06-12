@@ -1435,6 +1435,10 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			end
 			--who_serial = nil
 		end
+	
+		if damage_spells_to_ignore[spellid] then
+			return
+		end
 
 		--> no name, use spellname
 		if(not who_name) then
