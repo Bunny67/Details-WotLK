@@ -194,11 +194,10 @@ local special_damage_spells = {
 }
 
 --> damage spells to ignore
-local damage_spells_to_ignore = {
-}
+local spells_to_ignore = _detalhes.spellid_ignored
 
 --> expose the ignore spells table to external scripts
-_detalhes.SpellsToIgnore = damage_spells_to_ignore
+_detalhes.SpellsToIgnore = spells_to_ignore
 
 --> is parser allowed to replace spellIDs?
 local is_using_spellId_override = false
@@ -382,7 +381,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 	end
 
 	--> check if the spell isn't in the backlist
-	if damage_spells_to_ignore[spellid] then
+	if spells_to_ignore[spellid] then
 		return
 	end
 
@@ -1436,6 +1435,11 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			--who_serial = nil
 		end
 
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
+		end
+
 		--> no name, use spellname
 		if(not who_name) then
 			--who_name = "[*] " ..(spellname or "--unknown spell--")
@@ -1700,6 +1704,11 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 
 	function parser:buff(token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, spellid, spellname, spellschool, tipo, amount, arg1, arg2, arg3)
 
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
+		end
+
 	--> not yet well know about unnamed buff casters
 		if(not alvo_name) then
 			alvo_name = "[*] Unknown shield target"
@@ -1960,6 +1969,10 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 
 	function parser:buff_refresh(token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, spellid, spellname, spellschool, tipo, amount)
 
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
+		end
 	------------------------------------------------------------------------------------------------
 	--> handle shields
 
@@ -2109,6 +2122,10 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 
 	function parser:unbuff(token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, spellid, spellname, spellschool, tipo, amount)
 
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
+		end
 	------------------------------------------------------------------------------------------------
 	--> handle shields
 
@@ -2523,6 +2540,10 @@ local energy_types = {
 			return
 		end
 
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
+		end
 	------------------------------------------------------------------------------------------------
 	--> check if is energy or resource
 
@@ -2737,6 +2758,11 @@ local energy_types = {
 			return
 		end
 
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
+		end
+
 		_current_misc_container.need_refresh = true
 
 	------------------------------------------------------------------------------------------------
@@ -2844,6 +2870,11 @@ local energy_types = {
 			who_name = "[*] " .. spellname
 		end
 
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
+		end
+
 	------------------------------------------------------------------------------------------------
 	--> get actors
 
@@ -2936,6 +2967,11 @@ local energy_types = {
 		end
 		if(not alvo_name) then
 			alvo_name = "[*] "..spellid
+		end
+
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
 		end
 
 		_current_misc_container.need_refresh = true
@@ -3038,6 +3074,11 @@ local energy_types = {
 			return
 		end
 
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
+		end
+
 		_current_misc_container.need_refresh = true
 
 	------------------------------------------------------------------------------------------------
@@ -3132,6 +3173,11 @@ local energy_types = {
 		if(not cc_spell_list[spellid]) then
 			return
 			--print("NO CC:", spellid, spellname, extraSpellID, extraSpellName)
+		end
+
+		--> spell is ignored
+		if (spells_to_ignore[spellid]) then 
+			return 
 		end
 
 		if(_bit_band(who_flags, AFFILIATION_GROUP) == 0) then
