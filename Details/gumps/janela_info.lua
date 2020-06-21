@@ -420,9 +420,9 @@ end
 function gump:HidaAllBarrasInfo()
 	local barras = _detalhes.janela_info.barras1
 	for index = 1, #barras, 1 do
-		barras [index]:Hide()
-		barras [index].textura:SetStatusBarColor (1, 1, 1, 1)
-		barras [index].on_focus = false
+		barras[index]:Hide()
+		barras[index].textura:SetStatusBarColor(1, 1, 1)
+		barras[index].on_focus = false
 	end
 end
 
@@ -5418,7 +5418,7 @@ local row_on_mouseup = function (self, button)
 			local barra_antiga = info.mostrando
 			if (barra_antiga and not info.mostrando_mouse_over) then
 
-				barra_antiga.textura:SetStatusBarColor (1, 1, 1, 1) --> volta a textura normal
+				barra_antiga.textura:SetStatusBarColor(1, 1, 1) --> volta a textura normal
 				barra_antiga.on_focus = false --> n�o esta mais no foco
 
 				--> clicou na mesma barra
@@ -5436,8 +5436,8 @@ local row_on_mouseup = function (self, button)
 					info.jogador.detalhes = self.show
 					info.jogador:MontaDetalhes (self.show, self)
 
-					self:SetAlpha (1)
-					self.textura:SetStatusBarColor (129/255, 125/255, 69/255, 1)
+					self:SetAlpha(1)
+					self.textura:SetStatusBarColor(129/255, 125/255, 69/255)
 					self.on_focus = true
 					return
 				end
@@ -5445,8 +5445,8 @@ local row_on_mouseup = function (self, button)
 
 			--> nao tinha barras pressionadas
 			info.mostrando_mouse_over = false
-			self:SetAlpha (1)
-			self.textura:SetStatusBarColor (129/255, 125/255, 69/255, 1)
+			self:SetAlpha(1)
+			self.textura:SetStatusBarColor(129/255, 125/255, 69/255)
 			self.on_focus = true
 		end
 
@@ -5686,7 +5686,7 @@ function gump:CriaNovaBarraInfo1 (instancia, index)
 
 	info.barras1 [index] = esta_barra --> barra adicionada
 
-	esta_barra.textura:SetStatusBarColor (1, 1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
+	esta_barra.textura:SetStatusBarColor (1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
 	esta_barra.on_focus = false --> isso aqui � a parte da sele��o e descele��o
 
 	return esta_barra

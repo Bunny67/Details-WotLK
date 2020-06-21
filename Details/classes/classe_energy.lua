@@ -940,7 +940,7 @@ function atributo_energy:MontaInfoRegenRecebido()
 
 		if (not barra) then
 			barra = gump:CriaNovaBarraInfo1 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor (1, 1, 1)
 			barra.on_focus = false
 		end
 
@@ -1002,7 +1002,7 @@ function atributo_energy:MontaInfoRegenRecebido()
 
 		if (not barra) then
 			barra = gump:CriaNovaBarraInfo2 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor (1, 1, 1)
 		end
 
 		if (index == 1) then
@@ -1098,7 +1098,7 @@ function atributo_energy:MontaDetalhesRegenRecebido (nome, barra)
 
 		if (not barra) then --> se a barra n�o existir, criar ela ent�o
 			barra = gump:CriaNovaBarraInfo3 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor (1, 1, 1)
 		end
 
 		if (index == 1) then

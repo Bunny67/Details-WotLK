@@ -3716,14 +3716,14 @@ function atributo_damage:MontaInfoFriendlyFire()
 
 		if (not barra) then
 			barra = gump:CriaNovaBarraInfo1 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor(1, 1, 1)
 			barra.on_focus = false
 		end
 
 		if (not info.mostrando_mouse_over) then
 			if (tabela[1] == self.detalhes) then --> tabela [1] = NOME = NOME que esta na caixa da direita
 				if (not barra.on_focus) then --> se a barra n�o tiver no foco
-					barra.textura:SetStatusBarColor (129/255, 125/255, 69/255, 1)
+					barra.textura:SetStatusBarColor (129/255, 125/255, 69/255)
 					barra.on_focus = true
 					if (not info.mostrando) then
 						info.mostrando = barra
@@ -3731,7 +3731,7 @@ function atributo_damage:MontaInfoFriendlyFire()
 				end
 			else
 				if (barra.on_focus) then
-					barra.textura:SetStatusBarColor (1, 1, 1, 1) --> volta a cor antiga
+					barra.textura:SetStatusBarColor (1, 1, 1) --> volta a cor antiga
 					barra:SetAlpha (.9) --> volta a alfa antiga
 					barra.on_focus = false
 				end
@@ -3798,7 +3798,7 @@ function atributo_damage:MontaInfoFriendlyFire()
 
 		if (not barra) then
 			barra = gump:CriaNovaBarraInfo2 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor (1, 1, 1)
 		end
 
 		if (index == 1) then
@@ -3960,7 +3960,7 @@ end
 	if (not info.mostrando_mouse_over) then
 		if (spellid == self.detalhes) then --> tabela [1] = spellid = spellid que esta na caixa da direita
 			if (not row.on_focus) then --> se a barra n�o tiver no foco
-				row.textura:SetStatusBarColor (129/255, 125/255, 69/255, 1)
+				row.textura:SetStatusBarColor (129/255, 125/255, 69/255)
 				row.on_focus = true
 				if (not info.mostrando) then
 					info.mostrando = row
@@ -3968,7 +3968,7 @@ end
 			end
 		else
 			if (row.on_focus) then
-				row.textura:SetStatusBarColor (1, 1, 1, 1) --> volta a cor antiga
+				row.textura:SetStatusBarColor (1, 1, 1) --> volta a cor antiga
 				row:SetAlpha (.9) --> volta a alfa antiga
 				row.on_focus = false
 			end
@@ -4129,7 +4129,7 @@ function atributo_damage:MontaInfoDamageDone()
 
 			if (not barra) then --> se a barra n�o existir, criar ela ent�o
 				barra = gump:CriaNovaBarraInfo2 (instancia, index)
-				barra.textura:SetStatusBarColor (1, 1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
+				barra.textura:SetStatusBarColor (1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
 			end
 
 			if (index == 1) then
@@ -4205,7 +4205,7 @@ function atributo_damage:MontaInfoDamageDone()
 
 			if (not barra) then
 				barra = gump:CriaNovaBarraInfo2 (instancia, index)
-				barra.textura:SetStatusBarColor (1, 1, 1, 1)
+				barra.textura:SetStatusBarColor (1, 1, 1)
 			end
 
 			if (index == 1) then
@@ -4223,8 +4223,7 @@ function atributo_damage:MontaInfoDamageDone()
 				barra.icone:SetTexCoord (_unpack (texCoords))
 			end
 
-			barra.textura:SetStatusBarColor (1, 0.8, 0.8)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor(1, 1, 1)
 
 			barra.texto_esquerdo:SetText (index .. ". " .. _detalhes:GetOnlyName (tabela[1]))
 
@@ -4294,7 +4293,7 @@ function atributo_damage:MontaDetalhesFriendlyFire (nome, barra)
 
 		if (not barra) then --> se a barra n�o existir, criar ela ent�o
 			barra = gump:CriaNovaBarraInfo3 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
+			barra.textura:SetStatusBarColor (1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
 		end
 
 		if (index == 1) then
@@ -4361,7 +4360,7 @@ function atributo_damage:MontaDetalhesEnemy (spellid, barra)
 
 		if (not barra) then --> se a barra n�o existir, criar ela ent�o
 			barra = gump:CriaNovaBarraInfo3 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
+			barra.textura:SetStatusBarColor (1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
 		end
 
 		if (index == 1) then
@@ -4388,7 +4387,7 @@ function atributo_damage:MontaDetalhesEnemy (spellid, barra)
 		if (color) then
 			barra.textura:SetStatusBarColor (_unpack (color))
 		else
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor (1, 1, 1)
 		end
 
 		barra.icone:SetTexture ("Interface\\AddOns\\Details\\images\\classes_small_alpha")
@@ -4451,7 +4450,7 @@ function atributo_damage:MontaDetalhesDamageTaken (nome, barra)
 
 		if (not barra) then --> se a barra n�o existir, criar ela ent�o
 			barra = gump:CriaNovaBarraInfo3 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
+			barra.textura:SetStatusBarColor (1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
 		end
 
 		if (index == 1) then

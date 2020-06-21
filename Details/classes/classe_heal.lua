@@ -1738,14 +1738,14 @@ function atributo_heal:MontaInfoOverHealing()
 
 		if (not barra) then
 			barra = gump:CriaNovaBarraInfo1 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor (1, 1, 1)
 			barra.on_focus = false
 		end
 
 		if (not info.mostrando_mouse_over) then
 			if (tabela[1] == self.detalhes) then --> tabela [1] = spellid = spellid que esta na caixa da direita
 				if (not barra.on_focus) then --> se a barra n�o tiver no foco
-					barra.textura:SetStatusBarColor (129/255, 125/255, 69/255, 1)
+					barra.textura:SetStatusBarColor (129/255, 125/255, 69/255)
 					barra.on_focus = true
 					if (not info.mostrando) then
 						info.mostrando = barra
@@ -1753,7 +1753,7 @@ function atributo_heal:MontaInfoOverHealing()
 				end
 			else
 				if (barra.on_focus) then
-					barra.textura:SetStatusBarColor (1, 1, 1, 1) --> volta a cor antiga
+					barra.textura:SetStatusBarColor (1, 1, 1) --> volta a cor antiga
 					barra:SetAlpha (.9) --> volta a alfa antiga
 					barra.on_focus = false
 				end
@@ -1808,7 +1808,7 @@ function atributo_heal:MontaInfoOverHealing()
 
 		if (not barra) then
 			barra = gump:CriaNovaBarraInfo2 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor (1, 1, 1)
 		end
 
 		if (index == 1) then
@@ -1906,7 +1906,7 @@ function atributo_heal:MontaInfoHealingDone()
 
 		if (not barra) then
 			barra = gump:CriaNovaBarraInfo1 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor (1, 1, 1)
 			barra.on_focus = false
 		end
 
@@ -1955,7 +1955,7 @@ function atributo_heal:MontaInfoHealingDone()
 
 		if (not barra) then
 			barra = gump:CriaNovaBarraInfo2 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1)
+			barra.textura:SetStatusBarColor (1, 1, 1)
 		end
 
 		if (index == 1) then
@@ -1974,7 +1974,7 @@ function atributo_heal:MontaInfoHealingDone()
 		end
 
 		barra.texto_esquerdo:SetText (index .. ". " .. _detalhes:GetOnlyName (tabela[1]))
-		barra.textura:SetStatusBarColor (1, 1, 1, 1)
+		barra.textura:SetStatusBarColor (1, 1, 1)
 
 		if (info.sub_atributo == 2) then
 			barra.texto_direita:SetText (_detalhes:comma_value (_math_floor (tabela[2]/meu_tempo)) .." (" .. _cstr ("%.1f", tabela[3]) .. "%)")
@@ -2128,7 +2128,7 @@ function atributo_heal:MontaDetalhesHealingTaken (nome, barra)
 
 		if (not barra) then --> se a barra n�o existir, criar ela ent�o
 			barra = gump:CriaNovaBarraInfo3 (instancia, index)
-			barra.textura:SetStatusBarColor (1, 1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
+			barra.textura:SetStatusBarColor (1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
 		end
 
 		if (index == 1) then
