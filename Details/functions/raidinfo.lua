@@ -971,7 +971,11 @@ do --> data for Naxxramas
 			[16011] = 6, --Loatheb
 			[16061] = 7, --Instructor Razuvious
 			[16060] = 8, --Gothik the Harvester
-			[30549] = 9, --The Four Horsemen
+			[30549] = 9, --Baron Rivendare
+			[16065] = 9, --Lady Blaumeux
+			[16064] = 9, --Thane Korth'azz
+			[16062] = 9, --Highlord Mograine
+			[16063] = 9, --Sir Zeliek
 			[16028] = 10, --Patchwerk
 			[15931] = 11, --Grobbulus
 			[15932] = 12, --Gluth
