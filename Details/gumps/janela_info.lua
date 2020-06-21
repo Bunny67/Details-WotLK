@@ -5428,13 +5428,13 @@ local row_on_mouseup = function (self, button)
 
 				--> clicou em outra barra
 				else --> clicou em outra barra e trocou o foco
-					barra_antiga:SetAlpha (.9) --> volta a alfa antiga
+					barra_antiga:SetAlpha(.9) --> volta a alfa antiga
 
 					info.mostrando = self
 					info.showing = i
 
 					info.jogador.detalhes = self.show
-					info.jogador:MontaDetalhes (self.show, self)
+					info.jogador:MontaDetalhes(self.show, self)
 
 					self:SetAlpha(1)
 					self.textura:SetStatusBarColor(129/255, 125/255, 69/255)
@@ -5465,44 +5465,45 @@ local function SetBarraScripts (esta_barra, instancia, i)
 
 end
 
-local function CriaTexturaBarra (instancia, barra)
+local function CriaTexturaBarra(instancia, barra)
+	barra.textura = _CreateFrame("StatusBar", nil, barra)
+	barra.textura:SetAllPoints()
 
-	barra.textura = _CreateFrame ("StatusBar", nil, barra)
-	barra.textura:SetAllPoints (barra)
+	barra.overlay = _CreateFrame("Frame", nil, barra)
+	barra.overlay:SetAllPoints()
 
-	local texture = SharedMedia:Fetch ("statusbar", _detalhes.player_details_window.bar_texture)
-	barra.textura:SetStatusBarTexture (texture)
+	local texture = SharedMedia:Fetch("statusbar", _detalhes.player_details_window.bar_texture)
+	barra.textura:SetStatusBarTexture(texture)
 
-	barra.textura:GetStatusBarTexture():SetAlpha(0.5)
+	barra.textura:SetMinMaxValues(0, 100)
 
-	barra.textura:SetStatusBarColor (.5, .5, .5, 0)
-	barra.textura:SetMinMaxValues (0,100)
+	barra.textura:SetAlpha(0.5)
 
-	barra.textura.bg = barra.textura:CreateTexture (nil, "BACKGROUND")
+	barra.textura.bg = barra.textura:CreateTexture(nil, "BACKGROUND")
 	barra.textura.bg:SetAllPoints()
-	barra.textura.bg:SetTexture (1, 1, 1, 0.08)
+	barra.textura.bg:SetTexture(1, 1, 1, 0.08)
 
-	if (barra.targets) then
-		barra.targets:SetParent (barra.textura)
-		barra.targets:SetFrameLevel (barra.textura:GetFrameLevel()+2)
+	if barra.targets then
+		barra.targets:SetParent(barra.overlay)
+		barra.targets:SetFrameLevel(barra.textura:GetFrameLevel() + 2)
 	end
 
-	barra.texto_esquerdo = barra.textura:CreateFontString (nil, "OVERLAY", "GameFontHighlightSmall")
-	barra.texto_esquerdo:SetPoint ("LEFT", barra.textura, "LEFT", CONST_BAR_HEIGHT + 6, 0)
-	barra.texto_esquerdo:SetJustifyH ("LEFT")
-	barra.texto_esquerdo:SetTextColor (1,1,1,1)
+	barra.texto_esquerdo = barra.overlay:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+	barra.texto_esquerdo:SetPoint("LEFT", barra.textura, "LEFT", CONST_BAR_HEIGHT + 6, 0)
+	barra.texto_esquerdo:SetJustifyH("LEFT")
+	barra.texto_esquerdo:SetTextColor(1, 1, 1, 1)
 
-	barra.texto_esquerdo:SetNonSpaceWrap (true)
-	barra.texto_esquerdo:SetWordWrap (false)
+	barra.texto_esquerdo:SetNonSpaceWrap(true)
+	barra.texto_esquerdo:SetWordWrap(false)
 
-	barra.texto_direita = barra.textura:CreateFontString (nil, "OVERLAY", "GameFontHighlightSmall")
-	if (barra.targets) then
-		barra.texto_direita:SetPoint ("RIGHT", barra.targets, "LEFT", -2, 0)
+	barra.texto_direita = barra.overlay:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+	if barra.targets then
+		barra.texto_direita:SetPoint("RIGHT", barra.targets, "LEFT", -2, 0)
 	else
-		barra.texto_direita:SetPoint ("RIGHT", barra, "RIGHT", -2, 0)
+		barra.texto_direita:SetPoint("RIGHT", barra, "RIGHT", -2, 0)
 	end
-	barra.texto_direita:SetJustifyH ("RIGHT")
-	barra.texto_direita:SetTextColor (1,1,1,1)
+	barra.texto_direita:SetJustifyH("RIGHT")
+	barra.texto_direita:SetTextColor(1, 1, 1, 1)
 
 	barra.textura:Show()
 end
@@ -5626,111 +5627,109 @@ end
 
 
 
-function gump:CriaNovaBarraInfo1 (instancia, index)
-
-	if (_detalhes.janela_info.barras1 [index]) then
-		print ("erro a barra "..index.." ja existe na janela de detalhes...")
+function gump:CriaNovaBarraInfo1(instancia, index)
+	if _detalhes.janela_info.barras1[index] then
+		print("erro a barra "..index.." ja existe na janela de detalhes...")
 		return
 	end
 
 	local janela = info.container_barras.gump
 
-	local esta_barra = _CreateFrame ("Button", "Details_infobox1_bar_"..index, info.container_barras.gump)
-	esta_barra:SetHeight (CONST_BAR_HEIGHT)
+	local esta_barra = _CreateFrame("Button", "Details_infobox1_bar_"..index, info.container_barras.gump)
+	esta_barra:SetHeight(CONST_BAR_HEIGHT)
 	esta_barra.index = index
 
-	local y = (index-1) * (CONST_BAR_HEIGHT + 1)
-	y = y*-1 --> baixo
+	local y = (index - 1) * (CONST_BAR_HEIGHT + 1)
+	y = y * -1 --> baixo
 
-	esta_barra:SetPoint ("LEFT", janela, "LEFT")
-	esta_barra:SetPoint ("RIGHT", janela, "RIGHT")
-	esta_barra:SetPoint ("TOP", janela, "TOP", 0, y)
-	esta_barra:SetFrameLevel (janela:GetFrameLevel() + 1)
+	esta_barra:SetPoint("LEFT", janela, "LEFT")
+	esta_barra:SetPoint("RIGHT", janela, "RIGHT")
+	esta_barra:SetPoint("TOP", janela, "TOP", 0, y)
+	esta_barra:SetFrameLevel(janela:GetFrameLevel() + 1)
 
-	esta_barra:EnableMouse (true)
-	esta_barra:RegisterForClicks ("LeftButtonDown","RightButtonUp")
+	esta_barra:EnableMouse(true)
+	esta_barra:RegisterForClicks("LeftButtonDown","RightButtonUp")
 
-	esta_barra.targets = CreateFrame ("Button", "Details_infobox1_bar_"..index.."Targets", esta_barra)
-	esta_barra.targets:SetPoint ("RIGHT", esta_barra, "RIGHT")
-	esta_barra.targets:SetSize (CONST_BAR_HEIGHT-1, CONST_BAR_HEIGHT-1)
-	esta_barra.targets.texture = esta_barra.targets:CreateTexture (nil, overlay)
-	esta_barra.targets.texture:SetTexture ([[Interface\AddOns\Details\textures\Minimap\Tracking\Target]])
+	esta_barra.targets = CreateFrame("Button", "Details_infobox1_bar_"..index.."Targets", esta_barra)
+	esta_barra.targets:SetPoint("RIGHT", esta_barra, "RIGHT")
+	esta_barra.targets:SetSize(CONST_BAR_HEIGHT - 1, CONST_BAR_HEIGHT - 1)
+	esta_barra.targets.texture = esta_barra.targets:CreateTexture(nil, overlay)
+	esta_barra.targets.texture:SetTexture([[Interface\AddOns\Details\textures\Minimap\Tracking\Target]])
 	esta_barra.targets.texture:SetAllPoints()
 	esta_barra.targets.texture:SetDesaturated (true)
-	esta_barra.targets:SetAlpha (.7)
-	esta_barra.targets.texture:SetAlpha (.7)
-	esta_barra.targets:SetScript ("OnEnter", target_on_enter)
-	esta_barra.targets:SetScript ("OnLeave", target_on_leave)
+	esta_barra.targets:SetAlpha(.7)
+	esta_barra.targets.texture:SetAlpha(.7)
+	esta_barra.targets:SetScript("OnEnter", target_on_enter)
+	esta_barra.targets:SetScript("OnLeave", target_on_leave)
 
-	CriaTexturaBarra (instancia, esta_barra)
+	CriaTexturaBarra(instancia, esta_barra)
 
 	--> icone
-	esta_barra.miniframe = CreateFrame ("Button", nil, esta_barra)
-	esta_barra.miniframe:SetSize (CONST_BAR_HEIGHT-2, CONST_BAR_HEIGHT-2)
-	esta_barra.miniframe:SetPoint ("RIGHT", esta_barra.textura, "LEFT", CONST_BAR_HEIGHT + 2, 0)
+	esta_barra.miniframe = CreateFrame("Button", nil, esta_barra)
+	esta_barra.miniframe:SetSize(CONST_BAR_HEIGHT - 2, CONST_BAR_HEIGHT - 2)
+	esta_barra.miniframe:SetPoint("RIGHT", esta_barra.textura, "LEFT", CONST_BAR_HEIGHT + 2, 0)
 
-	esta_barra.miniframe:SetScript ("OnEnter", miniframe_func_on_enter)
-	esta_barra.miniframe:SetScript ("OnLeave", miniframe_func_on_leave)
+	esta_barra.miniframe:SetScript("OnEnter", miniframe_func_on_enter)
+	esta_barra.miniframe:SetScript("OnLeave", miniframe_func_on_leave)
 
-	esta_barra.icone = esta_barra.textura:CreateTexture (nil, "OVERLAY")
-	esta_barra.icone:SetWidth (CONST_BAR_HEIGHT)
-	esta_barra.icone:SetHeight (CONST_BAR_HEIGHT)
-	esta_barra.icone:SetPoint ("RIGHT", esta_barra.textura, "LEFT", CONST_BAR_HEIGHT + 2, 0)
+	esta_barra.icone = esta_barra.overlay:CreateTexture(nil, "OVERLAY")
+	esta_barra.icone:SetWidth(CONST_BAR_HEIGHT)
+	esta_barra.icone:SetHeight(CONST_BAR_HEIGHT)
+	esta_barra.icone:SetPoint("RIGHT", esta_barra.textura, "LEFT", CONST_BAR_HEIGHT + 2, 0)
 
 	esta_barra:SetAlpha(0.9)
-	esta_barra.icone:SetAlpha (1)
+	esta_barra.icone:SetAlpha(1)
 
 	esta_barra.isMain = true
 
-	SetBarraScripts (esta_barra, instancia, index)
+	SetBarraScripts(esta_barra, instancia, index)
 
-	info.barras1 [index] = esta_barra --> barra adicionada
+	info.barras1[index] = esta_barra --> barra adicionada
 
-	esta_barra.textura:SetStatusBarColor (1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
+	esta_barra.textura:SetStatusBarColor(1, 1, 1) --> isso aqui � a parte da sele��o e descele��o
 	esta_barra.on_focus = false --> isso aqui � a parte da sele��o e descele��o
 
 	return esta_barra
 end
 
-function gump:CriaNovaBarraInfo2 (instancia, index)
-
-	if (_detalhes.janela_info.barras2 [index]) then
+function gump:CriaNovaBarraInfo2(instancia, index)
+	if _detalhes.janela_info.barras2[index] then
 		print ("erro a barra "..index.." ja existe na janela de detalhes...")
 		return
 	end
 
 	local janela = info.container_alvos.gump
 
-	local esta_barra = _CreateFrame ("Button", "Details_infobox2_bar_"..index, info.container_alvos.gump)
-	esta_barra:SetHeight (CONST_TARGET_HEIGHT)
+	local esta_barra = _CreateFrame("Button", "Details_infobox2_bar_"..index, info.container_alvos.gump)
+	esta_barra:SetHeight(CONST_TARGET_HEIGHT)
 
-	local y = (index-1) * (CONST_TARGET_HEIGHT + 1)
-	y = y*-1 --> baixo
+	local y = (index - 1) * (CONST_TARGET_HEIGHT + 1)
+	y = y * -1 --> baixo
 
-	esta_barra:SetPoint ("LEFT", janela, "LEFT")
-	esta_barra:SetPoint ("RIGHT", janela, "RIGHT")
-	esta_barra:SetPoint ("TOP", janela, "TOP", 0, y)
-	esta_barra:SetFrameLevel (janela:GetFrameLevel() + 1)
+	esta_barra:SetPoint("LEFT", janela, "LEFT")
+	esta_barra:SetPoint("RIGHT", janela, "RIGHT")
+	esta_barra:SetPoint("TOP", janela, "TOP", 0, y)
+	esta_barra:SetFrameLevel(janela:GetFrameLevel() + 1)
 
-	esta_barra:EnableMouse (true)
-	esta_barra:RegisterForClicks ("LeftButtonDown","RightButtonUp")
+	esta_barra:EnableMouse(true)
+	esta_barra:RegisterForClicks("LeftButtonDown","RightButtonUp")
 
-	CriaTexturaBarra (instancia, esta_barra)
+	CriaTexturaBarra(instancia, esta_barra)
 
 	--> icone
-	esta_barra.icone = esta_barra.textura:CreateTexture (nil, "OVERLAY")
-	esta_barra.icone:SetWidth (CONST_TARGET_HEIGHT)
-	esta_barra.icone:SetHeight (CONST_TARGET_HEIGHT)
-	esta_barra.icone:SetPoint ("RIGHT", esta_barra.textura, "LEFT", CONST_TARGET_HEIGHT + 2, 0)
+	esta_barra.icone = esta_barra.overlay:CreateTexture(nil, "OVERLAY")
+	esta_barra.icone:SetWidth(CONST_TARGET_HEIGHT)
+	esta_barra.icone:SetHeight(CONST_TARGET_HEIGHT)
+	esta_barra.icone:SetPoint("RIGHT", esta_barra.textura, "LEFT", CONST_TARGET_HEIGHT + 2, 0)
 
-	esta_barra:SetAlpha (ALPHA_BLEND_AMOUNT)
-	esta_barra.icone:SetAlpha (1)
+	esta_barra:SetAlpha(ALPHA_BLEND_AMOUNT)
+	esta_barra.icone:SetAlpha(1)
 
 	esta_barra.isAlvo = true
 
-	SetBarraScripts (esta_barra, instancia, index)
+	SetBarraScripts(esta_barra, instancia, index)
 
-	info.barras2 [index] = esta_barra --> barra adicionada
+	info.barras2[index] = esta_barra --> barra adicionada
 
 	return esta_barra
 end
@@ -5738,45 +5737,44 @@ end
 local x_start = 61
 local y_start = -10
 
-function gump:CriaNovaBarraInfo3 (instancia, index)
-
-	if (_detalhes.janela_info.barras3 [index]) then
+function gump:CriaNovaBarraInfo3(instancia, index)
+	if _detalhes.janela_info.barras3[index] then
 		print ("erro a barra "..index.." ja existe na janela de detalhes...")
 		return
 	end
 
 	local janela = info.container_detalhes
 
-	local esta_barra = CreateFrame ("Button", "Details_infobox3_bar_"..index, janela)
-	esta_barra:SetHeight (16)
+	local esta_barra = CreateFrame("Button", "Details_infobox3_bar_"..index, janela)
+	esta_barra:SetHeight(16)
 
-	local y = (index-1) * 17
-	y = y*-1
+	local y = (index - 1) * 17
+	y = y * -1
 
-	--esta_barra:SetPoint ("LEFT", janela, "LEFT", x_start, 0)
-	--esta_barra:SetPoint ("RIGHT", janela, "RIGHT", 65, 0)
-	--esta_barra:SetPoint ("TOP", janela, "TOP", 0, y+y_start)
+--	esta_barra:SetPoint("LEFT", janela, "LEFT", x_start, 0)
+--	esta_barra:SetPoint("RIGHT", janela, "RIGHT", 65, 0)
+--	esta_barra:SetPoint("TOP", janela, "TOP", 0, y + y_start)
 
-	container3_bars_pointFunc (esta_barra, index)
+	container3_bars_pointFunc(esta_barra, index)
 
-	esta_barra:EnableMouse (true)
+	esta_barra:EnableMouse(true)
 
-	CriaTexturaBarra (instancia, esta_barra)
+	CriaTexturaBarra(instancia, esta_barra)
 
 	--> icone
-	esta_barra.icone = esta_barra.textura:CreateTexture (nil, "OVERLAY")
-	esta_barra.icone:SetWidth (14)
-	esta_barra.icone:SetHeight (14)
-	esta_barra.icone:SetPoint ("RIGHT", esta_barra.textura, "LEFT", 18, 0)
+	esta_barra.icone = esta_barra.overlay:CreateTexture(nil, "OVERLAY")
+	esta_barra.icone:SetWidth(14)
+	esta_barra.icone:SetHeight(14)
+	esta_barra.icone:SetPoint("RIGHT", esta_barra.textura, "LEFT", 18, 0)
 
-	esta_barra:SetAlpha (0.9)
-	esta_barra.icone:SetAlpha (1)
+	esta_barra:SetAlpha(0.9)
+	esta_barra.icone:SetAlpha(1)
 
 	esta_barra.isDetalhe = true
 
-	SetBarraScripts (esta_barra, instancia, index)
+	SetBarraScripts(esta_barra, instancia, index)
 
-	info.barras3 [index] = esta_barra --> barra adicionada
+	info.barras3[index] = esta_barra --> barra adicionada
 
 	return esta_barra
 end

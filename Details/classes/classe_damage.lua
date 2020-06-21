@@ -3874,85 +3874,84 @@ function atributo_damage:MontaInfoDamageTaken()
 
 end
 
---[[exported]] function _detalhes:UpdadeInfoBar (row, index, spellid, name, value, value_formated, max, percent, icon, detalhes, texCoords, spellschool, class)
+--[[exported]] function _detalhes:UpdadeInfoBar(row, index, spellid, name, value, value_formated, max, percent, icon, detalhes, texCoords, spellschool, class)
 	--> seta o tamanho da barra
-	if (index == 1) then
-		row.textura:SetValue (100)
+	if index == 1 then
+		row.textura:SetValue(100)
 	else
-		row.textura:SetValue (value/max*100)
+		row.textura:SetValue(value / max * 100)
 	end
 
-	if (type (index) == "number") then
-		if (debugmode) then
+	if type(index) == "number" then
+		if debugmode then
 			local _, rank = GetSpellInfo(spellid)
-			row.texto_esquerdo:SetText (index .. ". " .. name .. " > " .. spellid ..(rank and rank ~= "" and " ("..rank..")" or ""))
+			row.texto_esquerdo:SetText(index..". "..name.." > "..spellid..(rank and rank ~= "" and " ("..rank..")" or ""))
 		else
-			row.texto_esquerdo:SetText (index .. ". " .. name)
+			row.texto_esquerdo:SetText(index..". "..name)
 		end
 	else
-		row.texto_esquerdo:SetText (name)
+		row.texto_esquerdo:SetText(name)
 	end
 
 	row.texto_esquerdo.text = row.texto_esquerdo:GetText()
 
-	if (value_formated) then
-		row.texto_direita:SetText (value_formated .. " (" .. _cstr ("%.1f", percent) .."%)")
+	if value_formated then
+		row.texto_direita:SetText(value_formated.." (".._cstr ("%.1f", percent).."%)")
 	end
 
-	row.texto_esquerdo:SetSize (row:GetWidth() - row.texto_direita:GetStringWidth() - 40, 15)
+	row.texto_esquerdo:SetSize(row:GetWidth() - row.texto_direita:GetStringWidth() - 40, 15)
 
 	--> seta o icone
-	if (icon) then
+	if icon then
 		row.icone:SetTexture (icon)
-		if (icon == "Interface\\AddOns\\Details\\images\\classes_small") then
-			row.icone:SetTexCoord (0.25, 0.49609375, 0.75, 1)
+		if icon == "Interface\\AddOns\\Details\\images\\classes_small" then
+			row.icone:SetTexCoord(0.25, 0.49609375, 0.75, 1)
 		else
-			row.icone:SetTexCoord (0, 1, 0, 1)
+			row.icone:SetTexCoord(0, 1, 0, 1)
 		end
 	else
-		row.icone:SetTexture ("")
+		row.icone:SetTexture("")
 	end
 
-	if (not row.IconUpBorder) then
-		row.IconUpBorder = CreateFrame ("Frame", nil, row)
-		row.IconUpBorder:SetAllPoints (row.icone)
-		row.IconUpBorder:SetBackdrop ({edgeFile = [[Interface\Buttons\WHITE8X8]], edgeSize = 1})
-		row.IconUpBorder:SetBackdropBorderColor (0, 0, 0, 0.75)
+	if not row.IconUpBorder then
+		row.IconUpBorder = CreateFrame("Frame", nil, row)
+		row.IconUpBorder:SetAllPoints(row.icone)
+		row.IconUpBorder:SetBackdrop({edgeFile = [[Interface\Buttons\WHITE8X8]], edgeSize = 1})
+		row.IconUpBorder:SetBackdropBorderColor(0, 0, 0, 0.75)
 	end
 
-	if (texCoords) then
-		row.icone:SetTexCoord (unpack (texCoords))
+	if texCoords then
+		row.icone:SetTexCoord(_unpack(texCoords))
 	else
 		local icon_border = _detalhes.tooltip.icon_border_texcoord
-		row.icone:SetTexCoord (icon_border.L, icon_border.R, icon_border.T, icon_border.B)
+		row.icone:SetTexCoord(icon_border.L, icon_border.R, icon_border.T, icon_border.B)
 	end
 
 	row.minha_tabela = self
 	row.show = spellid
 	row:Show() --> mostra a barra
 
-	if (spellschool) then
-		local t = _detalhes.spells_school [spellschool]
-		if (t and t.decimals) then
-			row.textura:SetStatusBarColor (t.decimals[1], t.decimals[2], t.decimals[3])
+	if spellschool then
+		local t = _detalhes.spells_school[spellschool]
+		if t and t.decimals then
+			row.textura:SetStatusBarColor(t.decimals[1], t.decimals[2], t.decimals[3])
 		else
-			row.textura:SetStatusBarColor (1, 1, 1)
+			row.textura:SetStatusBarColor(1, 1, 1)
 		end
-
-	elseif (class) then
-		local color = _detalhes.class_colors [class]
-		if (color) then
-			row.textura:SetStatusBarColor (_unpack (color))
+	elseif class then
+		local color = _detalhes.class_colors[class]
+		if color then
+			row.textura:SetStatusBarColor(_unpack(color))
 		else
-			row.textura:SetStatusBarColor (1, 1, 1)
+			row.textura:SetStatusBarColor(1, 1, 1)
 		end
 	else
 		row.textura:SetStatusBarColor(1, 1, 1)
 	end
 
-	if (detalhes and self.detalhes and self.detalhes == spellid and info.showing == index) then
+	if detalhes and self.detalhes and self.detalhes == spellid and info.showing == index then
 		--self:MontaDetalhes (spellid, row) --> poderia deixar isso pro final e montar uma tail call??
-		self:MontaDetalhes (row.show, row, info.instancia) --> poderia deixar isso pro final e montar uma tail call??
+		self:MontaDetalhes(row.show, row, info.instancia) --> poderia deixar isso pro final e montar uma tail call??
 	end
 end
 
