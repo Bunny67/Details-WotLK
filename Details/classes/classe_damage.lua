@@ -3947,11 +3947,7 @@ end
 			row.textura:SetStatusBarColor (1, 1, 1)
 		end
 	else
-		if (spellid == 98021) then --spirit linkl
-			row.textura:SetStatusBarColor (1, 0.4, 0.4)
-		else
-			row.textura:SetStatusBarColor (1, 1, 1)
-		end
+		row.textura:SetStatusBarColor(1, 1, 1)
 	end
 
 	if (detalhes and self.detalhes and self.detalhes == spellid and info.showing == index) then
