@@ -3220,7 +3220,7 @@ local energy_types = {
 	------------------------------------------------------------------------------------------------
 	--> build dead
 		local encounterID = tonumber(alvo_serial:sub(-12, -7), 16)
-		if _detalhes.encounter_table and _detalhes.encounter_table.id == encounterID then
+		if encounterID and _detalhes.encounter_table and _detalhes.encounter_table.id == encounterID then
 			local mapid = _GetCurrentMapAreaID()
 			local boss_ids = _detalhes:GetBossIds(mapid)
 			if not boss_ids then
@@ -3232,12 +3232,9 @@ local energy_types = {
 						break
 					end
 				end
-				if not boss_ids then
-					return
-				end
 			end
 
-			local bossindex = boss_ids[encounterID]
+			local bossindex = boss_ids and boss_ids[encounterID]
 			if bossindex then
 				local _, _, _, _, maxPlayers = GetInstanceInfo()
 				local difficulty = GetInstanceDifficulty()
