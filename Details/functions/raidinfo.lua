@@ -31,16 +31,6 @@ do --> data for Zul'Aman
 		[23863] = 6, --Zul'jin
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		186, 187, 188, 189, 190, 191,
-		[186] = 1, --Akil'zon
-		[187] = 2, --Nalorakk
-		[188] = 3, --Jan'alai
-		[189] = 4, --Halazzi
-		[190] = 5, --Malacrass
-		[191] = 6, --Zul'jin
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Akil'zon"],
@@ -71,7 +61,6 @@ do --> data for Zul'Aman
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -115,16 +104,6 @@ do --> data for Serpentshrine Cavern
 		[21212] = 6, --Lady Vashj
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1567, 1568, 1569, 1570, 1571, 1572,
-		[1567] = 1, --Hydross the Unstable
-		[1568] = 2, --The Lurker Below
-		[1569] = 3, --Leotheras the Blind
-		[1570] = 4, --Fathom-Lord Karathress
-		[1571] = 5, --Morogrim Tidewalker
-		[1572] = 6, --Lady Vashj
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Hydross the Unstable"],
@@ -155,7 +134,6 @@ do --> data for Serpentshrine Cavern
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -189,11 +167,6 @@ do --> data for Magtheridon's Lair
 		[17257] = 1, --Magtheridon
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1566,
-		[1566] = 1, --Magtheridon
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Magtheridon"],
@@ -219,7 +192,6 @@ do --> data for Magtheridon's Lair
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -250,12 +222,6 @@ do --> data for Gruul's Lair
 		[19044] = 2, --Gruul the Dragonkiller
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1564, 1565,
-		[1564] = 1, --High King Maulgar
-		[1565] = 2, --Gruul the Dragonkiller
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["High King Maulgar"],
@@ -282,7 +248,6 @@ do --> data for Gruul's Lair
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -318,39 +283,17 @@ do --> data for Karazhan
 
 	-- TODO: Opera
 	local ENCOUNTER_ID_CL = {
-		16152, 15687, 16457, 1234567890, 34437, 15688, 16524, 15689, 17225, 15690,
+		16152, 15687, 16457, 17535, 34437, 15688, 16524, 15689, 17225, 15690,
 		[16152] = 1, --Attumen the Huntsman
 		[15687] = 2, --Moroes
 		[16457] = 3, --Maiden of Virtue
-		[17535] = 4, --Dorothee
-		[17546] = 4, --Roar
-		[17543] = 4, --Strawman
-		[17547] = 4, --Tinhead
-		[17548] = 4, --Tito
-		[18168] = 4, --The Crone
-		[17521] = 4, --The Big Bad Wolf
-		[17533] = 4, --Romulo
-		[17534] = 4, --Julianne
+		[17535] = 4, --Opera Event
 		[34437] = 5, --The Curator
 		[15688] = 6, --Terestian Illhoof
 		[16524] = 7, --Shade of Aran
 		[15689] = 8, --Netherspite
 		[17225] = 9, --Nightbane
 		[15690] = 10, --Prince Malchezaar
-	}
-
-	local ENCOUNTER_ID_EJ = {
-		1553, 1554, 1555, 1556, 1557, 1560, 1559, 1561, 1562, 1563,
-		[1553] = 1, --Attumen the Huntsman
-		[1554] = 2, --Moroes
-		[1555] = 3, --Maiden of Virtue
-		[1556] = 4, --Opera Event
-		[1557] = 5, --The Curator
-		[1560] = 6, --Terestian Illhoof
-		[1559] = 7, --Shade of Aran
-		[1561] = 8, --Netherspite
-		[1562] = 9, --Nightbane
-		[1563] = 10, --Prince Malchezaar
 	}
 
 	--> install the raid
@@ -387,7 +330,6 @@ do --> data for Karazhan
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -441,14 +383,6 @@ do --> data for The Eye
 		[19622] = 4, --Kael'thas Sunstrider
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1573, 1574, 1575, 1576,
-		[1573] = 1, --Al'ar
-		[1574] = 2, --Void Reaver
-		[1575] = 3, --High Astromancer Solarian
-		[1576] = 4, --Kael'thas Sunstrider
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Al'ar"],
@@ -477,7 +411,6 @@ do --> data for The Eye
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -511,11 +444,6 @@ do --> data for Onyxia's Lair
 		[10184] = 1, --Onyxia
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1651,
-		[1651] = 1, --Onyxia
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Onyxia"],
@@ -541,7 +469,6 @@ do --> data for Onyxia's Lair
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -570,11 +497,6 @@ do --> data for The Ruby Sanctum
 		[39863] = 1, --Halion
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1652,
-		[1652] = 1, --Halion
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Halion"],
@@ -600,7 +522,6 @@ do --> data for The Ruby Sanctum
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -660,23 +581,6 @@ do --> data for Icecrown Citadel
 		[3392] = 13, --Lady Jaina Proudmoore
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1624, 1625, ejID, 1628, 1629, 1630, 1631, 1632, 1633, 1634, 1635, 1636, 1637,
-		[1624] = 1, --Lord Marrowgar
-		[1625] = 2, --Lady Deathwhisper
-		[ejID] = 3, --Icecrown Gunship Battle
-		[1628] = 4, --Deathbringer Saurfang
-		[1629] = 5, --Festergut
-		[1630] = 6, --Rotface
-		[1631] = 7, --Professor Putricide
-		[1632] = 8, --Blood Prince Council
-		[1633] = 9, --Blood-Queen Lana'thel
-		[1634] = 10, --Valithria Dreamwalker
-		[1635] = 11, --Sindragosa
-		[1636] = 12, --The Lich King
-		[1637] = 13, --Lady Jaina Proudmoore
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Lord Marrowgar"],
@@ -714,7 +618,6 @@ do --> data for Icecrown Citadel
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -769,15 +672,6 @@ do --> data for Trial of the Crusader
 		[34564] = 5, --Anub'arak
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1618, 1619, ejID, 1622, 1623,
-		[1618] = 1, --The Beasts of Northrend
-		[1619] = 2, --Lord Jaraxxus
-		[ejID] = 3, --Faction Champions
-		[1622] = 4, --The Twin Val'kyr
-		[1623] = 5, --Anub'arak
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["The Beasts of Northrend"],
@@ -807,7 +701,6 @@ do --> data for Trial of the Crusader
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -899,25 +792,6 @@ do --> data for Naxxramas
 		[15990] = 15, --Kel'Thuzad
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1601, 1602, 1603, 1604, 1605, 1606, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1615,
-		[1601] = 1, --Anub'Rekhan
-		[1602] = 2, --Grand Widow Faerlina
-		[1603] = 3, --Maexxna
-		[1604] = 4, --Noth the Plaguebringer
-		[1605] = 5, --Heigan the Unclean
-		[1606] = 6, --Loatheb
-		[1607] = 7, --Instructor Razuvious
-		[1608] = 8, --Gothik the Harvester
-		[1609] = 9, --The Four Horsemen
-		[1610] = 10, --Patchwerk
-		[1611] = 11, --Grobbulus
-		[1612] = 12, --Gluth
-		[1613] = 13, --Thaddius
-		[1614] = 14, --Sapphiron
-		[1615] = 15, --Kel'Thuzad
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Anub'Rekhan"],
@@ -957,7 +831,6 @@ do --> data for Naxxramas
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -1010,14 +883,6 @@ do --> data for Vault of Archavon
 		[38433] = 4, --Toravon the Ice Watcher
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1597, 1598, 1599, 1560,
-		[1597] = 1, --Archavon the Stone Watcher
-		[1598] = 2, --Emalon the Storm Watcher
-		[1599] = 3, --Koralon the Flame Watcher
-		[1560] = 4, --Toravon the Ice Watcher
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Archavon the Stone Watcher"],
@@ -1046,7 +911,6 @@ do --> data for Vault of Archavon
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -1078,11 +942,6 @@ do --> data for The Obsidian Sanctum
 		[28860] = 1, --Sartharion
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1616,
-		[1616] = 1, --Sartharion
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Sartharion"],
@@ -1108,7 +967,6 @@ do --> data for The Obsidian Sanctum
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
@@ -1137,11 +995,6 @@ do --> data for The Eye of Eternity
 		[28859] = 1, --Malygos
 	}
 
-	local ENCOUNTER_ID_EJ = {
-		1617,
-		[1617] = 1, --Malygos
-	}
-
 	--> install the raid
 	local BOSSNAMES = {
 		LBB["Malygos"],
@@ -1167,7 +1020,6 @@ do --> data for The Eye of Eternity
 		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
 		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
 
-		encounter_ids = ENCOUNTER_ID_EJ,
 		encounter_ids2 = ENCOUNTER_ID_CL,
 		boss_names = BOSSNAMES,
 		encounters = ENCOUNTERS,
