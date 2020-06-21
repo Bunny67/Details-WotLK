@@ -621,13 +621,9 @@ function _detalhes:SaveProfile (saveas)
 end
 
 local default_profile = {
-
 	--> spec coords
 --	/run Details.class_specs_coords = nil
 		class_specs_coords = {
-			[577] = {128/512, 192/512, 256/512, 320/512}, --> havoc demon hunter
-			[581] = {192/512, 256/512, 256/512, 320/512}, --> vengeance demon hunter
-
 			[250] = {0, 64/512, 0, 64/512}, --> blood dk
 			[251] = {64/512, 128/512, 0, 64/512}, --> frost dk
 			[252] = {128/512, 192/512, 0, 64/512}, --> unholy dk
@@ -644,10 +640,6 @@ local default_profile = {
 			[62] = {(128/512) + 0.001953125, 192/512, 64/512, 128/512}, --> mage arcane
 			[63] = {192/512, 256/512, 64/512, 128/512}, --> mage fire
 			[64] = {256/512, 320/512, 64/512, 128/512}, --> mage frost
-
-			[268] = {320/512, 384/512, 64/512, 128/512}, --> monk bm
-			[269] = {448/512, 512/512, 64/512, 128/512}, --> monk ww
-			[270] = {384/512, 448/512, 64/512, 128/512}, --> monk mw
 
 			[65] = {0, 64/512, 128/512, 192/512}, --> paladin holy
 			[66] = {64/512, 128/512, 128/512, 192/512}, --> paladin protect
@@ -677,12 +669,6 @@ local default_profile = {
 	--> class icons and colors
 		class_icons_small = [[Interface\AddOns\Details\images\classes_small]],
 		class_coords = {
-			["DEMONHUNTER"] = {
-				0.73828126, -- [1]
-				1, -- [2]
-				0.5, -- [3]
-				0.75, -- [4]
-			},
 			["HUNTER"] = {
 				0, -- [1]
 				0.25, -- [2]
@@ -718,12 +704,6 @@ local default_profile = {
 				0.98828125, -- [2]
 				0, -- [3]
 				0.25, -- [4]
-			},
-			["MONK"] = {
-				0.5, -- [1]
-				0.73828125, -- [2]
-				0.5, -- [3]
-				0.75, -- [4]
 			},
 			["DEATHKNIGHT"] = {
 				0.25, -- [1]
@@ -794,11 +774,6 @@ local default_profile = {
 			},
 
 		class_colors = {
-			["DEMONHUNTER"] = {
-				0.64,
-				0.19,
-				0.79,
-			},
 			["HUNTER"] = {
 				0.67, -- [1]
 				0.83, -- [2]
@@ -865,11 +840,6 @@ local default_profile = {
 				1, -- [1]
 				0.49, -- [2]
 				0.04, -- [3]
-			},
-			["MONK"] = {
-				0, -- [1]
-				1, -- [2]
-				0.59, -- [3]
 			},
 			["DEATHKNIGHT"] = {
 				0.77, -- [1]
