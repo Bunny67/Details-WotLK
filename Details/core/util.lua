@@ -889,12 +889,12 @@ function _detalhes:EstaEmCombate()
 	end
 
 	-- TODO
-	if _detalhes.encounter_table and _detalhes.encounter_table.id == 36597 then
-		if (_detalhes.debug) then
-			_detalhes:Msg ("(debug) in the lich king encounter, cannot leave the combat.")
-		end
-		return true
-	end
+--	if _detalhes.encounter_table and _detalhes.encounter_table.id == 36597 then
+--		if (_detalhes.debug) then
+--			_detalhes:Msg ("(debug) in the lich king encounter, cannot leave the combat.")
+--		end
+--		return true
+--	end
 
 	_detalhes:SairDoCombate()
 end

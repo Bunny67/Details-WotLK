@@ -920,13 +920,13 @@ function _detalhes:SairDoCombate(bossKilled, from_encounter_end)
 	_detalhes.pre_pot_used = nil
 
 	-- TODO
-	if _detalhes.encounter_table and _detalhes.encounter_table.id ~= 36597 then
+--	if _detalhes.encounter_table and _detalhes.encounter_table.id ~= 36597 then
 		_table_wipe(_detalhes.encounter_table)
-	else
-		if _detalhes.debug then
-			_detalhes:Msg("(debug) in the lich king encounter, cannot wipe the encounter table.")
-		end
-	end
+--	else
+--		if _detalhes.debug then
+--			_detalhes:Msg("(debug) in the lich king encounter, cannot wipe the encounter table.")
+--		end
+--	end
 
 	_detalhes:InstanceCall(_detalhes.CheckPsUpdate)
 

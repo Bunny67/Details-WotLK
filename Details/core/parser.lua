@@ -3801,12 +3801,12 @@ function _detalhes:Check_ZONE_CHANGED_NEW_AREA(...)
 	end
 
 	-- TODO
-	if _detalhes.encounter_table and _detalhes.encounter_table.id == 36597 then
-		_table_wipe(_detalhes.encounter_table)
-		if _detalhes.debug then
-			_detalhes:Msg ("(debug) map changed with encounter table pointing to the lich king encounter, wiping the encounter table.")
-		end
-	end
+--	if _detalhes.encounter_table and _detalhes.encounter_table.id == 36597 then
+--		_table_wipe(_detalhes.encounter_table)
+--		if _detalhes.debug then
+--			_detalhes:Msg ("(debug) map changed with encounter table pointing to the lich king encounter, wiping the encounter table.")
+--		end
+--	end
 
 	_detalhes.time_type = _detalhes.time_type_original
 
