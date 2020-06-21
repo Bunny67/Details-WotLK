@@ -3656,7 +3656,6 @@ local _utf8sub = string.utf8sub
 				{"Ragnaros", "MAGE", 63},
 				{"The Lich King", "DEATHKNIGHT", },
 				{"Your Neighbor", "SHAMAN", },
-				{"Your Raid Leader", "MONK", },
 				{"Huffer", "HUNTER", },
 				{"Your Internet Girlfriend", "SHAMAN", },
 				{"Mr. President", "WARRIOR", },
@@ -3664,8 +3663,6 @@ local _utf8sub = string.utf8sub
 				{"Your Math Teacher", "SHAMAN", },
 				{"King Djoffrey", "PALADIN", },
 				{UnitName ("player") .. " Snow", pclass, },
-				{"A Drunk Dawrf", "MONK", },
-				{"Low Dps Guy", "MONK", },
 				{"Helvis Phresley", "DEATHKNIGHT", },
 				{"Stormwind Guard", "WARRIOR", },
 				{"A PvP Player", "ROGUE", 260},
@@ -3708,7 +3705,6 @@ local _utf8sub = string.utf8sub
 			{"Экспортировать", "MAGE", 63},
 			{"Готово", "DEATHKNIGHT", },
 			{"Создать", "SHAMAN", },
-			{"Текущий", "MONK", },
 			{"список команд", "HUNTER", },
 			{"центр", "SHAMAN", },
 			{"Разное", "WARRIOR", },
@@ -3721,7 +3717,6 @@ local _utf8sub = string.utf8sub
 			{"格檔", "PRIEST", },
 			{"中央", "MAGE", },
 			{"傷害", "SHAMAN", },
-			{"建立", "MONK", },
 			{"編輯", "WARRIOR", },
 			{"儲存變更", "ROGUE", },
 			{"刪除", "DEATHKNIGHT", },
@@ -3729,7 +3724,6 @@ local _utf8sub = string.utf8sub
 			{"吸收", "PRIEST", },
 			{"加到書籤", "MAGE", },
 			{"最大化", "SHAMAN", },
-			{"未命中", "MONK", },
 			{"�進階", "WARRIOR", },
 		}
 
@@ -3755,7 +3749,6 @@ local _utf8sub = string.utf8sub
 			{"시전", "PRIEST", },
 			{"현재", "MAGE", },
 			{"취소", "SHAMAN", },
-			{"내보내기", "MONK", },
 			{"(사용자 설정)", "WARRIOR", },
 			{"방어", "ROGUE", },
 			{"예제", "DEATHKNIGHT", },
@@ -3763,7 +3756,6 @@ local _utf8sub = string.utf8sub
 			{"최소", "PRIEST", },
 			{"미러 이미지", "MAGE", },
 			{"가장자리", "SHAMAN", },
-			{"외형", "MONK", },
 			{"아바타 선택", "WARRIOR", },
 		}
 
@@ -3811,9 +3803,6 @@ local _utf8sub = string.utf8sub
 				robot.spec = specs [math.random (1, #specs)]
 			elseif (robot.classe == "MAGE") then
 				local specs = {62, 63, 64}
-				robot.spec = specs [math.random (1, #specs)]
-			elseif (robot.classe == "MONK") then
-				local specs = {268, 269, 270}
 				robot.spec = specs [math.random (1, #specs)]
 			elseif (robot.classe == "PALADIN") then
 				local specs = {65, 66, 70}
@@ -3873,9 +3862,6 @@ local _utf8sub = string.utf8sub
 				robot.spec = specs [math.random (1, #specs)]
 			elseif (robot.classe == "MAGE") then
 				local specs = {62, 63, 64}
-				robot.spec = specs [math.random (1, #specs)]
-			elseif (robot.classe == "MONK") then
-				local specs = {268, 269, 270}
 				robot.spec = specs [math.random (1, #specs)]
 			elseif (robot.classe == "PALADIN") then
 				local specs = {65, 66, 70}
