@@ -561,11 +561,10 @@ do --> data for Icecrown Citadel
 		"ui-ej-boss-valithria dreamwalker",
 		"ui-ej-boss-sindragosa",
 		"ui-ej-boss-lich king",
-		"UI-EJ-BOSS-Lady-Jaina-Proudmoure-ICC",
 	}
 
 	local ENCOUNTER_ID_CL = {
-		36612, 36855, clID, 37813, 36626, 36627, 36678, 37970, 37955, 36789, 36853, 36597, 3392,
+		36612, 36855, clID, 37813, 36626, 36627, 36678, 37970, 37955, 36789, 36853, 36597,
 		[36612] = 1, --Lord Marrowgar
 		[36855] = 2, --Lady Deathwhisper
 		[clID] = 3, --Icecrown Gunship Battle
@@ -578,7 +577,6 @@ do --> data for Icecrown Citadel
 		[36789] = 10, --Valithria Dreamwalker
 		[36853] = 11, --Sindragosa
 		[36597] = 12, --The Lich King
-		[3392] = 13, --Lady Jaina Proudmoore
 	}
 
 	--> install the raid
@@ -595,7 +593,6 @@ do --> data for Icecrown Citadel
 		LBB["Valithria Dreamwalker"],
 		LBB["Sindragosa"],
 		LBB["The Lich King"],
-		LBB["Lady Jaina Proudmoore"],
 	}
 
 	local ENCOUNTERS = {}
@@ -636,7 +633,6 @@ do --> data for Icecrown Citadel
 			[36789] = 10, --Valithria Dreamwalker
 			[36853] = 11, --Sindragosa
 			[36597] = 12, --The Lich King
-			[3392] = 13, --Lady Jaina Proudmoore
 		},
 	})
 end
