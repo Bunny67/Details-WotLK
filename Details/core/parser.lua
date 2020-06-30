@@ -41,7 +41,6 @@ local _math_ceil = math.ceil --lua local
 local _table_wipe = table.wipe --lua local
 local _strsplit = strsplit
 local _tonumber = tonumber
-local _band = bit.band
 
 local _GetSpellInfo = _detalhes.getspellinfo --details api
 local escudo = _detalhes.escudos --details local
@@ -1311,6 +1310,22 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			return a.timestamp < b.timestamp
 		end
 
+		-- twin val'kyr light essence
+		if spellA == 65686 then 
+			return true
+		end
+		if spellB == 65686 then 
+			return false
+		end
+
+		-- twin val'kyr dark essence
+		if spellA == 65684 then 
+			return true
+		end
+		if spellB == 65684 then 
+			return false
+		end
+
 		--frost ward
 		if frost_ward_absorb_list[spellA] then
 			return true
@@ -1385,24 +1400,36 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		escudo[alvo_name] = escudo[alvo_name] or {}
 		
 		for _, absorb in ipairs(escudo[alvo_name]) do 
+			-- check if we have twin val'kyr light essence and we took fire damage
+			if absorb.spellid == 65686 and _bit_band(spelltype, 0x4) == spelltype then 
+				-- honestly I don't think this should be tracked as healing by details, the healing meters would be flooded with useless info.
+				--found_absorb = absorb 
+				--break
+				return 
+			-- check if we have twin val'kyr dark essence and we took shadow damage
+			elseif absorb.spellid == 65684 and _bit_band(spelltype, 0x20) == spelltype then 
+				-- see above
+				--found_absorb = absorb
+				--break
+				return
 			-- check if its a frost ward
-			if frost_ward_absorb_list[absorb.spellid] then
+			elseif frost_ward_absorb_list[absorb.spellid] then
 				-- only pick if its frost damage
-				if (_band(spelltype, 0x10) == spelltype) then 
+				if (_bit_band(spelltype, 0x10) == spelltype) then 
 					found_absorb = absorb
 					break -- exit since wards are priority
 				end
 			-- check if its a fire ward
 			elseif fire_ward_absorb_list[absorb.spellid] then
 				-- only pick if its fire damage
-				if (_band(spelltype, 0x4) == spelltype) then 
+				if (_bit_band(spelltype, 0x4) == spelltype) then 
 					found_absorb = absorb
 					break -- exit since wards are priority
 				end
 			-- check if its a shadow ward
 			elseif shadow_ward_absorb_list[absorb.spellid] then
 				-- only pick if its shadow damage
-				if (_band(spelltype, 0x32) == spelltype) then 
+				if (_bit_band(spelltype, 0x20) == spelltype) then 
 					found_absorb = absorb
 					break -- exit since wards are priority
 				end
