@@ -138,6 +138,7 @@ DF.CooldownsBySpec = {
 
 			[10278] = 3, --Blessing of Protection
 			[48788] = 3, --Lay on Hands
+		    [6940] = 3, -- Hand of Sacrifice
 
 			[31821] = 4, --Aura Mastery
 
@@ -151,7 +152,7 @@ DF.CooldownsBySpec = {
 
 			[31850] = 2, --Ardent Defender
 			[10278] = 3, --Blessing of Protection
-			[6940] = 3, --Blessing of Sacrifice
+			[6940] = 3, -- Hand of Sacrifice
 			[48788] = 3, --Lay on Hands
 			[64205] = 4, -- Divine Sacrifice
 
@@ -167,6 +168,7 @@ DF.CooldownsBySpec = {
 
 			[10278] = 3, --Blessing of Protection
 			[48788] = 3, --Lay on Hands
+			[6940] = 3, -- Hand of Sacrifice
 
 			[1044] = 5, --Blessing of Freedom
 			[853] = 5, --Hammer of Justice
@@ -265,7 +267,7 @@ DF.CooldownsInfo = {
 	[642] = {cooldown = 300, duration = 8, talent = false, charges = 1, class = "PALADIN", type = 2}, --Divine Shield
 	[64205] = {cooldown = 120, duration = 10, talent = 64205, charges =1, class = "PALADIN", type = 4}, -- Divine Sacrifice
 	[10278] = {cooldown = 300, duration =10, talent = false, charges = 1, class = "PALADIN", type = 3}, -- Hand of Protection
-	[48788] = {cooldown = 600, duration = false, talent = false, charges = 1, class = "PALADIN", type = 3}, --Lay on Hands
+	[48788] = {cooldown = 660, duration = false, talent = false, charges = 1, class = "PALADIN", type = 3}, --Lay on Hands
 	[31821] = {cooldown = 120, duration = 8, talent = 31821, charges = 1, class = "PALADIN", type = 4}, --Aura Mastery
 	[1044] = {cooldown = 25, duration = 8, talent = false, charges = 1, class = "PALADIN", type = 5}, --Blessing of Freedom
 	[31850] = {cooldown = 120, duration = 8, talent = 31850, charges = 1, class = "PALADIN", type = 2}, --Ardent Defender
@@ -322,8 +324,8 @@ DF.CooldownsInfo = {
 	[47537] = {cooldown = 90, duration = 10, talent = 47537, charges = 1, class = "PRIEST", type = 5},  -- Rapture, Rank 3
 	[48173] = {cooldown = 90, duration = 10, talent = false, charges = 1, class = "PRIEST", type = 5},  -- Desperate Prayer, Rank 9
 	[47788] = {cooldown = 180, duration = 10, talent = false, charges = 1, class = "PRIEST", type = 3},  -- Guardian Spirit
-	[64844] = {cooldown = 180, duration = 8, talent = false, charges = 1, class = "PRIEST", type = 4},  -- Divine Hymn
-	[64901] = {cooldown = 300, duration = 6, talent = false, charges = 1, class = "PRIEST", type = 4},  -- Hymn of Hope
+	[64844] = {cooldown = 480, duration = 8, talent = false, charges = 1, class = "PRIEST", type = 4},  -- Divine Hymn
+	[64901] = {cooldown = 360, duration = 6, talent = false, charges = 1, class = "PRIEST", type = 4},  -- Hymn of Hope
 	[10890] = {cooldown = 60, duration = 8, talent = false, charges = 1, class = "PRIEST", type = 5},  -- Psychic Scream, Rank 4
 	[47585] = {cooldown = 120, duration = 6, talent = 47585, charges = 1, class = "PRIEST", type = 2},  -- Dispersion
 
