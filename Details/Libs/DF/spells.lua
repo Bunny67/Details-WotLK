@@ -322,8 +322,8 @@ DF.CooldownsInfo = {
 	[47537] = {cooldown = 90, duration = 10, talent = 47537, charges = 1, class = "PRIEST", type = 5},  -- Rapture, Rank 3
 	[48173] = {cooldown = 90, duration = 10, talent = false, charges = 1, class = "PRIEST", type = 5},  -- Desperate Prayer, Rank 9
 	[47788] = {cooldown = 180, duration = 10, talent = false, charges = 1, class = "PRIEST", type = 3},  -- Guardian Spirit
-	[64844] = {cooldown = 180, duration = 8, talent = false, charges = 1, class = "PRIEST", type = 4},  -- Divine Hymn
-	[64901] = {cooldown = 300, duration = 6, talent = false, charges = 1, class = "PRIEST", type = 4},  -- Hymn of Hope
+	[64844] = {cooldown = 480, duration = 8, talent = false, charges = 1, class = "PRIEST", type = 4},  -- Divine Hymn
+	[64901] = {cooldown = 360, duration = 6, talent = false, charges = 1, class = "PRIEST", type = 4},  -- Hymn of Hope
 	[10890] = {cooldown = 60, duration = 8, talent = false, charges = 1, class = "PRIEST", type = 5},  -- Psychic Scream, Rank 4
 	[47585] = {cooldown = 120, duration = 6, talent = 47585, charges = 1, class = "PRIEST", type = 2},  -- Dispersion
 
