@@ -1090,6 +1090,8 @@ do
 		[67260] = 15, -- 300000
 		[67259] = 15, -- 700000
 		[67261] = 15, -- 1200000
+		[65686] = 86400, -- Twin Val'kyr Light Essence
+		[65684] = 86400, -- Twin Val'kyr Dark Essence
 	}
 
 	-- ~cooldown 1 self
