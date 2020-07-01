@@ -55,10 +55,10 @@ do
 		[48574] = 103, -- Rake, Rank 7
 		[49800] = 103, -- Rip, Rank 10
 
-		-- Guardian Druid:
-		[48568] = 104, -- Lacerate, Rank 3
-		[48480] = 104, -- Maul, Rank 10
-		[62606] = 104, -- Savage Defense
+		-- Bear Druid
+		[48568] = 103, -- Lacerate, Rank 3
+		[48480] = 103, -- Maul, Rank 10
+		[62606] = 103, -- Savage Defense
 
 		-- Restoration Druid:
 		[48447] = 105, -- Tranquility, Rank 7
@@ -254,7 +254,6 @@ do
 
 		[102] = "DRUID", -- Balance Druid
 		[103] = "DRUID", -- Feral Druid
-		[104] = "DRUID", -- Guardian Druid
 		[105] = "DRUID", -- Restoration Druid
 
 		[253] = "HUNTER", -- Beast Mastery Hunter

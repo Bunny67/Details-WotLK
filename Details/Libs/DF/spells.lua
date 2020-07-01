@@ -414,7 +414,6 @@ DF.SpecIds = {
 
 	[102] = "DRUID",
 	[103] = "DRUID",
-	[104] = "DRUID",
 	[105] = "DRUID",
 
 	[253] = "HUNTER",
@@ -616,7 +615,7 @@ DF.SpellRangeCheckListBySpec = {
 
 	[102] = 8921, -->  druid balance - Moonfire (45 yards)
 	[103] = 8921, -->  druid feral - Moonfire (40 yards)
-	[104] = 6795, -->  druid guardian - Growl
+	[103] = 6795, -->  druid guardian - Growl
 	[105] = 8921, -->  druid resto - Moonfire (40 yards)
 
 	[253] = 193455, -->  hunter bm - Cobra Shot
