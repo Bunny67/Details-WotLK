@@ -141,6 +141,7 @@ local _token_ids = _detalhes.TokenID
 local OBJECT_TYPE_ENEMY		= 0x00000040
 local OBJECT_TYPE_PLAYER	= 0x00000400
 local OBJECT_TYPE_PETS		= 0x00003000
+local OBJECT_TYPE_GUARDIAN	= 0x00002000
 local AFFILIATION_GROUP		= 0x00000007
 local REACTION_FRIENDLY		= 0x00000010
 local REACTION_MINE			= 0x00000001
@@ -234,6 +235,11 @@ local _hook_interrupt_container = _detalhes.hooks["HOOK_INTERRUPT"]
 --> encoutner rules
 local ignored_npc_ids = {
 	["1234567890"] = true,
+}
+
+local sub_pet_ids = {
+		[15352] = true, -- earth elemental
+		[15438] = true, -- fire elemental
 }
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1153,14 +1159,9 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			return
 		end
 
-		--> MOTHER encounter in Uldir is triggering the summon of the add as it was a pet from the player the crossed rooms REMOVE WHEN BFA IS DONE
-		if(spellid == 268871 or spellid == 267833) then
-			--print("IGNORING summon of a Corrupted Blood Clone for player", who_name)
-			--5/17 18:16:48.886  SPELL_SUMMON,Creature-0-4028-1861-987-136949-00007DF137,"Corrupted Blood Clone",0xa18,0x0,Creature-0-4028-1861-987-136315-00007DF140,"Remnant of Corruption",0xa28,0x0,267833,"Defense Grid",0x1
-			--5/17 18:16:49.601  SPELL_SUMMON,Player-970-000BDB1F,"Fhqwhgads-Anduin",0x514,0x2,Creature-0-4028-1861-987-136949-00007DF141,"Corrupted Blood Clone",0xa28,0x0,268871,"Corrupted Blood Clone",0x1
-			--4/22 18:07:54.369  SPELL_SUMMON,Player-3296-009371B2,"Façade-Anasterian(US)",0x514,0x0,Creature-0-3198-1448-2131-90477-0000380DAA,"Blood Globule",0xa28,0x0,180410,"Heart Seeker",0x1
-			--5/4 15:45:24.222  SPELL_SUMMON,Player-3296-009576DD,"Àlëx-Brill(EU)",0x40514,0x0,Creature-0-2083-1448-25606-90513-000047BE44,"Fel Blood Globule",0xa28,0x0,180413,"Heart Seeker",0x1
-			return
+		-- only treat SPELL_CREATE like SPELL_SUMMON for snake trap.
+		if (token == "SPELL_CREATE" and spellid ~= 34600) then 
+			return 
 		end
 
 		if(not who_name) then
@@ -1178,6 +1179,16 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			who_name, who_serial, who_flags = alvo_pet[1], alvo_pet[2], alvo_pet[3]
 		end
 
+		--> pet summoned another pet, but the pet was summoned first
+		if _bit_band(who_flags, OBJECT_TYPE_GUARDIAN) then
+			local mobid = tonumber(alvo_serial:sub(3+6,3+9),16)
+			if sub_pet_ids[mobid] then 
+				C_Timer.After(0.1, function() 
+					parser:summon(token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, spellid, spellName)
+				end)
+				return
+			end
+		end
 		--print()
 
 		_detalhes.tabela_pets:Adicionar(alvo_serial, alvo_name, alvo_flags, who_serial, who_name, who_flags)
@@ -3454,6 +3465,7 @@ local energy_types = {
 local token_list = {
 	-- neutral
 	["SPELL_SUMMON"] = parser.summon,
+	["SPELL_CREATE"] = parser.summon,
 --	["SPELL_CAST_FAILED"] = parser.spell_fail
 }
 
