@@ -78,23 +78,47 @@ local specIDs = {
 	["WARRIOR"] = {71, 72, 73},
 	["PALADIN"] = {65, 66, 70},
 	["DEATHKNIGHT"] = {250, 251, 252},
-	["DRUID"] = {102, 103, 103, 105},
+	["DRUID"] = {102, 103, 104, 105},
 	["HUNTER"] = {253, 254, 255},
 	["SHAMAN"] = {262, 263, 264},
 }
 
-function DF.GetSpecialization()
-	local talantGroup = GetActiveTalentGroup()
+local function GetFeralSubSpec(unit)
+	--57881 = Natural Reactions - Increase bear dodge and regen rage on dodge.
+	--other options:
+	--57877 = Protector of the Pack - Increase attack power by 6% and reduced damage taken by 12% in bear form.
+	--16858 = Feral Aggression (0 points in bear) - Increased attack power reduction of demo roar and increase ferocious bite damage.
+	--16931 = Thick Hide - Increase armor from cloth and leather items. 
+	local points = LibGroupTalents:UnitHasTalent(unit, GetSpellInfo(57881), LibGroupTalents:GetActiveTalentGroup(unit))
+	if points > 0 then 
+		return 3 -- we are a guardian druid
+	else
+		return 2
+	end
+end
+
+function DF.GetSpecialization(unit)
+	if not unit then unit = "player" end
+	local talantGroup = LibGroupTalents:GetActiveTalentGroup(unit)
 	local maxPoints, specIdx = 0, 0
 
 	for i = 1, MAX_TALENT_TABS do
-		local name, icon, pointsSpent = GetTalentTabInfo(i, nil, nil, talantGroup)
-		if maxPoints < pointsSpent then
-			maxPoints = pointsSpent
-			specIdx = i
+		local name, icon, pointsSpent = LibGroupTalents:GetTalentTabInfo(unit, i, talantGroup)
+		if pointsSpent ~= nil then
+			if maxPoints < pointsSpent then
+				maxPoints = pointsSpent
+				if select(2, UnitClass(unit)) == "DRUID" and i >= 2 then
+					if i == 3 then 
+						specIdx = 4
+					elseif i == 2 then 
+						specIdx = GetFeralSubSpec(unit)
+					end
+				else
+					specIdx = i
+				end
+			end
 		end
 	end
-
 	return specIdx
 end
 
