@@ -1398,20 +1398,23 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		local found_absorb
 
 		escudo[alvo_name] = escudo[alvo_name] or {}
-		
 		for _, absorb in ipairs(escudo[alvo_name]) do 
 			-- check if we have twin val'kyr light essence and we took fire damage
-			if absorb.spellid == 65686 and _bit_band(spelltype, 0x4) == spelltype then 
-				-- honestly I don't think this should be tracked as healing by details, the healing meters would be flooded with useless info.
-				--found_absorb = absorb 
-				--break
-				return 
+			if absorb.spellid == 65686 then 
+				if _bit_band(spelltype, 0x4) == spelltype then
+					-- honestly I don't think this should be tracked as healing by details, the healing meters would be flooded with useless info.
+					--found_absorb = absorb 
+					--break
+					return 
+				end
 			-- check if we have twin val'kyr dark essence and we took shadow damage
-			elseif absorb.spellid == 65684 and _bit_band(spelltype, 0x20) == spelltype then 
-				-- see above
-				--found_absorb = absorb
-				--break
-				return
+			elseif absorb.spellid == 65684 then
+				if _bit_band(spelltype, 0x20) == spelltype then  
+					-- see above
+					--found_absorb = absorb
+					--break
+					return
+				end
 			-- check if its a frost ward
 			elseif frost_ward_absorb_list[absorb.spellid] then
 				-- only pick if its frost damage
@@ -1756,6 +1759,25 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 	------------------------------------------------------------------------------------------------
 	--> handle shields
 
+	------------------------------------------------------------------------------------------------
+		--> healing done absorbs
+		-- this needs to be outside buff / debuffs for boss mechanics which absorb damage.
+		if(absorb_spell_list[spellid]) then
+			escudo[alvo_name] = escudo[alvo_name] or {}
+
+			-- create absorb data 
+			local absorb = {}
+			absorb.timestamp = time
+			absorb.name = who_name
+			absorb.serial = who_serial
+			absorb.flags = who_flags
+			absorb.spellid = spellid
+			absorb.spellname = spellname
+			-- insert absorb at the end of the absorb stack 
+			_table_insert(escudo[alvo_name], absorb)
+			_table_sort(escudo[alvo_name], AbsorbAuraOrderPred)
+		end
+
 		if(tipo == "BUFF") then
 			------------------------------------------------------------------------------------------------
 			--> buff uptime
@@ -1775,24 +1797,6 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 					--um pet colocando uma aura do dono
 					parser:add_buff_uptime(token, time, alvo_serial, alvo_name, alvo_flags, alvo_serial, alvo_name, alvo_flags, spellid, spellname, "BUFF_UPTIME_IN")
 				end
-			end
-
-			------------------------------------------------------------------------------------------------
-			--> healing done absorbs
-			if(absorb_spell_list[spellid]) then
-				escudo[alvo_name] = escudo[alvo_name] or {}
-
-				-- create absorb data 
-				local absorb = {}
-				absorb.timestamp = time
-				absorb.name = who_name
-				absorb.serial = who_serial
-				absorb.flags = who_flags
-				absorb.spellid = spellid
-				absorb.spellname = spellname
-				-- insert absorb at the end of the absorb stack 
-				_table_insert(escudo[alvo_name], absorb)
-				_table_sort(escudo[alvo_name], AbsorbAuraOrderPred)
 			end
 
 	------------------------------------------------------------------------------------------------
@@ -1989,8 +1993,39 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 
 	------------------------------------------------------------------------------------------------
 	--> handle shields
+	------------------------------------------------------------------------------------------------
+		--> healing done(shields)
+		-- this needs to be outside buff / debuffs for boss mechanics which absorb damage.
+		if(absorb_spell_list[spellid]) then
+			escudo[alvo_name] = escudo[alvo_name] or {}
 
-		if(tipo == "BUFF") then
+			-- refresh absorb if it's already applied by this player
+			local found = false
+			for _, applied_absorb in ipairs(escudo[alvo_name]) do 
+
+				if applied_absorb.spellid == spellid and applied_absorb.serial == who_serial then
+					applied_absorb.timestamp = time
+					found = true 
+					break
+				end
+			end
+
+			-- create absorb data (this absorb was probably caused out of combat)
+			if not found then
+				absorb = {}
+				absorb.timestamp = time
+				absorb.name = who_name
+				absorb.serial = who_serial
+				absorb.flags = who_flags
+				absorb.spellid = spellid
+				absorb.spellname = spellname
+				-- insert absorb at the end of the absorb stack 
+				_table_insert(escudo[alvo_name], absorb)
+				_table_sort(escudo[alvo_name], AbsorbAuraOrderPred)
+			end
+		end
+
+		if (tipo == "BUFF") then
 
 			------------------------------------------------------------------------------------------------
 			--> buff uptime
@@ -2004,39 +2039,11 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 					end
 				end
 
-			------------------------------------------------------------------------------------------------
-			--> healing done(shields)
-				if(absorb_spell_list[spellid]) then
-					escudo[alvo_name] = escudo[alvo_name] or {}
-
-					-- refresh absorb if it's already applied by this player
-					local found = false
-					for _, applied_absorb in ipairs(escudo[alvo_name]) do 
-
-						if applied_absorb.spellid == spellid and applied_absorb.serial == who_serial then
-							applied_absorb.timestamp = time
-							found = true 
-							break
-						end
-					end
-
-					-- create absorb data (this absorb was probably caused out of combat)
-					if not found then
-						absorb = {}
-						absorb.timestamp = time
-						absorb.name = who_name
-						absorb.serial = who_serial
-						absorb.flags = who_flags
-						absorb.spellid = spellid
-						absorb.spellname = spellname
-						-- insert absorb at the end of the absorb stack 
-						_table_insert(escudo[alvo_name], absorb)
-						_table_sort(escudo[alvo_name], AbsorbAuraOrderPred)
-					end
+			
 			------------------------------------------------------------------------------------------------
 			--> recording buffs
 
-				elseif(_recording_self_buffs) then
+				if(_recording_self_buffs) then
 					if(who_name == _detalhes.playername or alvo_name == _detalhes.playername) then --> foi colocado pelo player
 
 						local bufftable = _detalhes.Buffs.BuffsTable[spellname]
@@ -2138,6 +2145,20 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 
 	------------------------------------------------------------------------------------------------
 	--> handle shields
+	------------------------------------------------------------------------------------------------
+		--> healing done(shields)
+		-- this needs to be outside buff / debuffs for boss mechanics which absorb damage.
+		if absorb_spell_list[spellid] then
+			escudo[alvo_name] = escudo[alvo_name] or {}
+			-- locate buff 
+			for _, applied_absorb in ipairs(escudo[alvo_name]) do 
+				if applied_absorb.serial == who_serial and applied_absorb.spellid == spellid then
+					-- schedule removal of shield buff since absorbed damage is sent after unbuff is called.
+					C_Timer.After(0.1, function() parser:unbuff_shield(alvo_name, who_serial, spellid) end)
+					break
+				end
+			end
+		end
 
 		if(tipo == "BUFF") then
 
@@ -2152,23 +2173,9 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 						parser:add_buff_uptime(token, time, alvo_serial, alvo_name, alvo_flags, alvo_serial, alvo_name, alvo_flags, spellid, spellname, "BUFF_UPTIME_OUT")
 					end
 				end
-
-			------------------------------------------------------------------------------------------------
-			--> healing done(shields)
-				if absorb_spell_list[spellid] then
-					escudo[alvo_name] = escudo[alvo_name] or {}
-					-- locate buff 
-					for _, applied_absorb in ipairs(escudo[alvo_name]) do 
-						if applied_absorb.serial == who_serial and applied_absorb.spellid == spellid then
-							-- schedule removal of shield buff since absorbed damage is sent after unbuff is called.
-							C_Timer.After(0.1, function() parser:unbuff_shield(alvo_name, who_serial, spellid) end)
-							break
-						end
-					end
-
 			------------------------------------------------------------------------------------------------
 			--> recording buffs
-				elseif(_recording_self_buffs) then
+				if(_recording_self_buffs) then
 					if(who_name == _detalhes.playername or alvo_name == _detalhes.playername) then --> foi colocado pelo player
 
 						local bufftable = _detalhes.Buffs.BuffsTable[spellname]
