@@ -242,6 +242,10 @@ local sub_pet_ids = {
 		[15438] = true, -- fire elemental
 }
 
+local spell_create_is_summon = {
+	[34600] = true, -- snake trap
+}
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --> internal functions
 
@@ -1160,7 +1164,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		end
 
 		-- only treat SPELL_CREATE like SPELL_SUMMON for snake trap.
-		if (token == "SPELL_CREATE" and spellid ~= 34600) then 
+		if (token == "SPELL_CREATE" and not spell_create_is_summon[spellid]) then 
 			return 
 		end
 
