@@ -217,6 +217,16 @@ DF.CooldownsBySpec = {
 			[48477] = 3, --Rebirth
 			[50334] = 1, --Berserk
 		},
+		-- guardian
+		[104] = {			
+			[22812] = 2, --Barkskin
+			[61336] = 2, --Survival Instincts
+			[77764] = 4, --Stampeding Roar
+			[48447] = 4, --Tranquility
+			[29166] = 3, --Innervate
+			[48477] = 3, --Rebirth
+			[50334] = 1, --Berserk
+		},
 		--restoration
 		[105] = {
 
