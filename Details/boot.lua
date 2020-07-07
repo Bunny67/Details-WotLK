@@ -311,6 +311,7 @@ do
 				["SPELL_INTERRUPT"] = 32,
 				["UNIT_DIED"] = 33,
 				["UNIT_DESTROYED"] = 34,
+				["SPELL_CAST_START"] = 35,
 			}
 
 		--> armazena instancias inativas
