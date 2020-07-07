@@ -4,9 +4,16 @@ if (not DF or not DetailsFrameworkCanLoad) then
 	return
 end
 
-DF_COOLDOWN_RAID = 4
+DF_COOLDOWN_OFFENSIVE = 1
+DF_COOLDOWN_PERSONAL = 2
 DF_COOLDOWN_EXTERNAL = 3
+DF_COOLDOWN_RAID = 4
+DF_COOLDOWN_UTILITY = 5
 
+local lust_id = 2825 
+if UnitFactionGroup("player") == "Alliance" then 
+	lust_id = 32182
+end
 DF.CooldownsBySpec = {
 	-- 1 attack cooldown
 	-- 2 personal defensive cooldown
@@ -258,14 +265,17 @@ DF.CooldownsBySpec = {
 		--elemental
 		[262] = {
 			[16166] = 1, -- Elemental Mastery
+			[lust_id] = 4, -- Bloodlust / Heroism
 		},
 		--enhancement
 		[263] = {
 			[51533] = 1, --Feral Spirit
+			[lust_id] = 4, -- Bloodlust / Heroism
 		},
 		--restoration
 		[263] = {
 			[16190] = 3, -- Mana Tide Totem
+			[lust_id] = 4, -- Bloodlust / Heroism
 		},
 }
 
@@ -297,7 +307,8 @@ DF.CooldownsInfo = {
 	--> shaman
 	[51533] = {cooldown = 120, duration = 15, talent = 51533, charges = 1, class = "SHAMAN", type = 1}, --Feral Spirit
 	[16190] = {cooldown = 300, duration = 12, talent = 16190, charges = 1, class = "SHAMAN", type = 4}, --Mana Tide Totem
-	[16166] = {cooldown = 120, duration = 15, talent = 16166, charges = 1, class = "SHAMAN", type = 4}, --Mana Tide Totem
+	[16166] = {cooldown = 120, duration = 15, talent = 16166, charges = 1, class = "SHAMAN", type = 4}, --Elemental Mastery
+	[lust_id] = {cooldown = 300, duration = 40, talent = false, charges = 1, class = "SHAMAN", type = 4}, --Bloodlust / Heroism
 
 	--> hunter
 	[19574] = {cooldown = 90, duration = 12, talent = 19574, charges = 1, class = "HUNTER", type = 1}, --Bestial Wrath
@@ -307,7 +318,7 @@ DF.CooldownsInfo = {
 	[29166] = {cooldown = 180, duration = 12, talent = false, charges = 1, class = "DRUID", type = 3}, --Innervate
 	[48477] = {cooldown = 600, duration = false, talent = false, charges = 1, class = "DRUID", type = 3}, --Rebirth
 	[50334] = {cooldown = 180, duration = 15, talent = false, charges = 1, class = "DRUID", type = 1}, --Berserk
-	[61336] = {cooldown = 120, duration = 6, talent = false, charges = 2, class = "DRUID", type = 2}, --Survival Instincts (2min feral 4min guardian, same spellid)
+	[61336] = {cooldown = 120, duration = 6, talent = false, charges = 1, class = "DRUID", type = 2}, --Survival Instincts (2min feral 4min guardian, same spellid)
 	[77764] = {cooldown = 120, duration = 8, talent = false, charges = 1, class = "DRUID", type = 4}, --Stampeding Roar (utility)
 	[48447] = {cooldown = 180, duration = 8, talent = false, charges = 1, class = "DRUID", type = 4}, --Tranquility
 
@@ -454,6 +465,7 @@ DF.CooldownsAttack = {}
 DF.CooldownsDeffense = {}
 DF.CooldownsExternals = {}
 DF.CooldownsRaid = {}
+DF.CooldownsUtility = {}
 
 DF.CooldownsAllDeffensive = {}
 
@@ -477,8 +489,7 @@ for specId, cooldownTable in pairs (DF.CooldownsBySpec) do
 			DF.CooldownsAllDeffensive [spellId] = true
 
 		elseif (cooldownType == 5) then
-
-
+			DF.CooldownsUtility [spellId] = true
 		end
 
 		DF.CooldownToClass [spellId] = DF.SpecIds [spellId]
