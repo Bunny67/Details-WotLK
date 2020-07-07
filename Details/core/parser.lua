@@ -3588,6 +3588,7 @@ function _detalhes:CaptureDisable(capture_type)
 		token_list["SPELL_PERIODIC_ENERGIZE"] = nil
 	elseif capture_type == "spellcast" then
 		token_list["SPELL_CAST_SUCCESS"] = nil
+		token_list["SPELL_CAST_START"] = nil
 	elseif capture_type == "miscdata" then
 		-- dispell
 		token_list["SPELL_DISPEL"] = nil
@@ -3647,6 +3648,7 @@ function _detalhes:CaptureEnable(capture_type)
 		token_list["SPELL_PERIODIC_ENERGIZE"] = parser.energize
 	elseif capture_type == "spellcast" then
 		token_list["SPELL_CAST_SUCCESS"] = parser.spellcast
+		token_list["SPELL_CAST_START"] = parser.spellcast
 	elseif capture_type == "miscdata" then
 		-- dispell
 		token_list["SPELL_DISPEL"] = parser.dispell
@@ -3729,6 +3731,7 @@ local all_parser_tokens = {
 	["SPELL_PERIODIC_ENERGIZE"] = "energize",
 
 	["SPELL_CAST_SUCCESS"] = "spellcast",
+	["SPELL_CAST_START"] = "spellcast",
 	["SPELL_DISPEL"] = "dispell",
 	["SPELL_STOLEN"] = "dispell",
 	["SPELL_AURA_BROKEN"] = "break_cc",
