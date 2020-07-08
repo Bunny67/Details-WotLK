@@ -90,7 +90,7 @@ local function GetFeralSubSpec(unit)
 	--16858 = Feral Aggression (0 points in bear) - Increased attack power reduction of demo roar and increase ferocious bite damage.
 	--16931 = Thick Hide - Increase armor from cloth and leather items. 
 	local points = LibGroupTalents:UnitHasTalent(unit, GetSpellInfo(57881), LibGroupTalents:GetActiveTalentGroup(unit))
-	if points > 0 then 
+	if points and points > 0 then 
 		return 3 -- we are a guardian druid
 	else
 		return 2
