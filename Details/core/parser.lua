@@ -1184,7 +1184,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		end
 
 		--> pet summoned another pet, but the pet was summoned first
-		if _bit_band(who_flags, OBJECT_TYPE_GUARDIAN) then
+		if _bit_band(who_flags, OBJECT_TYPE_PETS) ~= 0 then
 			local mobid = tonumber(alvo_serial:sub(3+6,3+9),16)
 			if sub_pet_ids[mobid] then 
 				C_Timer.After(0.1, function() 
