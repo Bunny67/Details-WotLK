@@ -1087,7 +1087,7 @@ do
 							local bossIndex = Details:GetBossIndex (mapID, currentCombat.is_boss.id, nil, currentCombat.is_boss.name)
 							if (bossIndex) then
 								--> get the EJID
-								local EJID = Details.EncounterInformation [mapID] and _detalhes.EncounterInformation [mapID].encounter_ids [bossIndex]
+								local EJID = _detalhes.EncounterInformation [mapID] and _detalhes.EncounterInformation [mapID].encounter_ids and _detalhes.EncounterInformation [mapID].encounter_ids [bossIndex]
 								if (EJID) then
 									--> if the EJID exists build the hash
 									local bossDificulty = currentCombat.is_boss.diff
