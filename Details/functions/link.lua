@@ -127,8 +127,6 @@
 				["multi"] = {
 				},
 			},
-			["encounterid"] = "1721",
-			["use_encounterid"] = true,
 			["difficulty"] = {
 				["multi"] = {
 				},
@@ -239,7 +237,6 @@
 				["multi"] = {
 				},
 			},
-			["use_encounterid"] = true,
 			["difficulty"] = {
 				["multi"] = {
 				},
@@ -1272,9 +1269,9 @@
 		},
 	}
 
-	function _detalhes:CreateWeakAura (aura_type, spellid, use_spellid, spellname, name, icon_texture, target, stacksize, sound, chat, icon_text, icon_glow, encounter_id, group, icon_size, other_values, in_combat, cooldown_animation)
+	function _detalhes:CreateWeakAura (aura_type, spellid, use_spellid, spellname, name, icon_texture, target, stacksize, sound, chat, icon_text, icon_glow, group, icon_size, other_values, in_combat, cooldown_animation)
 
-		--print (aura_type, spellid, use_spellid, spellname, name, icon_texture, target, stacksize, sound, chat, icon_text, icon_glow, encounter_id, group, icon_size, other_values)
+		--print (aura_type, spellid, use_spellid, spellname, name, icon_texture, target, stacksize, sound, chat, icon_text, icon_glow, group, icon_size, other_values)
 
 		--> check if wa is installed
 		if (not WeakAuras or not WeakAurasSaved) then
@@ -1622,12 +1619,6 @@
 		new_aura.id = name
 		new_aura.displayIcon = icon_texture
 
-		--> load by encounter id
-		if (encounter_id) then
-			new_aura.load.use_encounterid = true
-			new_aura.load.encounterid = tostring (encounter_id)
-		end
-
 		--> using sound
 		if (sound and type (sound) == "table") then
 			local add = _detalhes.table.copy ({}, sound_prototype_custom)
@@ -1744,12 +1735,12 @@
 		DetailsPluginContainerWindow.EmbedPlugin (DetailsAuraPanel, DetailsAuraPanel, true)
 
 		function DetailsAuraPanel.RefreshWindow()
-			_detalhes:OpenAuraPanel() --spellid, spellname, spellicon, encounterid, triggertype, auratype, other_values
+			_detalhes:OpenAuraPanel() --spellid, spellname, spellicon, triggertype, auratype, other_values
 		end
 	end
 
 	local empty_other_values = {}
-	function _detalhes:OpenAuraPanel (spellid, spellname, spellicon, encounterid, triggertype, auratype, other_values)
+	function _detalhes:OpenAuraPanel (spellid, spellname, spellicon, triggertype, auratype, other_values)
 
 		if (not spellname and spellid) then
 			spellname = GetSpellInfo(spellid)
@@ -2236,13 +2227,6 @@
 --			useglow.glow_test:SetPoint ("BOTTOMRIGHT", useglow.widget, "BOTTOMRIGHT", 20, -2)
 --			useglow.glow_test:Hide()
 
-			--encounter id
-			local encounterid_label = fw:CreateLabel (f, "Encounter ID: ", nil, nil, "GameFontNormal")
-			local encounterid = fw:CreateTextEntry (f, _detalhes.empty_function, 150, 20, "EncounterIdText", "$parentEncounterIdText")
-			encounterid:SetTemplate (slider_template)
-			encounterid:SetPoint ("LEFT", encounterid_label, "RIGHT", 2, 0)
-			encounterid.tooltip = "Only load this aura for this raid encounter."
-
 			--size
 			local icon_size_slider = fw:NewSlider (f, f, "$parentIconSizeSlider", "IconSizeSlider", 150, 20, 8, 256, 1, 64)
 			local icon_size_label = fw:CreateLabel (f, "Size: ", nil, nil, "GameFontNormal")
@@ -2368,13 +2352,8 @@
 				local icon_text = f.AuraText.text
 				local icon_glow = f.UseGlow.value
 
-				local eid = DetailsAuraPanel.EncounterIdText.text
-				if (eid == "") then
-					eid = nil
-				end
-
 				if (addon == "WA") then
-					_detalhes:CreateWeakAura (aura_type_value, spellid, use_spellId, spellname, name, icon, target, stacksize, sound, chat, icon_text, icon_glow, eid, folder, iconsize, f.other_values, incombat, iscooldown)
+					_detalhes:CreateWeakAura (aura_type_value, spellid, use_spellId, spellname, name, icon, target, stacksize, sound, chat, icon_text, icon_glow, folder, iconsize, f.other_values, incombat, iscooldown)
 				else
 					_detalhes:Msg ("No Aura Addon selected. Addons currently supported: WeakAuras 2.")
 				end
@@ -2406,7 +2385,6 @@
 			--triggers
 			aura_on_label:SetPoint ("TOPLEFT", f, "TOPLEFT", x_start, ((y_start*4) + (65)) * -1)
 			stack_label:SetPoint ("TOPLEFT", f, "TOPLEFT", x_start, ((y_start*17) + (65)) * -1)
-			encounterid_label:SetPoint ("TOPLEFT", f, "TOPLEFT", x_start, ((y_start*18) + (65)) * -1)
 
 			--about the spell
 			spellname_label:SetPoint ("TOPLEFT", f, "TOPLEFT", x_start, ((y_start*20) + (45)) * -1)
@@ -2520,22 +2498,17 @@
 		end
 
 		DetailsAuraPanel.spellid = spellid
-		DetailsAuraPanel.encounterid = encounterid
-		DetailsAuraPanel.EncounterIdText.text = encounterid or ""
 
 		DetailsAuraPanel.other_values = other_values
 
 		DetailsAuraPanel.WeakaurasFolderDropdown:Refresh()
-		if (encounterid) then
-			DetailsAuraPanel.WeakaurasFolderDropdown:Select ("Details! Aura Group")
-			DetailsAuraPanel.IconSizeSlider:SetValue (128)
-		else
-			DetailsAuraPanel.WeakaurasFolderDropdown:Select (1, true)
-			DetailsAuraPanel.IconSizeSlider:SetValue (64)
-		end
+
+		DetailsAuraPanel.IconSizeSlider:SetValue (64)
 
 		if (DetailsAuraPanel.other_values.dbm_timer_id or DetailsAuraPanel.other_values.bw_timer_id) then
 			DetailsAuraPanel.WeakaurasFolderDropdown:Select ("Details! Boss Mods Group")
+		else
+			DetailsAuraPanel.WeakaurasFolderDropdown:Select (1, true)
 		end
 
 		if (DetailsAuraPanel.other_values.text_size) then
@@ -3331,19 +3304,18 @@
 				local data = all_modules [1].data [row]
 				local spellid = data[1]
 				local spellname, _, spellicon = GetSpellInfo (spellid)
-				_detalhes:OpenAuraPanel (spellid, spellname, spellicon, data[3])
+				_detalhes:OpenAuraPanel (spellid, spellname, spellicon)
 			end
 
 			local spell_encounter_open_aura_creator = function (row)
 				local data = all_modules [2].data [row]
 				local spellID = data[1]
-				local encounterID  = data [2]
 				local enemyName = data [3]
 				local encounterName = data [4]
 
 				local spellname, _, spellicon = GetSpellInfo (spellID)
 
-				_detalhes:OpenAuraPanel (spellID, spellname, spellicon, encounterID)
+				_detalhes:OpenAuraPanel (spellID, spellname, spellicon)
 			end
 
 			local EncounterSpellEvents = EncounterDetailsDB and EncounterDetailsDB.encounter_spells
@@ -3722,7 +3694,7 @@
 					end
 				end
 
-				_detalhes:OpenAuraPanel (data[2], spellname, spellicon, data.id, DETAILS_WA_TRIGGER_DBM_TIMER, DETAILS_WA_AURATYPE_TEXT, {dbm_timer_id = data[2], spellid = data[7], text = "Next " .. spellname .. " In", text_size = 72, icon = spellicon})
+				_detalhes:OpenAuraPanel (data[2], spellname, spellicon, DETAILS_WA_TRIGGER_DBM_TIMER, DETAILS_WA_AURATYPE_TEXT, {dbm_timer_id = data[2], spellid = data[7], text = "Next " .. spellname .. " In", text_size = 72, icon = spellicon})
 			end
 
 			local dbm_timers_module = {
@@ -3848,11 +3820,11 @@
 					else
 						spellname, _, spellicon = GetSpellInfo (spellid)
 					end
-					_detalhes:OpenAuraPanel (data [2], spellname, spellicon, data.id, DETAILS_WA_TRIGGER_BW_TIMER, DETAILS_WA_AURATYPE_TEXT, {bw_timer_id = data [2], text = "Next " .. spellname .. " In", text_size = 72, icon = spellicon})
+					_detalhes:OpenAuraPanel (data [2], spellname, spellicon, DETAILS_WA_TRIGGER_BW_TIMER, DETAILS_WA_AURATYPE_TEXT, {bw_timer_id = data [2], text = "Next " .. spellname .. " In", text_size = 72, icon = spellicon})
 
 				elseif (type (data [2]) == "string") then
 					--> "Xhul'horac" Imps
-					_detalhes:OpenAuraPanel (data [2], data[3], data[5], data.id, DETAILS_WA_TRIGGER_BW_TIMER, DETAILS_WA_AURATYPE_TEXT, {bw_timer_id = data [2], text = "Next " .. (data[3] or "") .. " In", text_size = 72, icon = data[5]})
+					_detalhes:OpenAuraPanel (data [2], data[3], data[5], DETAILS_WA_TRIGGER_BW_TIMER, DETAILS_WA_AURATYPE_TEXT, {bw_timer_id = data [2], text = "Next " .. (data[3] or "") .. " In", text_size = 72, icon = data[5]})
 				end
 			end
 

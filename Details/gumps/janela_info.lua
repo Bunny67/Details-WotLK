@@ -2630,7 +2630,7 @@ function gump:CriaJanelaInfo()
 
 		local wa_button = function (self, mouseButton, spellID, auraType)
 			local spellName, _, spellIcon = GetSpellInfo (spellID)
-			_detalhes:OpenAuraPanel (spellID, spellName, spellIcon, nil, auraType == "BUFF" and 4 or 2, 1)
+			_detalhes:OpenAuraPanel (spellID, spellName, spellIcon, auraType == "BUFF" and 4 or 2, 1)
 		end
 
 		local scroll_createline = function (self, index)

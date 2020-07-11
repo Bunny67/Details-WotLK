@@ -1822,7 +1822,7 @@ _detalhes.EncounterDetailsTempWindow = function (EncounterDetails)
 	
 	local create_aura_func = function (self, button, spellid, encounter_id)
 		local name, _, icon = EncounterDetails.getspellinfo (spellid)
-		EncounterDetails:OpenAuraPanel (spellid, name, self and self.MyObject._icon.texture, encounter_id)
+		EncounterDetails:OpenAuraPanel (spellid, name, self and self.MyObject._icon.texture)
 	end
 	
 	local info_onenter = function (self)
@@ -2063,12 +2063,12 @@ _detalhes.EncounterDetailsTempWindow = function (EncounterDetails)
 	
 	local on_select_dbm_bar = function (_, _, value)
 		local timer_id, spellname, spellicon, encounterid, spellid = unpack (value)
-		EncounterDetails:OpenAuraPanel (timer_id, spellname, spellicon, encounterid, DETAILS_WA_TRIGGER_DBM_TIMER, DETAILS_WA_AURATYPE_TEXT, {dbm_timer_id = timer_id, spellid = spellid, text = "Next " .. spellname .. " In", text_size = 72, icon = spellicon})
+		EncounterDetails:OpenAuraPanel (timer_id, spellname, spellicon, DETAILS_WA_TRIGGER_DBM_TIMER, DETAILS_WA_AURATYPE_TEXT, {dbm_timer_id = timer_id, spellid = spellid, text = "Next " .. spellname .. " In", text_size = 72, icon = spellicon})
 	end
 	
 	local on_select_bw_bar = function (_, _, value)
 		local timer_id, spellname, spellicon, encounterid = unpack (value)
-		EncounterDetails:OpenAuraPanel (timer_id, spellname, spellicon, encounterid, DETAILS_WA_TRIGGER_BW_TIMER, DETAILS_WA_AURATYPE_TEXT, {bw_timer_id = timer_id, text = "Next " .. spellname .. " In", text_size = 72, icon = spellicon})
+		EncounterDetails:OpenAuraPanel (timer_id, spellname, spellicon, DETAILS_WA_TRIGGER_BW_TIMER, DETAILS_WA_AURATYPE_TEXT, {bw_timer_id = timer_id, text = "Next " .. spellname .. " In", text_size = 72, icon = spellicon})
 	end
 	
 	local already_added = {}
