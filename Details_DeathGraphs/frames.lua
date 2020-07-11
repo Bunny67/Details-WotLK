@@ -1086,12 +1086,12 @@ do
 							--> get the boss index within the raid
 							local bossIndex = Details:GetBossIndex (mapID, currentCombat.is_boss.id, nil, currentCombat.is_boss.name)
 							if (bossIndex) then
-								--> get the EJID
-								local EJID = _detalhes.EncounterInformation [mapID] and _detalhes.EncounterInformation [mapID].encounter_ids and _detalhes.EncounterInformation [mapID].encounter_ids [bossIndex]
-								if (EJID) then
-									--> if the EJID exists build the hash
+								--> get the encounter
+								local encounter = Details.EncounterInformation[mapID] and _detalhes.EncounterInformation[mapID].encounter_ids2[bossIndex]
+								if (encounter) then
+									--> if the encounter exists build the hash
 									local bossDificulty = currentCombat.is_boss.diff
-									local hash = tostring (EJID) .. tostring (bossDificulty)
+									local hash = tostring (encounter) .. tostring (bossDificulty)
 									if (hash) then
 										boss = hash
 									end
@@ -2659,12 +2659,12 @@ do
 					--> get the boss index within the raid
 					local bossIndex = Details:GetBossIndex (mapID, currentCombat.is_boss.id, nil, currentCombat.is_boss.name)
 					if (bossIndex) then
-						--> get the EJID
-						local EJID = Details.EncounterInformation [mapID] and _detalhes.EncounterInformation [mapID].encounter_ids [bossIndex]
-						if (EJID) then
-							--> if the EJID exists build the hash
+						--> get the encounter
+						local encounter = Details.EncounterInformation[mapID] and _detalhes.EncounterInformation[mapID].encounter_ids2[bossIndex]
+						if (encounter) then
+							--> if the encounter exists build the hash
 							local bossDificulty = currentCombat.is_boss.diff
-							local hash = tostring (EJID) .. tostring (bossDificulty)
+							local hash = tostring (encounter) .. tostring (bossDificulty)
 							if (hash) then
 								boss_dropdown:Select (hash)
 							end
