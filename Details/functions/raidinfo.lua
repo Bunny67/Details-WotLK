@@ -4,7 +4,6 @@ local LBZ = LibStub("LibBabble-Zone-3.0"):GetLookupTable()
 -- BK
 
 do --> data for Zul'Aman
-	local INSTANCE_EJID = 77
 	local INSTANCE_MAPID = 867
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "ZulAman"
@@ -53,7 +52,6 @@ do --> data for Zul'Aman
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Zul'Aman"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -77,7 +75,6 @@ do --> data for Zul'Aman
 end
 
 do --> data for Serpentshrine Cavern
-	local INSTANCE_EJID = 748
 	local INSTANCE_MAPID = 863
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "SerpentshrineCavern"
@@ -126,7 +123,6 @@ do --> data for Serpentshrine Cavern
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Serpentshrine Cavern"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -150,7 +146,6 @@ do --> data for Serpentshrine Cavern
 end
 
 do --> data for Magtheridon's Lair
-	local INSTANCE_EJID = 747
 	local INSTANCE_MAPID = 866
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "MagtheridonLair"
@@ -184,7 +179,6 @@ do --> data for Magtheridon's Lair
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Magtheridon's Lair"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -203,7 +197,6 @@ do --> data for Magtheridon's Lair
 end
 
 do --> data for Gruul's Lair
-	local INSTANCE_EJID = 746
 	local INSTANCE_MAPID = 865
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "GruulLair"
@@ -240,7 +233,6 @@ do --> data for Gruul's Lair
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Gruul's Lair"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -260,7 +252,6 @@ do --> data for Gruul's Lair
 end
 
 do --> data for Karazhan
-	local INSTANCE_EJID = 745
 	local INSTANCE_MAPID = 868
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "Karazhan"
@@ -322,7 +313,6 @@ do --> data for Karazhan
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Karazhan"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -359,7 +349,6 @@ do --> data for Karazhan
 end
 
 do --> data for The Eye
-	local INSTANCE_EJID = 749
 	local INSTANCE_MAPID = 862
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "TheEye"
@@ -403,7 +392,6 @@ do --> data for The Eye
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["The Eye"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -427,7 +415,6 @@ end
 -- WotLK
 
 do --> data for Onyxia's Lair
-	local INSTANCE_EJID = 760
 	local INSTANCE_MAPID = 14
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "OnyxiaLair"
@@ -461,7 +448,6 @@ do --> data for Onyxia's Lair
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Onyxia's Lair"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -480,7 +466,6 @@ do --> data for Onyxia's Lair
 end
 
 do --> data for The Ruby Sanctum
-	local INSTANCE_EJID = 761
 	local INSTANCE_MAPID = 610
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "TheRubySanctum"
@@ -514,7 +499,6 @@ do --> data for The Ruby Sanctum
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["The Ruby Sanctum"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -535,7 +519,6 @@ end
 do --> data for Icecrown Citadel
 	local faction = UnitFactionGroup("player")
 
-	local INSTANCE_EJID = 758
 	local INSTANCE_MAPID = 605
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "IcecrownCitadel"..faction
@@ -607,7 +590,6 @@ do --> data for Icecrown Citadel
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Icecrown Citadel"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -638,7 +620,6 @@ do --> data for Icecrown Citadel
 end
 
 do --> data for Trial of the Crusader
-	local INSTANCE_EJID = 757
 	local INSTANCE_MAPID = 544
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "TrialoftheCrusader"
@@ -689,7 +670,6 @@ do --> data for Trial of the Crusader
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Trial of the Crusader"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -743,7 +723,6 @@ do --> data for Trial of the Crusader
 end
 
 do --> data for Naxxramas
-	local INSTANCE_EJID = 754
 	local INSTANCE_MAPID = 536
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "Naxxramas"
@@ -819,7 +798,6 @@ do --> data for Naxxramas
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Naxxramas"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -856,7 +834,6 @@ do --> data for Naxxramas
 end
 
 do --> data for Vault of Archavon
-	local INSTANCE_EJID = 753
 	local INSTANCE_MAPID = 533
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "VaultofArchavon"
@@ -899,7 +876,6 @@ do --> data for Vault of Archavon
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Vault of Archavon"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -921,7 +897,6 @@ do --> data for Vault of Archavon
 end
 
 do --> data for The Obsidian Sanctum
-	local INSTANCE_EJID = 755
 	local INSTANCE_MAPID = 532
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "TheObsidianSanctum"
@@ -955,7 +930,6 @@ do --> data for The Obsidian Sanctum
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["The Obsidian Sanctum"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -974,7 +948,6 @@ do --> data for The Obsidian Sanctum
 end
 
 do --> data for The Eye of Eternity
-	local INSTANCE_EJID = 756
 	local INSTANCE_MAPID = 528
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "TheEyeofEternity"
@@ -1008,7 +981,6 @@ do --> data for The Eye of Eternity
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["The Eye of Eternity"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
@@ -1027,7 +999,6 @@ do --> data for The Eye of Eternity
 end
 
 do --> data for Ulduar
-	local INSTANCE_EJID = 1000
 	local INSTANCE_MAPID = 530
 	local HDIMAGESPATH = "Details\\images\\raid"
 	local HDFILEPREFIX = "Ulduar"
@@ -1100,7 +1071,6 @@ do --> data for Ulduar
 
 	_detalhes:InstallEncounter({
 		id = INSTANCE_MAPID, --map id
-		ej_id = INSTANCE_EJID, --encounter journal id
 		name = LBZ["Ulduar"],
 		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
 		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,

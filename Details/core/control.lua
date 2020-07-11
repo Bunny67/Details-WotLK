@@ -103,7 +103,6 @@ local boss_found_not_registered = function(t, ZoneName, ZoneMapID, DifficultyID)
 		mapid = ZoneMapID,
 		diff = DifficultyID,
 		diff_string = select(4, GetInstanceInfo()),
-		ej_instance_id = t[5],
 		id = t[2],
 		bossimage = t[4],
 	}
@@ -113,18 +112,9 @@ end
 
 local boss_found = function(index, name, zone, mapid, diff, encounterid)
 	local mapID = GetCurrentMapAreaID()
-	local ejid
-	if mapID then
-		ejid = DetailsFramework.EncounterJournal.EJ_GetInstanceForMap(mapID)
-	end
-
 	if not mapID then
 		--print("Details! exeption handled: zone has no map")
 		return
-	end
-
-	if not ejid or ejid == 0 then
-		ejid = _detalhes:GetInstanceEJID()
 	end
 
 	local boss_table = {
@@ -135,7 +125,6 @@ local boss_found = function(index, name, zone, mapid, diff, encounterid)
 		mapid = mapid,
 		diff = diff,
 		diff_string = select(4, GetInstanceInfo()),
-		ej_instance_id = ejid,
 		id = encounterid,
 	}
 
@@ -605,11 +594,6 @@ function _detalhes:SairDoCombate(bossKilled, from_encounter_end)
 			local DifficultyID = _GetInstanceDifficulty()
 			local ZoneMapID = _GetCurrentMapAreaID()
 
-			local ejid = DetailsFramework.EncounterJournal.EJ_GetInstanceForMap(ZoneMapID)
-			if not ejid or ejid == 0 then
-				ejid = _detalhes:GetInstanceEJID()
-			end
-
 			local _, boss_index = _detalhes:GetBossEncounterDetailsFromEncounterId(ZoneMapID, encounterID)
 
 			_detalhes.tabela_vigente.is_boss = {
@@ -620,7 +604,6 @@ function _detalhes:SairDoCombate(bossKilled, from_encounter_end)
 				mapid = ZoneMapID,
 				diff = DifficultyID,
 				diff_string = DifficultyName,
-				ej_instance_id = ejid or 0,
 				id = encounterID,
 			}
 		end

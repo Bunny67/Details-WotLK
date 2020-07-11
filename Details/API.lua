@@ -178,7 +178,7 @@ combatName = combat:GetCombatName ( try_to_find )
 
 bossInfo = combat:GetBossInfo()
 @COMMENTreturns the table containing informations about the boss encounter.
-table members: name, zone, mapid, diff, diff_string, id, ej_instance_id, killed, index@
+table members: name, zone, mapid, diff, diff_string, id, killed, index@
 
 battlegroudInfo = combat:GetPvPInfo()
 @COMMENTreturns the table containing infos about the battlegroud:

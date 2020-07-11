@@ -1084,7 +1084,7 @@ do
 							--> get the map index
 							local mapID = currentCombat.is_boss.mapid
 							--> get the boss index within the raid
-							local bossIndex = Details:GetBossIndex (mapID, currentCombat.is_boss.id, nil, currentCombat.is_boss.name)
+							local bossIndex = Details:GetBossIndex (mapID, currentCombat.is_boss.id, currentCombat.is_boss.name)
 							if (bossIndex) then
 								--> get the encounter
 								local encounter = Details.EncounterInformation[mapID] and _detalhes.EncounterInformation[mapID].encounter_ids2[bossIndex]
@@ -2657,7 +2657,7 @@ do
 					--> get the map index
 					local mapID = currentCombat.is_boss.mapid
 					--> get the boss index within the raid
-					local bossIndex = Details:GetBossIndex (mapID, currentCombat.is_boss.id, nil, currentCombat.is_boss.name)
+					local bossIndex = Details:GetBossIndex (mapID, currentCombat.is_boss.id, currentCombat.is_boss.name)
 					if (bossIndex) then
 						--> get the encounter
 						local encounter = Details.EncounterInformation[mapID] and _detalhes.EncounterInformation[mapID].encounter_ids2[bossIndex]

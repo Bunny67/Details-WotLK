@@ -146,7 +146,7 @@ returns the segment name, e.g. "Trainning Dummy", if try_to_find is true, it sea
 
 bossInfo = combat:GetBossInfo()
 returns the table containing informations about the boss encounter.
-table members: name, zone, mapid, diff, diff_string, id, ej_instance_id, killed, index
+table members: name, zone, mapid, diff, diff_string, id, killed, index
 
 battlegroudInfo = combat:GetPvPInfo()
 returns the table containing infos about the battlegroud:
