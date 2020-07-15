@@ -146,7 +146,6 @@ DF.CooldownsBySpec = {
 			[10278] = 3, --Blessing of Protection
 			[48788] = 3, --Lay on Hands
 		    [6940] = 3, -- Hand of Sacrifice
-
 			[31821] = 4, --Aura Mastery
 
 			[1044] = 5, --Blessing of Freedom
@@ -162,7 +161,8 @@ DF.CooldownsBySpec = {
 			[6940] = 3, -- Hand of Sacrifice
 			[48788] = 3, --Lay on Hands
 			[64205] = 4, -- Divine Sacrifice
-
+			[642] = 2, -- Divine Shield
+			[498] = 2, -- Divine Protection
 			[1044] = 5, --Blessing of Freedom
 			[853] = 5, --Hammer of Justice
 		},
@@ -176,7 +176,8 @@ DF.CooldownsBySpec = {
 			[10278] = 3, --Blessing of Protection
 			[48788] = 3, --Lay on Hands
 			[6940] = 3, -- Hand of Sacrifice
-
+			[642] = 2, -- Divine Shield
+			[498] = 2, -- Divine Protection
 			[1044] = 5, --Blessing of Freedom
 			[853] = 5, --Hammer of Justice
 		},
