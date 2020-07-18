@@ -149,7 +149,7 @@ DF.CooldownsBySpec = {
 			[31821] = 4, --Aura Mastery
 
 			[1044] = 5, --Blessing of Freedom
-			[853] = 5, --Hammer of Justice
+			[10308] = 5, --Hammer of Justice
 		},
 
 		--protection
@@ -164,7 +164,7 @@ DF.CooldownsBySpec = {
 			[642] = 2, -- Divine Shield
 			[498] = 2, -- Divine Protection
 			[1044] = 5, --Blessing of Freedom
-			[853] = 5, --Hammer of Justice
+			[10308] = 5, --Hammer of Justice
 		},
 
 		--retribution
@@ -179,7 +179,7 @@ DF.CooldownsBySpec = {
 			[642] = 2, -- Divine Shield
 			[498] = 2, -- Divine Protection
 			[1044] = 5, --Blessing of Freedom
-			[853] = 5, --Hammer of Justice
+			[10308] = 5, --Hammer of Justice
 		},
 
 	--DEATH KNIGHT
@@ -293,6 +293,7 @@ DF.CooldownsInfo = {
 	[1044] = {cooldown = 25, duration = 8, talent = false, charges = 1, class = "PALADIN", type = 5}, --Blessing of Freedom
 	[31850] = {cooldown = 120, duration = 8, talent = 31850, charges = 1, class = "PALADIN", type = 2}, --Ardent Defender
 	[6940] = {cooldown = 120, duration = 12, talent = false, charges = 1, class = "PALADIN", type = 3}, --Blessing of Sacrifice
+	[10308] = {cooldown = 60, duration = 6, talent = false, charges = 1, class = "PALADIN", type = 5}, -- Hammer of Justice
 
 	--> warrior
 	[1719] = {cooldown = 90, duration = 10, talent = false, charges = 1, class = "WARRIOR", type = 1}, --Recklessness
