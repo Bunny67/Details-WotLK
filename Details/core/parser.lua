@@ -23,7 +23,6 @@ local _IsInGroup = IsInGroup --wow api local
 local _GetNumGroupMembers = GetNumGroupMembers --wow api local
 local _UnitGroupRolesAssigned = DetailsFramework.UnitGroupRolesAssigned
 local _GetTime = GetTime
-local _select = select
 local _UnitBuff = UnitBuff
 
 local _cstr = string.format --lua local
@@ -2027,7 +2026,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 
 			-- create absorb data (this absorb was probably caused out of combat)
 			if not found then
-				absorb = {}
+				local absorb = {}
 				absorb.timestamp = time
 				absorb.name = who_name
 				absorb.serial = who_serial
