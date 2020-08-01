@@ -2598,15 +2598,13 @@
 			local dbm_callback_phase = function (event, msg, ...)
 
 				local mod = _detalhes.encounter_table.DBM_Mod
-
+				
 				if (not mod) then
-					local id = _detalhes:GetEncounterIdFromBossIndex (_detalhes.encounter_table.mapid, _detalhes.encounter_table.id)
-					if (id) then
-						for index, tmod in ipairs (DBM.Mods) do
-							if (tmod.id == id) then
-								_detalhes.encounter_table.DBM_Mod = tmod
-								mod = tmod
-							end
+					for index, tmod in ipairs (DBM.Mods) do
+						if (tmod.inCombat) then
+							_detalhes.encounter_table.DBM_Mod = tmod
+							mod = tmod
+							break
 						end
 					end
 				end
