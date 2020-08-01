@@ -2598,7 +2598,7 @@
 			local dbm_callback_phase = function (event, msg, ...)
 
 				local mod = _detalhes.encounter_table.DBM_Mod
-				
+
 				if (not mod) then
 					for index, tmod in ipairs (DBM.Mods) do
 						if (tmod.inCombat) then
