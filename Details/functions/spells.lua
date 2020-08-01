@@ -1029,7 +1029,7 @@ do
 		[7239] = 120, -- Frost
 		[7242] = 120, -- Shadow Protection Potion
 		[7245] = 120, -- Holy
-		[6052] = 120, -- Nature Protection Potion
+		[7254] = 120, -- Nature Protection Potion
 		[53915] = 120, -- Mighty Shadow Protection Potion
 		[53914] = 120, -- Mighty Nature Protection Potion
 		[53913] = 120, -- Mighty Frost Protection Potion
