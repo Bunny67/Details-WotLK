@@ -429,7 +429,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			who_flags = reflection.who_flags
 			-- crediting the source of the reflection aura
 
-			spellid = reflection.spellid 
+			spellid = reflection.spellid
 			spellname = reflection.spellname
 			spelltype = reflection.spelltype
 			--> data of the aura that caused the reflection
@@ -486,7 +486,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			or (alvo_flags and _bit_band(alvo_flags, AFFILIATION_GROUP) ~= 0 and _UnitAffectingCombat(alvo_name))
 			or (not _detalhes.in_group and who_flags and _bit_band(who_flags, AFFILIATION_GROUP) ~= 0)) then
 			_detalhes:EntrarEmCombate(who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags)
-			
+
 			--> n�o entra em combate se for DOT
 			if _detalhes.encounter_table.id and _detalhes.encounter_table["start"] and _detalhes.announce_firsthit.enabled then
 				local link
@@ -1107,8 +1107,8 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			local reflection = reflection_auras[alvo_serial]
 			if damage then
 				--> damage ocurred first, so we have its data
-				amount = reflection_damage[who_serial][spellid].amount
-				
+				local amount = reflection_damage[who_serial][spellid].amount
+
 				alvo_serial = reflection.who_serial
 				alvo_name = reflection.who_name
 				alvo_flags = reflection.who_flags
@@ -1117,7 +1117,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 				spelltype = reflection.spelltype
 				--> crediting the source of the aura that caused the reflection
 				--> also saying that the damage came from the aura that reflected the spell
-				
+
 				reflection_damage[who_serial][spellid] = nil
 				if next(reflection_damage[who_serial]) == nil then
 					--> this is so bad at clearing, there should be a better way of handling this
@@ -1163,8 +1163,8 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		end
 
 		-- only treat SPELL_CREATE like SPELL_SUMMON for snake trap.
-		if (token == "SPELL_CREATE" and not spell_create_is_summon[spellid]) then 
-			return 
+		if (token == "SPELL_CREATE" and not spell_create_is_summon[spellid]) then
+			return
 		end
 
 		if(not who_name) then
@@ -1185,8 +1185,8 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		--> pet summoned another pet, but the pet was summoned first
 		if _bit_band(who_flags, OBJECT_TYPE_PETS) ~= 0 then
 			local mobid = tonumber(alvo_serial:sub(3+6,3+9),16)
-			if sub_pet_ids[mobid] then 
-				C_Timer.After(0.1, function() 
+			if sub_pet_ids[mobid] then
+				C_Timer.After(0.1, function()
 					parser:summon(token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, spellid, spellName)
 				end)
 				return
@@ -1312,8 +1312,8 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 
 	end
 
-	-- https://github.com/TrinityCore/TrinityCore/blob/d81a9e5bc3b3e13b47332b3e7817bd0a0b228cbc/src/server/game/Spells/Auras/SpellAuraEffects.h#L313-L367 
-	-- absorb order from trinitycore 
+	-- https://github.com/TrinityCore/TrinityCore/blob/d81a9e5bc3b3e13b47332b3e7817bd0a0b228cbc/src/server/game/Spells/Auras/SpellAuraEffects.h#L313-L367
+	-- absorb order from trinitycore
 	local function AbsorbAuraOrderPred(a, b)
 
 		local spellA = a.spellid
@@ -1325,18 +1325,18 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		end
 
 		-- twin val'kyr light essence
-		if spellA == 65686 then 
+		if spellA == 65686 then
 			return true
 		end
-		if spellB == 65686 then 
+		if spellB == 65686 then
 			return false
 		end
 
 		-- twin val'kyr dark essence
-		if spellA == 65684 then 
+		if spellA == 65684 then
 			return true
 		end
-		if spellB == 65684 then 
+		if spellB == 65684 then
 			return false
 		end
 
@@ -1344,66 +1344,66 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		if frost_ward_absorb_list[spellA] then
 			return true
 		end
-		if frost_ward_absorb_list[spellB] then 
-			return false 
+		if frost_ward_absorb_list[spellB] then
+			return false
 		end
 
 		-- fire ward
 		if fire_ward_absorb_list[spellA] then
 			return true
 		end
-		if fire_ward_absorb_list[spellB] then 
+		if fire_ward_absorb_list[spellB] then
 			return false
 		end
 
 		--shadow ward
-		if shadow_ward_absorb_list[spellA] then 
+		if shadow_ward_absorb_list[spellA] then
 			return true
 		end
 		if shadow_ward_absorb_list[spellB] then
-			return false 
+			return false
 		end
 
 		-- sacred shield
-		if spellA == 58597 then 
+		if spellA == 58597 then
 			return true
 		end
-		if spellB == 58597 then 
-			return false 
+		if spellB == 58597 then
+			return false
 		end
 
-		--fell blossom 
-		if spellA == 28527 then 
-			return true 
+		--fell blossom
+		if spellA == 28527 then
+			return true
 		end
-		if spellB == 28527 then 
+		if spellB == 28527 then
 			return false
 		end
 
 		-- Divine Aegis
-		if spellA == 47753 then 
-			return true 
-		end 
-		if spellB == 47753 then 
-			return false 
+		if spellA == 47753 then
+			return true
+		end
+		if spellB == 47753 then
+			return false
 		end
 
 		-- Ice Barrier
 		if ice_barrier_absorb_list[spellA] then
 			return true
 		end
-		if ice_barrier_absorb_list[spellB] then 
-			return false 
+		if ice_barrier_absorb_list[spellB] then
+			return false
 		end
-		
+
 		-- Warlock Sacrifice
-		if sacrifice_absorb_list[spellA] then 
+		if sacrifice_absorb_list[spellA] then
 			return true
 		end
-		if sacrifice_absorb_list[spellB] then 
-			return false 
+		if sacrifice_absorb_list[spellB] then
+			return false
 		end
-		
+
 		-- sort oldest buffs to the top
 		return a.timestamp < b.timestamp
 	end
@@ -1412,18 +1412,18 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		local found_absorb
 
 		escudo[alvo_name] = escudo[alvo_name] or {}
-		for _, absorb in ipairs(escudo[alvo_name]) do 
+		for _, absorb in ipairs(escudo[alvo_name]) do
 			-- check if we have twin val'kyr light essence and we took fire damage
-			if absorb.spellid == 65686 then 
+			if absorb.spellid == 65686 then
 				if _bit_band(spelltype, 0x4) == spelltype then
 					-- honestly I don't think this should be tracked as healing by details, the healing meters would be flooded with useless info.
-					--found_absorb = absorb 
+					--found_absorb = absorb
 					--break
-					return 
+					return
 				end
 			-- check if we have twin val'kyr dark essence and we took shadow damage
 			elseif absorb.spellid == 65684 then
-				if _bit_band(spelltype, 0x20) == spelltype then  
+				if _bit_band(spelltype, 0x20) == spelltype then
 					-- see above
 					--found_absorb = absorb
 					--break
@@ -1432,32 +1432,32 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			-- check if its a frost ward
 			elseif frost_ward_absorb_list[absorb.spellid] then
 				-- only pick if its frost damage
-				if (_bit_band(spelltype, 0x10) == spelltype) then 
+				if (_bit_band(spelltype, 0x10) == spelltype) then
 					found_absorb = absorb
 					break -- exit since wards are priority
 				end
 			-- check if its a fire ward
 			elseif fire_ward_absorb_list[absorb.spellid] then
 				-- only pick if its fire damage
-				if (_bit_band(spelltype, 0x4) == spelltype) then 
+				if (_bit_band(spelltype, 0x4) == spelltype) then
 					found_absorb = absorb
 					break -- exit since wards are priority
 				end
 			-- check if its a shadow ward
 			elseif shadow_ward_absorb_list[absorb.spellid] then
 				-- only pick if its shadow damage
-				if (_bit_band(spelltype, 0x20) == spelltype) then 
+				if (_bit_band(spelltype, 0x20) == spelltype) then
 					found_absorb = absorb
 					break -- exit since wards are priority
 				end
 			else
-				found_absorb = absorb 
+				found_absorb = absorb
 				break -- exit since this should be the oldest absorb added and not a ward
 			end
 		end
 		if found_absorb then
 			return parser:heal(token, time, found_absorb.serial, found_absorb.name, found_absorb.flags, alvo_serial, alvo_name, alvo_flags, found_absorb.spellid, found_absorb.spellname, nil, absorbed, 0, 0, nil, true)
-		end -- should we do something if it expected to absorb but couldn't? 
+		end -- should we do something if it expected to absorb but couldn't?
 	end
 
 	function parser:heal(token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, spellid, spellname, spelltype, amount, overhealing, absorbed, critical, is_shield)
@@ -1779,7 +1779,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		if(absorb_spell_list[spellid]) then
 			escudo[alvo_name] = escudo[alvo_name] or {}
 
-			-- create absorb data 
+			-- create absorb data
 			local absorb = {}
 			absorb.timestamp = time
 			absorb.name = who_name
@@ -1787,7 +1787,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 			absorb.flags = who_flags
 			absorb.spellid = spellid
 			absorb.spellname = spellname
-			-- insert absorb at the end of the absorb stack 
+			-- insert absorb at the end of the absorb stack
 			_table_insert(escudo[alvo_name], absorb)
 			_table_sort(escudo[alvo_name], AbsorbAuraOrderPred)
 		end
@@ -2015,11 +2015,11 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 
 			-- refresh absorb if it's already applied by this player
 			local found = false
-			for _, applied_absorb in ipairs(escudo[alvo_name]) do 
+			for _, applied_absorb in ipairs(escudo[alvo_name]) do
 
 				if applied_absorb.spellid == spellid and applied_absorb.serial == who_serial then
 					applied_absorb.timestamp = time
-					found = true 
+					found = true
 					break
 				end
 			end
@@ -2033,7 +2033,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 				absorb.flags = who_flags
 				absorb.spellid = spellid
 				absorb.spellname = spellname
-				-- insert absorb at the end of the absorb stack 
+				-- insert absorb at the end of the absorb stack
 				_table_insert(escudo[alvo_name], absorb)
 				_table_sort(escudo[alvo_name], AbsorbAuraOrderPred)
 			end
@@ -2053,7 +2053,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 					end
 				end
 
-			
+
 			------------------------------------------------------------------------------------------------
 			--> recording buffs
 
@@ -2142,7 +2142,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 	function parser:unbuff_shield(alvo_name, who_serial, spellid)
 		escudo[alvo_name] = escudo[alvo_name] or {}
 		local index
-		for i, applied_absorb in ipairs(escudo[alvo_name]) do 
+		for i, applied_absorb in ipairs(escudo[alvo_name]) do
 			if applied_absorb.serial == who_serial and applied_absorb.spellid == spellid then
 				index = i
 				break
@@ -2164,8 +2164,8 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		-- this needs to be outside buff / debuffs for boss mechanics which absorb damage.
 		if absorb_spell_list[spellid] then
 			escudo[alvo_name] = escudo[alvo_name] or {}
-			-- locate buff 
-			for _, applied_absorb in ipairs(escudo[alvo_name]) do 
+			-- locate buff
+			for _, applied_absorb in ipairs(escudo[alvo_name]) do
 				if applied_absorb.serial == who_serial and applied_absorb.spellid == spellid then
 					-- schedule removal of shield buff since absorbed damage is sent after unbuff is called.
 					C_Timer.After(0.1, function() parser:unbuff_shield(alvo_name, who_serial, spellid) end)
