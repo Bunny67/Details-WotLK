@@ -26,7 +26,7 @@ local _GetTime = GetTime
 local _UnitBuff = UnitBuff
 
 local _cstr = string.format --lua local
-local _sub = string.sub --lua local
+local _str_sub = string.sub --lua local
 local _table_insert = table.insert --lua local
 local _select = select --lua local
 local _bit_band = bit.band --lua local
@@ -141,6 +141,7 @@ local OBJECT_TYPE_ENEMY		= 0x00000040
 local OBJECT_TYPE_PLAYER	= 0x00000400
 local OBJECT_TYPE_PETS		= 0x00003000
 local OBJECT_TYPE_GUARDIAN	= 0x00002000
+local OBJECT_CONTROL_NPC	= 0x00000200
 local AFFILIATION_GROUP		= 0x00000007
 local REACTION_FRIENDLY		= 0x00000010
 local REACTION_MINE			= 0x00000001
@@ -367,6 +368,34 @@ end
 [15]=1
 --]=]
 
+local function check_boss(npcID)
+	if not _is_in_instance and (_current_encounter_id or not npcID) then
+		return
+	end
+
+	local mapid = _GetCurrentMapAreaID()
+	local boss_ids = _detalhes:GetBossIds(mapid)
+	if not boss_ids then
+		local mapname = _GetRealZoneText()
+		for id, data in _pairs(_detalhes.EncounterInformation) do
+			if data.name == mapname then
+				boss_ids = _detalhes:GetBossIds(id)
+				mapid = id
+				break
+			end
+		end
+		if not boss_ids then
+			return
+		end
+	end
+
+	local bossindex = boss_ids[npcID]
+	if bossindex then
+		local _, _, _, _, maxPlayers = GetInstanceInfo()
+		local difficulty = GetInstanceDifficulty()
+		_detalhes.parser_functions:ENCOUNTER_START(_detalhes:GetBossEncounter(mapid, bossindex), _detalhes:GetBossName(mapid, bossindex), difficulty, maxPlayers)
+	end
+end
 
 function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, spellid, spellname, spelltype, amount, overkill, school, resisted, blocked, absorbed, critical, glacing, crushing)
 ------------------------------------------------------------------------------------------------
@@ -451,26 +480,32 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 	end
 
 	--> npcId check for ignored npcs
-	--target
-	local npcId = npcid_cache[alvo_serial]
-	if not npcId then
-		npcId = _tonumber(_sub(alvo_serial, 8, 12), 16) or 0
-		npcid_cache[alvo_serial] = npcId
+	if _bit_band(alvo_serial, OBJECT_CONTROL_NPC) ~= 0 then
+		local npcId = npcid_cache[alvo_serial]
+		if not npcId then
+			npcId = _tonumber(_str_sub(alvo_serial, 8, 12), 16) or 0
+			npcid_cache[alvo_serial] = npcId
+		end
+
+		check_boss(npcId)
+
+		if ignored_npcids[npcId] then
+			return
+		end
 	end
 
-	if ignored_npcids[npcId] then
-		return
-	end
+	if _bit_band(who_serial, OBJECT_CONTROL_NPC) ~= 0 then
+		local npcId = npcid_cache[who_serial]
+		if not npcId then
+			npcId = _tonumber(_str_sub(who_serial, 8, 12), 16) or 0
+			npcid_cache[who_serial] = npcId
+		end
 
-	--source
-	npcId = npcid_cache[who_serial]
-	if not npcId then
-		npcId = _tonumber(_sub(who_serial, 8, 12), 16) or 0
-		npcid_cache[who_serial] = npcId
-	end
+		check_boss(npcId)
 
-	if ignored_npcids[npcId] then
-		return
+		if ignored_npcids[npcId] then
+			return
+		end
 	end
 
 	if absorbed and absorbed > 0 and alvo_name and escudo[alvo_name] and who_name then
@@ -480,34 +515,15 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 ------------------------------------------------------------------------------------------------
 --> check if need start an combat
 	if not _in_combat then
-		if token ~= "SPELL_PERIODIC_DAMAGE" and
-			((who_flags and _bit_band(who_flags, AFFILIATION_GROUP) ~= 0 and _UnitAffectingCombat(who_name))
-			or (alvo_flags and _bit_band(alvo_flags, AFFILIATION_GROUP) ~= 0 and _UnitAffectingCombat(alvo_name))
-			or (not _detalhes.in_group and who_flags and _bit_band(who_flags, AFFILIATION_GROUP) ~= 0)) then
+		if not (_bit_band(who_flags, REACTION_FRIENDLY) ~= 0 and _bit_band(alvo_flags, REACTION_FRIENDLY) ~= 0) and (_bit_band(who_flags, AFFILIATION_GROUP) ~= 0 or _bit_band(who_flags, AFFILIATION_GROUP) ~= 0) then
 			_detalhes:EntrarEmCombate(who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags)
-
-			--> n�o entra em combate se for DOT
 			if _detalhes.encounter_table.id and _detalhes.encounter_table["start"] and _detalhes.announce_firsthit.enabled then
-				local link
-				if spellid <= 10 then
-					link = _GetSpellInfo(spellid)
-				else
-					link = GetSpellLink(spellid)
-				end
-
+				local link = spellid <= 10 and _GetSpellInfo(spellid) or GetSpellLink(spellid)
 				if _detalhes.WhoAggroTimer then
 					_detalhes.WhoAggroTimer:Cancel()
 				end
 				_detalhes.WhoAggroTimer = C_Timer.NewTicker(0.5, who_aggro, 1)
-				_detalhes.WhoAggroTimer.HitBy = "|cFFFFFF00First Hit|r: " ..(link or "") .. " from " ..(who_name or "Unknown")
-			end
-		else
-			--> entrar em combate se for dot e for do jogador e o ultimo combate ter sido a mais de 10 segundos atr�s
-			if token == "SPELL_PERIODIC_DAMAGE" and who_name == _detalhes.playername then
-				--> faz o calculo dos 10 segundos
-				if(_detalhes.last_combat_time + 10) < _tempo then
-					_detalhes:EntrarEmCombate(who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags)
-				end
+				_detalhes.WhoAggroTimer.HitBy = "|cFFFFFF00First Hit|r: "..(link or "").." from "..(who_name or UNKNOWN)
 			end
 		end
 	end
@@ -3845,7 +3861,7 @@ function _detalhes.parser_functions:PLAYER_ENTERING_WORLD(...)
 end
 
 -- ~encounter
-function _detalhes.parser_functions:ENCOUNTER_START(...)
+function _detalhes.parser_functions:ENCOUNTER_START(encounterID, encounterName, difficultyID, raidSize)
 	if _detalhes.debug then
 		_detalhes:Msg("(debug) |cFFFFFF00ENCOUNTER_START|r event triggered.")
 	end
@@ -3857,11 +3873,9 @@ function _detalhes.parser_functions:ENCOUNTER_START(...)
 
 	-- TEMP
 	--> leave the current combat when the encounter start, if is doing a mythic plus dungeons, check if the options alows to create a dedicated segment for the boss fight
-	if (_in_combat and not _detalhes.tabela_vigente.is_boss) then
-		_detalhes:SairDoCombate()
-	end
-
-	local encounterID, encounterName, difficultyID, raidSize = ...
+--	if (_in_combat and not _detalhes.tabela_vigente.is_boss) then
+--		_detalhes:SairDoCombate()
+--	end
 
 	if not _detalhes.WhoAggroTimer and _detalhes.announce_firsthit.enabled then
 		_detalhes.WhoAggroTimer = C_Timer.NewTicker(0.5, who_aggro, 1)
@@ -3879,9 +3893,8 @@ function _detalhes.parser_functions:ENCOUNTER_START(...)
 	local dbm_mod, dbm_time = _detalhes.encounter_table.DBM_Mod, _detalhes.encounter_table.DBM_ModTime
 	_table_wipe(_detalhes.encounter_table)
 
-	local encounterID, encounterName, difficultyID, raidSize = ...
 	local zoneName = _GetInstanceInfo()
-	local zoneMapID = _GetCurrentMapAreaID()
+	local zoneMapID = _detalhes.zone_id
 
 	--print(encounterID, encounterName, difficultyID, raidSize)
 	_detalhes.encounter_table.phase = 1
@@ -3889,12 +3902,11 @@ function _detalhes.parser_functions:ENCOUNTER_START(...)
 	--store the encounter time inside the encounter table for the encounter plugin
 	_detalhes.encounter_table["start"] = _GetTime()
 	_detalhes.encounter_table["end"] = nil
---		local encounterID = Details.encounter_table.id
 	_detalhes.encounter_table.id = encounterID
 	_detalhes.encounter_table.name = encounterName
 	_detalhes.encounter_table.diff = difficultyID
 	_detalhes.encounter_table.size = raidSize
-	_detalhes.encounter_table.zone = zoneName
+	_detalhes.encounter_table.zone = _detalhes.zone_name
 	_detalhes.encounter_table.mapid = zoneMapID
 
 	if dbm_mod and dbm_time == time() then --pode ser time() � usado no start pra saber se foi no mesmo segundo.
@@ -3924,7 +3936,7 @@ function _detalhes.parser_functions:ENCOUNTER_START(...)
 		_detalhes.encounter_table.index = boss_index
 	end
 
-	_detalhes:SendEvent("COMBAT_ENCOUNTER_START", nil, ...)
+	_detalhes:SendEvent("COMBAT_ENCOUNTER_START", nil, encounterID, encounterName, difficultyID, raidSize)
 end
 
 function _detalhes.parser_functions:ENCOUNTER_END(...)
