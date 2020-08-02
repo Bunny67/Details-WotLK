@@ -415,7 +415,6 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		--> no actor name, use spell name instead
 		who_name = "[*] "..spellname
 		who_flags = 0xa48
-		who_serial = ""
 	end
 
 	--> check if the spell isn't in the backlist
