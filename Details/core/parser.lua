@@ -368,7 +368,7 @@ end
 --]=]
 
 local function check_boss(npcID)
-	if not _is_in_instance and (_current_encounter_id or not npcID) then
+	if not _is_in_instance or (_current_encounter_id or not npcID) then
 		return
 	end
 
