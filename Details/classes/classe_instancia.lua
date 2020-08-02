@@ -3352,17 +3352,10 @@ function _detalhes:envia_relatorio (linhas, custom)
 	local channel = to_who:find ("CHANNEL")
 	local is_btag = to_who:find ("REALID")
 
-	local delay = 200
-
 	if (channel) then
-
 		channel = to_who:gsub ((".*|"), "")
 
 		for i = 1, #linhas do
-			if (channel == "Trade") then
-				channel = "Trade - City"
-			end
-
 			_SendChatMessage(linhas[i], "CHANNEL", nil, GetChannelName(channel))
 		end
 

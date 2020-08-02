@@ -2970,25 +2970,6 @@
 			f:SetMovable (true)
 			f.Title:SetTextColor (1, .8, .2)
 
-			local have_plugins_enabled
-
-			for id, instanceTable in pairs (_detalhes.EncounterInformation) do
-				if (_detalhes.InstancesToStoreData [id]) then
-					have_plugins_enabled = true
-					break
-				end
-			end
-
-			if (not have_plugins_enabled and false) then
-				local nopluginLabel = f:CreateFontString (nil, "overlay", "GameFontNormal")
-				local nopluginIcon = f:CreateTexture (nil, "overlay")
-				nopluginIcon:SetPoint ("BOTTOMLEFT", f, "BOTTOMLEFT", 10, 10)
-				nopluginIcon:SetSize (16, 16)
-				nopluginIcon:SetTexture ([[Interface\AddOns\Details\textures\DialogFrame\UI-Dialog-Icon-AlertNew]])
-				nopluginLabel:SetPoint ("LEFT", nopluginIcon, "RIGHT", 5, 0)
-				nopluginLabel:SetText (L["STRING_FORGE_ENABLEPLUGINS"])
-			end
-
 			if (not _detalhes:GetTutorialCVar ("FORGE_TUTORIAL")) then
 				local tutorialFrame = CreateFrame ("Frame", "$parentTutorialFrame", f)
 				tutorialFrame:SetPoint ("CENTER", f, "CENTER")

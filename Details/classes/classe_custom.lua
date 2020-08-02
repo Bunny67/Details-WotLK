@@ -55,8 +55,7 @@ atributo_custom._TargetActorsProcessed = {}
 
 local ToKFunctions = _detalhes.ToKFunctions
 local SelectedToKFunction = ToKFunctions[1]
-local FormatTooltipNumber = ToKFunctions[8]
-local TooltipMaximizedMethod = 1
+--local FormatTooltipNumber = ToKFunctions[8]
 local UsingCustomRightText = false
 local UsingCustomLeftText = false
 
@@ -344,7 +343,7 @@ function atributo_custom:BuildActorList(func, source, target, spellid, combat, c
 			end
 		end
 	elseif source == "[raid]" then
-		if _detalhes.in_combat and instance.segmento == 0 and not export then
+		if _detalhes.in_combat and instance.segmento == 0 then
 			if container_index == 1 then
 				combat_container = _detalhes.cache_damage_group
 			elseif container_index == 2 then
@@ -941,17 +940,17 @@ function atributo_custom:ToolTip(instance, bar_number, row_object, keydown)
 	--> get the actor
 	local actor = self.my_actor
 
-	local r, g, b
-	if actor.id then
-		local school_color = _detalhes.school_colors[actor.classe]
-		if not school_color then
-			school_color = _detalhes.school_colors["unknown"]
-		end
-
-		r, g, b = _unpack(school_color)
-	else
-		r, g, b = actor:GetClassColor()
-	end
+--	local r, g, b
+--	if actor.id then
+--		local school_color = _detalhes.school_colors[actor.classe]
+--		if not school_color then
+--			school_color = _detalhes.school_colors["unknown"]
+--		end
+--
+--		r, g, b = _unpack(school_color)
+--	else
+--		r, g, b = actor:GetClassColor()
+--	end
 
 	if actor.id then
 		_detalhes:AddTooltipSpellHeaderText(select(1, _GetSpellInfo(actor.id)), "yellow", 1, select(3, _GetSpellInfo(actor.id)), 0.90625, 0.109375, 0.15625, 0.875)
@@ -1138,8 +1137,7 @@ end
 
 function atributo_custom:UpdateSelectedToKFunction()
 	SelectedToKFunction = ToKFunctions[_detalhes.ps_abbreviation]
-	FormatTooltipNumber = ToKFunctions[_detalhes.tooltip.abbreviation]
-	TooltipMaximizedMethod = _detalhes.tooltip.maximize_method
+--	FormatTooltipNumber = ToKFunctions[_detalhes.tooltip.abbreviation]
 	atributo_custom:UpdateDamageDoneBracket()
 	atributo_custom:UpdateHealingDoneBracket()
 end
@@ -1381,7 +1379,7 @@ function _detalhes:AddDefaultCustomDisplays()
 		script_version = 15,
 	}
 --	/run _detalhes:AddDefaultCustomDisplays()
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_HEALTHSTONE_DEFAULT"] and(custom.script_version and custom.script_version >= Healthstone.script_version) ) then
 			have = true
@@ -1447,7 +1445,7 @@ function _detalhes:AddDefaultCustomDisplays()
 		]],
 	}
 
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_ACTIVITY_DPS"] and(custom.script_version and custom.script_version >= DamageActivityTime.script_version) ) then
 			have = true
@@ -1511,7 +1509,7 @@ function _detalhes:AddDefaultCustomDisplays()
 		]],
 	}
 
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_ACTIVITY_HPS"] and(custom.script_version and custom.script_version >= HealActivityTime.script_version) ) then
 			have = true
@@ -1612,7 +1610,7 @@ function _detalhes:AddDefaultCustomDisplays()
 
 --		/run _detalhes:AddDefaultCustomDisplays()
 
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_CC_DONE"] and(custom.script_version and custom.script_version >= CC_Done.script_version) ) then
 			have = true
@@ -1746,7 +1744,7 @@ function _detalhes:AddDefaultCustomDisplays()
 
 --		/run _detalhes:AddDefaultCustomDisplays()
 
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_CC_RECEIVED"] and(custom.script_version and custom.script_version >= CC_Received.script_version) ) then
 			have = true
@@ -2029,7 +2027,7 @@ function _detalhes:AddDefaultCustomDisplays()
 		]],
 	}
 
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_MYSPELLS"] and(custom.script_version and custom.script_version >= MySpells.script_version) ) then
 			have = true
@@ -2121,7 +2119,7 @@ function _detalhes:AddDefaultCustomDisplays()
 
 --		/run _detalhes:AddDefaultCustomDisplays()
 
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_DAMAGEONSKULL"] and(custom.script_version and custom.script_version >= DamageOnSkullTarget.script_version) ) then
 			have = true
@@ -2251,7 +2249,7 @@ function _detalhes:AddDefaultCustomDisplays()
 
 --		/run _detalhes:AddDefaultCustomDisplays()
 
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_DAMAGEONANYMARKEDTARGET"] and(custom.script_version and custom.script_version >= DamageOnAnyTarget.script_version) ) then
 			have = true
@@ -2409,7 +2407,7 @@ function _detalhes:AddDefaultCustomDisplays()
 		]],
 	}
 
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_DYNAMICOVERAL"] and(custom.script_version and custom.script_version >= DynamicOverallDamage.script_version) ) then
 			have = true
@@ -2510,7 +2508,7 @@ function _detalhes:AddDefaultCustomDisplays()
 		]],
 	}
 
-	local have = false
+	have = false
 	for _, custom in ipairs(self.custom) do
 		if(custom.name == Loc["STRING_CUSTOM_DAMAGEONSHIELDS"] and(custom.script_version and custom.script_version >= DamageOnShields.script_version) ) then
 			have = true

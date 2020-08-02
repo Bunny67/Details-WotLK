@@ -1,6 +1,5 @@
 
 --lua locals
-local _cstr = string.format
 local _math_floor = math.floor
 local _setmetatable = setmetatable
 local _pairs = pairs

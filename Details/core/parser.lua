@@ -454,7 +454,6 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 	--target
 	local npcId = npcid_cache[alvo_serial]
 	if not npcId then
-		npcId = _tonumber(_select(6, _strsplit("-", alvo_serial)) or 0)
 		npcId = _tonumber(_sub(alvo_serial, 8, 12), 16) or 0
 		npcid_cache[alvo_serial] = npcId
 	end
@@ -1008,6 +1007,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		local este_jogador = damage_cache[who_serial]
 		if(not este_jogador) then
 			--este_jogador, meu_dono, who_name = _current_damage_container:PegarCombatente(nil, who_name)
+			local meu_dono
 			este_jogador, meu_dono, who_name = _current_damage_container:PegarCombatente(who_serial, who_name, who_flags, true)
 			if(not este_jogador) then
 				return --> just return if actor doen't exist yet

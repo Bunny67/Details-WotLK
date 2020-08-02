@@ -9,7 +9,6 @@ end
 
 --> put the object on the global scope
 _G.Lib3DModelList = Lib3DModelList
-local Lib3DModelList = Lib3DModelList
 
 Lib3DModelList.embeds = Lib3DModelList.embeds or {}
 local embed_functions = {
