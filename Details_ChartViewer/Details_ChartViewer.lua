@@ -1000,7 +1000,7 @@ local create_add_tab_panel = function()
 		local name_label = fw:CreateLabel (panel, "Name:") -- , size, color, font, member, name, layer)
 
 		--texentry
-		local name_textentry = fw:CreateTextEntry (panel, func, 150, 20) -- , member, name)
+		local name_textentry = fw:CreateTextEntry (panel, nil, 150, 20) -- , member, name)
 		name_textentry:SetPoint ("left", name_label, "right", 2, 0)
 		ChartViewer.name_textentry = name_textentry
 		name_textentry:SetTemplate (ChartViewer:GetFramework():GetTemplate ("dropdown", "OPTIONS_DROPDOWN_TEMPLATE"))
@@ -1083,8 +1083,6 @@ local create_add_tab_panel = function()
 				return t
 
 			end
-
-			return data_options
 		end
 
 		local data_dropdown = fw:CreateDropDown (panel, data_options_func, 1, 150, 20)

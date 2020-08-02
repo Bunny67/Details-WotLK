@@ -581,7 +581,7 @@ local function cria_drop_down (este_gump)
 
 --> both check buttons
 
-	function cria_check_buttons (este_gump)
+	local function cria_check_buttons (este_gump)
 		local checkbox = _CreateFrame ("CheckButton", "Details_Report_CB_1", este_gump, "ChatConfigCheckButtonTemplate")
 		checkbox:SetPoint ("TOPLEFT", este_gump.wisp_who, "BOTTOMLEFT", -25, -4)
 		_G [checkbox:GetName().."Text"]:SetText (Loc ["STRING_REPORTFRAME_CURRENT"])

@@ -1205,113 +1205,6 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 	--> HEALING 	serach key: ~heal											|
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-
-	local gotit = {
-		[140468]=true, --Flameglow Mage
-		[122470]=true, --touch of karma Monk
-		[114556]=true, --purgatory DK
-		[152280]=true, --defile DK
-		[20711]=true, --spirit of redeption priest
-		[155783]=true, --Primal Tenacity Druid
-		[135597]=true, --Tooth and Claw Druid
-		[152261]=true, --Holy Shield Paladin
-		[158708]=true, --Earthen Barrier boss?
-	}
-
-	local ignored_shields = {
-		[142862] = true, -- Ancient Barrier(Malkorok)
-		[114556] = true, -- Purgatory(DK)
-		[115069] = true, -- Stance of the Sturdy Ox(Monk)
-		[20711] = true, -- Spirit of Redemption(Priest)
-		[184553]  = true, --Soul Capacitor
-	}
-
-	local ignored_overheal = {
-		[47753] = true, -- Divine Aegis
-		[86273] = true, -- Illuminated Healing
-		[114908] = true, --Spirit Shell
-		[152118] = true, --Clarity of Will
-	}
-
-	function parser:heal_denied(token, time, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, spellidAbsorb, spellnameAbsorb, spellschoolAbsorb, serialHealer, nameHealer, flagsHealer, flags2Healer, spellidHeal, spellnameHeal, typeHeal, amountDenied)
-
-	--	print(who_name, alvo_name, nameHealer, spellidHeal, spellnameHeal, typeHeal, amountDenied)
-		if(not _in_combat) then
-			return
-		end
-
-		--> check invalid serial against pets
-		if(who_serial == "") then
-			if(who_flags and _bit_band(who_flags, OBJECT_TYPE_PETS) ~= 0) then --> � um pet
-				return
-			end
-		end
-
-		--> no name, use spellname
-		if(not who_name) then
-			if(not spellname) then
-				--print("ERROR:", token, who_serial, who_name, who_flags, alvo_serial, alvo_name, alvo_flags, spellidAbsorb, spellnameAbsorb, spellschoolAbsorb, serialHealer, nameHealer, flagsHealer, flags2Healer, spellidHeal, spellnameHeal, typeHeal, amountDenied)
-			end
-			--who_name = "[*] "..spellname
-			who_name = "[*] " ..(spellname or "--unknown spell--")
-		end
-
-		--> no target, just ignore
-		if(not alvo_name) then
-			return
-		end
-
-		--> if no spellid
-		if(not spellidAbsorb) then
-			spellidAbsorb = 1
-			spellnameAbsorb = "unknown"
-			spellschoolAbsorb = 1
-		end
-
-		if(is_using_spellId_override) then
-			spellidAbsorb = override_spellId[spellidAbsorb] or spellidAbsorb
-			spellidHeal = override_spellId[spellidHeal] or spellidHeal
-		end
-
-	------------------------------------------------------------------------------------------------
-	--> get actors
-
-		local este_jogador, meu_dono = healing_cache[who_serial]
-		if(not este_jogador) then --> pode ser um desconhecido ou um pet
-			este_jogador, meu_dono, who_name = _current_heal_container:PegarCombatente(who_serial, who_name, who_flags, true)
-			if(not meu_dono and who_flags and who_serial ~= "") then --> se n�o for um pet, adicionar no cache
-				healing_cache[who_serial] = este_jogador
-			end
-		end
-
-		local jogador_alvo, alvo_dono = healing_cache[alvo_serial]
-		if(not jogador_alvo) then
-			jogador_alvo, alvo_dono, alvo_name = _current_heal_container:PegarCombatente(alvo_serial, alvo_name, alvo_flags, true)
-			if(not alvo_dono and alvo_flags and also_serial ~= "") then
-				healing_cache[alvo_serial] = jogador_alvo
-			end
-		end
-
-		este_jogador.last_event = _tempo
-
-		------------------------------------------------
-
-		este_jogador.totaldenied = este_jogador.totaldenied + amountDenied
-
-		--> actor spells table
-		local spell = este_jogador.spells._ActorTable[spellidAbsorb]
-		if(not spell) then
-			spell = este_jogador.spells:PegaHabilidade(spellidAbsorb, true, token)
-			if(_current_combat.is_boss and who_flags and _bit_band(who_flags, OBJECT_TYPE_ENEMY) ~= 0) then
-				_detalhes.spell_school_cache[spellnameAbsorb] = spellschoolAbsorb or 1
-			end
-		end
-
-		--return spell:Add(alvo_serial, alvo_name, alvo_flags, cura_efetiva, who_name, absorbed, critical, overhealing)
-		return spell_heal_func(spell, alvo_serial, alvo_name, alvo_flags, amountDenied, spellidHeal, token, nameHealer, overhealing)
-
-	end
-
 	-- https://github.com/TrinityCore/TrinityCore/blob/d81a9e5bc3b3e13b47332b3e7817bd0a0b228cbc/src/server/game/Spells/Auras/SpellAuraEffects.h#L313-L367
 	-- absorb order from trinitycore
 	local function AbsorbAuraOrderPred(a, b)
@@ -1663,7 +1556,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 				spell.is_shield = true
 			end
 			if spellname and (_current_combat.is_boss and who_flags and _bit_band(who_flags, OBJECT_TYPE_ENEMY) ~= 0) then
-				_detalhes.spell_school_cache[spellname] = spelltype or school
+				_detalhes.spell_school_cache[spellname] = spelltype
 			end
 		end
 
@@ -3634,7 +3527,6 @@ function _detalhes:CaptureEnable(capture_type)
 	elseif capture_type == "heal" then
 		token_list["SPELL_HEAL"] = parser.heal
 		token_list["SPELL_PERIODIC_HEAL"] = parser.heal
-		token_list["SPELL_HEAL_ABSORBED"] = parser.heal_denied
 		_recording_healing = true
 	elseif capture_type == "aura" then
 		token_list["SPELL_AURA_APPLIED"] = parser.buff
@@ -3674,7 +3566,6 @@ parser.original_functions = {
 	["missed"] = parser.missed,
 	["environment"] = parser.environment,
 	["heal"] = parser.heal,
-	["heal_denied"] = parser.heal_denied,
 	["buff"] = parser.buff,
 	["unbuff"] = parser.unbuff,
 	["buff_refresh"] = parser.buff_refresh,
@@ -3720,7 +3611,6 @@ local all_parser_tokens = {
 
 	["SPELL_HEAL"] = "heal",
 	["SPELL_PERIODIC_HEAL"] = "heal",
-	["SPELL_HEAL_ABSORBED"] = "heal_denied",
 
 	["SPELL_AURA_APPLIED"] = "buff",
 	["SPELL_AURA_REMOVED"] = "unbuff",
@@ -4020,11 +3910,9 @@ function _detalhes.parser_functions:ENCOUNTER_START(...)
 			if type(encounter_start_table.delay) == "function" then
 				local delay = encounter_start_table.delay()
 				if delay then
-					--_detalhes.encounter_table["start"] = time() + delay
 					_detalhes.encounter_table["start"] = _GetTime() + delay
 				end
 			else
-				--_detalhes.encounter_table["start"] = time() + encounter_start_table.delay
 				_detalhes.encounter_table["start"] = _GetTime() + encounter_start_table.delay
 			end
 		end

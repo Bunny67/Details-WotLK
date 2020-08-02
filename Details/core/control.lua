@@ -266,28 +266,6 @@ function _detalhes:FindBoss(noJournalSearch)
 		end
 	end
 
-	noJournalSearch = true --> disabling the scan on encounter journal
-
-	if not noJournalSearch then
-		local in_instance = IsInInstance() --> garrison returns party as instance type.
-		if (InstanceType == "party" or InstanceType == "raid") and in_instance then
-			local boss_list = _detalhes:GetCurrentDungeonBossListFromEJ()
-			if boss_list then
-				local ActorsContainer = _detalhes.tabela_vigente[class_type_dano]._ActorTable
-				if ActorsContainer then
-					for index, Actor in _ipairs(ActorsContainer) do
-						if not Actor.grupo then
-							if boss_list[Actor.nome] then
-								Actor.boss = true
-								return boss_found_not_registered(boss_list[Actor.nome], ZoneName, ZoneMapID, DifficultyID)
-							end
-						end
-					end
-				end
-			end
-		end
-	end
-
 	return false
 end
 
