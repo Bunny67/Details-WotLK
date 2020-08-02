@@ -316,6 +316,7 @@ function _detalhes:EntrarEmCombate(...)
 	_table_wipe(_detalhes.pets_no_owner)
 	_detalhes.container_pets:BuscarPets()
 
+	_table_wipe(_detalhes.cache_dead_npc)
 	_table_wipe(_detalhes.cache_damage_group)
 	_table_wipe(_detalhes.cache_healing_group)
 	_detalhes:UpdateParserGears()

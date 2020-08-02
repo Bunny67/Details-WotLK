@@ -189,12 +189,10 @@ _detalhes.OverridedSpellIds = override_spellId
 local ignored_npcids = {}
 
 --> spells with special treatment
-local special_damage_spells = {
-}
+local special_damage_spells = {}
 
 --> damage spells to ignore
-local damage_spells_to_ignore = {
-}
+local damage_spells_to_ignore = {}
 
 --> expose the ignore spells table to external scripts
 _detalhes.SpellsToIgnore = damage_spells_to_ignore
@@ -231,14 +229,9 @@ local _hook_deaths_container = _detalhes.hooks["HOOK_DEATH"]
 local _hook_battleress_container = _detalhes.hooks["HOOK_BATTLERESS"]
 local _hook_interrupt_container = _detalhes.hooks["HOOK_INTERRUPT"]
 
---> encoutner rules
-local ignored_npc_ids = {
-	["1234567890"] = true,
-}
-
 local sub_pet_ids = {
-		[15352] = true, -- earth elemental
-		[15438] = true, -- fire elemental
+	[15352] = true, -- earth elemental
+	[15438] = true, -- fire elemental
 }
 
 local spell_create_is_summon = {
@@ -372,7 +365,7 @@ local function check_boss(npcID)
 		return
 	end
 
-	local mapID = _GetCurrentMapAreaID()
+	local mapID = _detalhes.zone_id
 	local bossIDs = _detalhes:GetBossIds(mapID)
 	if not bossIDs then
 		for id, data in _pairs(_detalhes.EncounterInformation) do
@@ -3175,26 +3168,9 @@ local energy_types = {
 	------------------------------------------------------------------------------------------------
 	--> build dead
 		if _bit_band(alvo_flags, OBJECT_CONTROL_NPC) ~= 0 then
-			local encounterID = npcid_cache[alvo_serial]
-			if encounterID and _detalhes.encounter_table and _detalhes.encounter_table.id == encounterID then
-				local mapID = _detalhes.zone_id
-				local bossIDs = _detalhes:GetBossIds(mapID)
-				if not bossIDs then
-					for id, data in _pairs(_detalhes.EncounterInformation) do
-						if data.name == _detalhes.zone_name then
-							bossIDs = _detalhes:GetBossIds(id)
-							mapID = id
-							break
-						end
-					end
-				end
-
-				local bossIndex = bossIDs and bossIDs[encounterID]
-				if bossIndex then
-					local _, _, _, _, maxPlayers = GetInstanceInfo()
-					local difficulty = GetInstanceDifficulty()
-					_detalhes.parser_functions:ENCOUNTER_END(encounterID, _detalhes:GetBossName(mapID, bossIndex), difficulty, maxPlayers)
-				end
+			local npcID = npcid_cache[alvo_serial]
+			if npcID then
+				_table_insert(_detalhes.cache_dead_npc, npcID)
 			end
 		end
 
@@ -3892,7 +3868,6 @@ function _detalhes.parser_functions:ENCOUNTER_START(encounterID, encounterName, 
 	local dbm_mod, dbm_time = _detalhes.encounter_table.DBM_Mod, _detalhes.encounter_table.DBM_ModTime
 	_table_wipe(_detalhes.encounter_table)
 
-	local zoneName = _GetInstanceInfo()
 	local zoneMapID = _detalhes.zone_id
 
 	--print(encounterID, encounterName, difficultyID, raidSize)
@@ -4180,6 +4155,30 @@ function _detalhes.parser_functions:PLAYER_REGEN_ENABLED(...)
 		if _current_encounter_id and IsInInstance() then
 			print("has a encounter ID")
 			print("player is dead:", UnitHealth("player") < 1)
+		end
+	end
+
+	for _, npcID in _ipairs(_detalhes.cache_dead_npc) do
+		if _detalhes.encounter_table and _detalhes.encounter_table.id == npcID then
+			local mapID = _detalhes.zone_id
+			local bossIDs = _detalhes:GetBossIds(mapID)
+			if not bossIDs then
+				for id, data in _pairs(_detalhes.EncounterInformation) do
+					if data.name == _detalhes.zone_name then
+						bossIDs = _detalhes:GetBossIds(id)
+						mapID = id
+						break
+					end
+				end
+			end
+
+			local bossIndex = bossIDs and bossIDs[npcID]
+			if bossIndex then
+				local _, _, _, _, maxPlayers = GetInstanceInfo()
+				local difficulty = GetInstanceDifficulty()
+				_detalhes.parser_functions:ENCOUNTER_END(npcID, _detalhes:GetBossName(mapID, bossIndex), difficulty, maxPlayers)
+				break
+			end
 		end
 	end
 

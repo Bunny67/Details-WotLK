@@ -218,6 +218,8 @@ do
 			_detalhes.ReportOptions = {}
 		--> armazena os buffs registrados - store buffs ids and functions
 			_detalhes.Buffs = {} --> initialize buff table
+		-->  cache dead npc
+			_detalhes.cache_dead_npc = {}
 		-->  cache de grupo
 			_detalhes.cache_damage_group = {}
 			_detalhes.cache_healing_group = {}
