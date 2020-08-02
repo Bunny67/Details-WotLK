@@ -415,6 +415,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		--> no actor name, use spell name instead
 		who_name = "[*] "..spellname
 		who_flags = 0xa48
+		who_serial = ""
 	end
 
 	--> check if the spell isn't in the backlist
@@ -479,7 +480,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 	end
 
 	--> npcId check for ignored npcs
-	if _bit_band(alvo_serial, OBJECT_CONTROL_NPC) ~= 0 then
+	if _bit_band(alvo_flags, OBJECT_CONTROL_NPC) ~= 0 then
 		local npcId = npcid_cache[alvo_serial]
 		if not npcId then
 			npcId = _tonumber(_str_sub(alvo_serial, 8, 12), 16) or 0
@@ -493,7 +494,7 @@ function parser:spell_dmg(token, time, who_serial, who_name, who_flags, alvo_ser
 		end
 	end
 
-	if _bit_band(who_serial, OBJECT_CONTROL_NPC) ~= 0 then
+	if _bit_band(who_flags, OBJECT_CONTROL_NPC) ~= 0 then
 		local npcId = npcid_cache[who_serial]
 		if not npcId then
 			npcId = _tonumber(_str_sub(who_serial, 8, 12), 16) or 0
@@ -3186,6 +3187,7 @@ local energy_types = {
 						boss_ids = _detalhes:GetBossIds(id)
 						mapid = id
 						break
+		if _bit_band(alvo_flags, OBJECT_CONTROL_NPC) ~= 0 then
 					end
 				end
 			end
@@ -3195,6 +3197,7 @@ local energy_types = {
 				local _, _, _, _, maxPlayers = GetInstanceInfo()
 				local difficulty = GetInstanceDifficulty()
 				_detalhes.parser_functions:ENCOUNTER_END(encounterID, _detalhes:GetBossName(mapid, bossindex), difficulty, maxPlayers)
+				end
 			end
 		end
 
