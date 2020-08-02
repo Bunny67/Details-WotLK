@@ -1,5 +1,5 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("Details_TimeLine", "enUS", true) 
-if not L then return end 
+local L = LibStub("AceLocale-3.0"):NewLocale("Details_TimeLine", "enUS", true)
+if not L then return end
 
 L["STRING_DATAINVALID"] = "Failed to load this segment: data is corrupt."
 L["STRING_ELAPSED"] = "Time Elapsed"

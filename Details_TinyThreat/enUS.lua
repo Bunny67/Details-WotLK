@@ -1,8 +1,8 @@
-local Loc = LibStub("AceLocale-3.0"):NewLocale("Details_Threat", "enUS", true) 
+local Loc = LibStub("AceLocale-3.0"):NewLocale("Details_Threat", "enUS", true)
 
 if (not Loc) then
-	return 
-end 
+	return
+end
 
 Loc ["STRING_PLUGIN_NAME"] = "Tiny Threat"
 

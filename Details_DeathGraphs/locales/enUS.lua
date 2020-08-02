@@ -1,5 +1,5 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("Details_DeathGraphs", "enUS", true) 
-if not L then return end 
+local L = LibStub("AceLocale-3.0"):NewLocale("Details_DeathGraphs", "enUS", true)
+if not L then return end
 
 L["STRING_BRESS"] = "Battle Ress"
 L["STRING_DEATH_DESC"] = "Show panel containing player deaths."
@@ -49,7 +49,7 @@ L["STRING_TOOLTIP"] = "Show death graphics"
 L["STRING_10NORMAL"] = "10 Normal"
 L["STRING_10NORMAL_DESC"] = "Record deaths when you are playing on 10 normal difficulty."
 L["STRING_25NORMAL"] = "25 Normal"
-L["STRING_25NORMAL_DESC"] = "Record deaths when you are playing on 25 normal difficulty." 
+L["STRING_25NORMAL_DESC"] = "Record deaths when you are playing on 25 normal difficulty."
 L["STRING_10HEROIC"] = "10 Heroic"
 L["STRING_10HEROIC_DESC"] = "Record deaths when you are playing on 10 heroic difficulty."
 L["STRING_25HEROIC"] = "25 Heroic"

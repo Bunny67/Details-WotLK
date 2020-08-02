@@ -1,24 +1,24 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("Details_ChartViewer", "ptBR") 
-if not L then return end 
+local L = LibStub("AceLocale-3.0"):NewLocale("Details_ChartViewer", "ptBR")
+if not L then return end
 
 --[[Translation missing --]]
---[[ L["STRING_ADDEDOKAY"] = ""--]] 
+--[[ L["STRING_ADDEDOKAY"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_CONFIRM"] = ""--]] 
+--[[ L["STRING_CONFIRM"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_NEWTAB"] = ""--]] 
+--[[ L["STRING_NEWTAB"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_OPTIONS"] = ""--]] 
+--[[ L["STRING_OPTIONS"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_OPTIONS_SHOWICON"] = ""--]] 
+--[[ L["STRING_OPTIONS_SHOWICON"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_OPTIONS_WINDOWSCALE"] = ""--]] 
+--[[ L["STRING_OPTIONS_WINDOWSCALE"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_PLUGIN_DESC"] = ""--]] 
+--[[ L["STRING_PLUGIN_DESC"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_PLUGIN_NAME"] = ""--]] 
+--[[ L["STRING_PLUGIN_NAME"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_TOOLTIP"] = ""--]] 
+--[[ L["STRING_TOOLTIP"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_TOOSHORTNAME"] = ""--]] 
+--[[ L["STRING_TOOSHORTNAME"] = ""--]]
 

@@ -200,6 +200,7 @@ function atributo_custom:RefreshWindow(instance, combat, force, export)
 			_detalhes:EndRefresh(instance, 0, combat, combat[1])
 		end
 
+		local okey
 		okey, total, top, amount = _pcall(func, combat, instance_container, instance)
 		if not okey then
 			_detalhes:Msg("|cFFFF9900error on custom display function|r:", total)

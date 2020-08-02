@@ -1,5 +1,5 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("Details_TimeLine", "ruRU") 
-if not L then return end 
+local L = LibStub("AceLocale-3.0"):NewLocale("Details_TimeLine", "ruRU")
+if not L then return end
 
 L["STRING_DATAINVALID"] = "Не удалось загрузить этот сегмент: данные повреждены."
 L["STRING_ELAPSED"] = "Затраченное время"
