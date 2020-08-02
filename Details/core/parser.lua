@@ -17,7 +17,6 @@ local _UnitGUID = UnitGUID --wow api local
 local _GetUnitName = GetUnitName --wow api local
 local _GetInstanceInfo = GetInstanceInfo --wow api local
 local _GetCurrentMapAreaID = GetCurrentMapAreaID --wow api local
-local _GetRealZoneText = GetRealZoneText --wow api local
 local _IsInRaid = IsInRaid --wow api local
 local _IsInGroup = IsInGroup --wow api local
 local _GetNumGroupMembers = GetNumGroupMembers --wow api local
@@ -373,27 +372,26 @@ local function check_boss(npcID)
 		return
 	end
 
-	local mapid = _GetCurrentMapAreaID()
-	local boss_ids = _detalhes:GetBossIds(mapid)
-	if not boss_ids then
-		local mapname = _GetRealZoneText()
+	local mapID = _GetCurrentMapAreaID()
+	local bossIDs = _detalhes:GetBossIds(mapID)
+	if not bossIDs then
 		for id, data in _pairs(_detalhes.EncounterInformation) do
-			if data.name == mapname then
-				boss_ids = _detalhes:GetBossIds(id)
-				mapid = id
+			if data.name == _detalhes.zone_name then
+				bossIDs = _detalhes:GetBossIds(id)
+				mapID = id
 				break
 			end
 		end
-		if not boss_ids then
+		if not bossIDs then
 			return
 		end
 	end
 
-	local bossindex = boss_ids[npcID]
-	if bossindex then
+	local bossIndex = bossIDs[npcID]
+	if bossIndex then
 		local _, _, _, _, maxPlayers = GetInstanceInfo()
 		local difficulty = GetInstanceDifficulty()
-		_detalhes.parser_functions:ENCOUNTER_START(_detalhes:GetBossEncounter(mapid, bossindex), _detalhes:GetBossName(mapid, bossindex), difficulty, maxPlayers)
+		_detalhes.parser_functions:ENCOUNTER_START(_detalhes:GetBossEncounter(mapID, bossIndex), _detalhes:GetBossName(mapID, bossIndex), difficulty, maxPlayers)
 	end
 end
 
@@ -3176,27 +3174,26 @@ local energy_types = {
 
 	------------------------------------------------------------------------------------------------
 	--> build dead
-		local encounterID = tonumber(alvo_serial:sub(-12, -7), 16)
-		if encounterID and _detalhes.encounter_table and _detalhes.encounter_table.id == encounterID then
-			local mapid = _GetCurrentMapAreaID()
-			local boss_ids = _detalhes:GetBossIds(mapid)
-			if not boss_ids then
-				local mapname = _GetRealZoneText()
-				for id, data in _pairs(_detalhes.EncounterInformation) do
-					if data.name == mapname then
-						boss_ids = _detalhes:GetBossIds(id)
-						mapid = id
-						break
 		if _bit_band(alvo_flags, OBJECT_CONTROL_NPC) ~= 0 then
+			local encounterID = npcid_cache[alvo_serial]
+			if encounterID and _detalhes.encounter_table and _detalhes.encounter_table.id == encounterID then
+				local mapID = _detalhes.zone_id
+				local bossIDs = _detalhes:GetBossIds(mapID)
+				if not bossIDs then
+					for id, data in _pairs(_detalhes.EncounterInformation) do
+						if data.name == _detalhes.zone_name then
+							bossIDs = _detalhes:GetBossIds(id)
+							mapID = id
+							break
+						end
 					end
 				end
-			end
 
-			local bossindex = boss_ids and boss_ids[encounterID]
-			if bossindex then
-				local _, _, _, _, maxPlayers = GetInstanceInfo()
-				local difficulty = GetInstanceDifficulty()
-				_detalhes.parser_functions:ENCOUNTER_END(encounterID, _detalhes:GetBossName(mapid, bossindex), difficulty, maxPlayers)
+				local bossIndex = bossIDs and bossIDs[encounterID]
+				if bossIndex then
+					local _, _, _, _, maxPlayers = GetInstanceInfo()
+					local difficulty = GetInstanceDifficulty()
+					_detalhes.parser_functions:ENCOUNTER_END(encounterID, _detalhes:GetBossName(mapID, bossIndex), difficulty, maxPlayers)
 				end
 			end
 		end
