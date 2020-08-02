@@ -48,7 +48,6 @@ do
 			_detalhes.parser = {}
 			_detalhes.parser_functions = {}
 			_detalhes.parser_frame = CreateFrame ("Frame")
-			_detalhes.pvp_parser_frame = CreateFrame ("Frame")
 			_detalhes.parser_frame:Hide()
 
 			_detalhes.MacroList = {
