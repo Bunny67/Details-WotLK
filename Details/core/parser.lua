@@ -5,6 +5,7 @@ local Loc = LibStub("AceLocale-3.0"):GetLocale( "Details" )
 local _tempo = time()
 local _
 local DetailsFramework = DetailsFramework
+local UnitGroupRolesAssigned = DetailsFramework.UnitGroupRolesAssigned
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --> local pointers
@@ -20,7 +21,6 @@ local _GetCurrentMapAreaID = GetCurrentMapAreaID --wow api local
 local _IsInRaid = IsInRaid --wow api local
 local _IsInGroup = IsInGroup --wow api local
 local _GetNumGroupMembers = GetNumGroupMembers --wow api local
-local _UnitGroupRolesAssigned = DetailsFramework.UnitGroupRolesAssigned
 local _GetTime = GetTime
 local _UnitBuff = UnitBuff
 
@@ -296,51 +296,47 @@ _detalhes.PrintEncounterRecord = function(self)
 	local encounterID = self.Boss
 	local diff = self.Diff
 
-	if(diff == 15 or diff == 16) then
+	local value, rank, combatTime = 0, 0, 0
 
-		local value, rank, combatTime = 0, 0, 0
+	if encounterID == lastRecordFound.id and diff == lastRecordFound.diff then
+		--> is the same encounter, no need to find the value again.
+		value, rank, combatTime = lastRecordFound.value, lastRecordFound.rank, lastRecordFound.combatTime
+	else
+		local db = _detalhes.GetStorage()
 
-		if (encounterID == lastRecordFound.id and diff == lastRecordFound.diff) then
-			--> is the same encounter, no need to find the value again.
-			value, rank, combatTime = lastRecordFound.value, lastRecordFound.rank, lastRecordFound.combatTime
+		local role = UnitGroupRolesAssigned("player")
+		local isDamage = (role == "DAMAGER" or role == "NONE") or (role == "TANK") --or true
+		local bestRank, encounterTable = _detalhes.storage:GetBestFromPlayer(diff, encounterID, isDamage and "damage" or "healing", _detalhes.playername, true)
+
+		if bestRank then
+			local playerTable, onEncounter, rankPosition = _detalhes.storage:GetPlayerGuildRank(diff, encounterID, isDamage and "damage" or "healing", _detalhes.playername, true)
+
+			value = bestRank[1] or 0
+			rank = rankPosition or 0
+			combatTime = encounterTable.elapsed
+
+			--> if found the result, cache the values so no need to search again next pull
+			lastRecordFound.value = value
+			lastRecordFound.rank = rank
+			lastRecordFound.id = encounterID
+			lastRecordFound.diff = diff
+			lastRecordFound.combatTime = combatTime
 		else
-			local db = _detalhes.GetStorage()
-
-			local role = UnitGroupRolesAssigned("player")
-			local isDamage = (role == "DAMAGER") or (role == "TANK") --or true
-			local bestRank, encounterTable = _detalhes.storage:GetBestFromPlayer(diff, encounterID, isDamage and "damage" or "healing", _detalhes.playername, true)
-
-			if bestRank then
-				local playerTable, onEncounter, rankPosition = _detalhes.storage:GetPlayerGuildRank(diff, encounterID, isDamage and "damage" or "healing", _detalhes.playername, true)
-
-				value = bestRank[1] or 0
-				rank = rankPosition or 0
-				combatTime = encounterTable.elapsed
-
-				--> if found the result, cache the values so no need to search again next pull
-				lastRecordFound.value = value
-				lastRecordFound.rank = rank
-				lastRecordFound.id = encounterID
-				lastRecordFound.diff = diff
-				lastRecordFound.combatTime = combatTime
-			else
-				--> if didn't found, no reason to search again on next pull
-				lastRecordFound.value = 0
-				lastRecordFound.rank = 0
-				lastRecordFound.combatTime = 0
-				lastRecordFound.id = encounterID
-				lastRecordFound.diff = diff
-			end
-		end
-
-		_detalhes:Msg("|cFFFFBB00Your Best Score|r:", _detalhes:ToK2((value) / combatTime) .. "[|cFFFFFF00Guild Rank: " .. rank .. "|r]") --> localize-me
-
-		if((not combatTime or combatTime == 0) and not _detalhes.SyncWarning) then
-			_detalhes:Msg("|cFFFF3300you may need sync the rank within the guild, type '|cFFFFFF00/details rank|r'|r") --> localize-me
-			_detalhes.SyncWarning = true
+			--> if didn't found, no reason to search again on next pull
+			lastRecordFound.value = 0
+			lastRecordFound.rank = 0
+			lastRecordFound.combatTime = 0
+			lastRecordFound.id = encounterID
+			lastRecordFound.diff = diff
 		end
 	end
 
+	_detalhes:Msg("|cFFFFBB00Your Best Score|r:", _detalhes:ToK2((value) / combatTime) .. "[|cFFFFFF00Guild Rank: " .. rank .. "|r]") --> localize-me
+
+	if (not combatTime or combatTime == 0) and not _detalhes.SyncWarning then
+		_detalhes:Msg("|cFFFF3300you may need sync the rank within the guild, type '|cFFFFFF00/details rank|r'|r") --> localize-me
+		_detalhes.SyncWarning = true
+	end
 end
 
 --[=[
@@ -4317,9 +4313,9 @@ function _detalhes.parser_functions:UNIT_FACTION(unit)
 end
 
 function _detalhes.parser_functions:PLAYER_ROLES_ASSIGNED(...)
-	if _detalhes.last_assigned_role ~= _UnitGroupRolesAssigned("player") then
+	if _detalhes.last_assigned_role ~= UnitGroupRolesAssigned("player") then
 		_detalhes:CheckSwitchOnLogon(true)
-		_detalhes.last_assigned_role = _UnitGroupRolesAssigned("player")
+		_detalhes.last_assigned_role = UnitGroupRolesAssigned("player")
 	end
 end
 
