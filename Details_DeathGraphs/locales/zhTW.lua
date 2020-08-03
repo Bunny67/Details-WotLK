@@ -1,5 +1,5 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("Details_DeathGraphs", "zhTW") 
-if not L then return end 
+local L = LibStub("AceLocale-3.0"):NewLocale("Details_DeathGraphs", "zhTW")
+if not L then return end
 
 L["STRING_BRESS"] = "戰鬥復活"
 L["STRING_DEATH_DESC"] = "顯示包含玩家死亡的面板。"
@@ -47,18 +47,18 @@ L["STRING_TIMELINE_DEATHS_THRESHOLD"] = "時間線死亡閥值"
 L["STRING_TIMELINE_DEATHS_THRESHOLD_DESC"] = "第一個cFFFFFF00X | r玩家的死亡登記在時間線圖表中。"
 L["STRING_TOOLTIP"] = "顯示死亡圖表"
 --[[Translation missing --]]
---[[ L["STRING_10NORMAL"] = ""--]] 
+--[[ L["STRING_10NORMAL"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_10NORMAL_DESC"] = ""--]] 
+--[[ L["STRING_10NORMAL_DESC"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_25NORMAL"] = ""--]] 
+--[[ L["STRING_25NORMAL"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_25NORMAL_DESC"] = ""--]] 
+--[[ L["STRING_25NORMAL_DESC"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_10HEROIC"] = ""--]] 
+--[[ L["STRING_10HEROIC"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_10HEROIC_DESC"] = ""--]] 
+--[[ L["STRING_10HEROIC_DESC"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_25HEROIC"] = ""--]] 
+--[[ L["STRING_25HEROIC"] = ""--]]
 --[[Translation missing --]]
---[[ L["STRING_25HEROIC_DESC"] = ""--]] 
+--[[ L["STRING_25HEROIC_DESC"] = ""--]]

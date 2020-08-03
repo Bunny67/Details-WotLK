@@ -2,7 +2,7 @@ DETAILS_STORAGE_VERSION = 6
 
 function _detalhes:CreateStorageDB()
 	DetailsDataStorage = {
-		VERSION = DETAILS_STORAGE_VERSION, 
+		VERSION = DETAILS_STORAGE_VERSION,
 		[1] = {},
 		[2] = {},
 		[3] = {},
@@ -18,7 +18,7 @@ f:RegisterEvent ("ADDON_LOADED")
 f:SetScript("OnEvent", function (self, event, addonName)
 	if addonName == "Details_DataStorage" then
 		DetailsDataStorage = DetailsDataStorage or _detalhes:CreateStorageDB()
-		
+
 		if DetailsDataStorage.VERSION < DETAILS_STORAGE_VERSION then
 			--> do revisions
 			if DetailsDataStorage.VERSION < 6 then

@@ -1,5 +1,5 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("Details_TimeLine", "koKR") 
-if not L then return end 
+local L = LibStub("AceLocale-3.0"):NewLocale("Details_TimeLine", "koKR")
+if not L then return end
 
 L["STRING_DATAINVALID"] = "이 세분화를 불러올 수 없습니다: 데이터가 올바르지 않습니다."
 L["STRING_ELAPSED"] = "경과 시간"

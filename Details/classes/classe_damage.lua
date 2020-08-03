@@ -617,7 +617,7 @@
 		GameCooltip:AddIcon ([[Interface\AddOns\Details\images\key_shift]], 1, 2, _detalhes.tooltip_key_size_width, _detalhes.tooltip_key_size_height, 0, 1, 0, 0.640625, _detalhes.tooltip_key_overlay2)
 		_detalhes:AddTooltipHeaderStatusbar (1, 1, 1, 0.5)
 
-		local top = Targets[1] and Targets[1][2]
+		local topTarget = Targets[1] and Targets[1][2]
 
 		local lineHeight = _detalhes.tooltip.line_height
 
@@ -625,7 +625,7 @@
 			GameCooltip:AddLine (_detalhes:GetOnlyName(t[1]), _detalhes:ToK (t[2]) .. " (" .. _cstr ("%.1f", t[2]/total*100) .. "%)")
 			local class, _, _, _, _, r, g, b = _detalhes:GetClass (t[1])
 
-			GameCooltip:AddStatusBar (t[2]/top*100, 1, r, g, b, 0.8, false,  byspell_tooltip_background)
+			GameCooltip:AddStatusBar (t[2]/topTarget*100, 1, r, g, b, 0.8, false,  byspell_tooltip_background)
 
 			if (class) then
 				local specID = _detalhes:GetSpec (t[1])
@@ -1087,7 +1087,7 @@
 		local esta_barra = instancia.barras [qual_barra] --> pega a refer�ncia da barra na janela
 
 		if (not esta_barra) then
-			print ("DEBUG: problema com <instancia.esta_barra> "..qual_barra.." "..lugar)
+			print ("DEBUG: problema com <instancia.esta_barra> "..qual_barra)
 			return
 		end
 
@@ -1491,7 +1491,7 @@
 		local esta_barra = instancia.barras [qual_barra]
 
 		if (not esta_barra) then
-			print ("DEBUG: problema com <instancia.esta_barra> "..qual_barra.." "..lugar)
+			print ("DEBUG: problema com <instancia.esta_barra> "..qual_barra)
 			return
 		end
 
@@ -2895,7 +2895,7 @@ function atributo_damage:ToolTip_DamageDone (instancia, numero, barra, keydown)
 		--> TOP HABILIDADES
 
 			--get variables
-			local ActorDamage = self.total_without_pet --mostrando os pets no tooltip
+--			local ActorDamage = self.total_without_pet --mostrando os pets no tooltip
 			local ActorDamage = self.total
 			local ActorDamageWithPet = self.total
 			if (ActorDamage == 0) then

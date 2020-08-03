@@ -526,9 +526,9 @@ do --> data for Icecrown Citadel
 	local EJ_DUNGEONBG = "ui-ej-dungeonbutton-icecrowncitadel"
 	local EJ_LOREBG = "ui-ej-lorebg-icecrowncitadel"
 
-	local portrait, clID, ejID = "ui-ej-boss-gunship horde", 37540, 1626
+	local portrait, clID = "ui-ej-boss-gunship horde", 37540
 	if faction == "Alliance" then
-		portrait, clID, ejID = "ui-ej-boss-gunship alliance", 37215, 1627
+		portrait, clID = "ui-ej-boss-gunship alliance", 37215
 	end
 
 	local PORTRAIT_LIST = {
@@ -627,9 +627,9 @@ do --> data for Trial of the Crusader
 	local EJ_DUNGEONBG = "ui-ej-dungeonbutton-trialofthecrusader"
 	local EJ_LOREBG = "ui-ej-lorebg-trialofthecrusader"
 
-	local portrait, clID, ejID = "ui-ej-boss-pvp event vs horde", 34467, 1620
+	local portrait, clID = "ui-ej-boss-pvp event vs horde", 34467
 	if UnitFactionGroup("player") == "Alliance" then
-		portrait, clID, ejID = "ui-ej-boss-pvp event vs alliance", 34451, 1621
+		portrait, clID = "ui-ej-boss-pvp event vs alliance", 34451
 	end
 
 	local PORTRAIT_LIST = {

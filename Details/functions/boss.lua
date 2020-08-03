@@ -10,7 +10,7 @@ do
 
 	local _GetCurrentMapAreaID = GetCurrentMapAreaID --api local
 	local _GetRealZoneText = GetRealZoneText --api local
-	
+
 	_detalhes.EncounterInformation = {}
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

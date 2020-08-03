@@ -3,13 +3,12 @@
 local major, minor = "Lib3DModelList", 1
 local Lib3DModelList, oldminor = LibStub:NewLibrary (major, minor)
 
-if (not Lib3DModelList) then 
-	return 
+if (not Lib3DModelList) then
+	return
 end
 
 --> put the object on the global scope
 _G.Lib3DModelList = Lib3DModelList
-local Lib3DModelList = Lib3DModelList
 
 Lib3DModelList.embeds = Lib3DModelList.embeds or {}
 local embed_functions = {
@@ -30,23 +29,23 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 	Lib3DModelList.callback = callback
 
 	if (not Lib3DModelList.SelectWindow) then
-	
+
 		--> create the main frame
 		Lib3DModelList.SelectWindow = CreateFrame ("frame", "Lib3DModelListSelectWindow", UIParent, "ButtonFrameTemplate")
 		local f = Lib3DModelList.SelectWindow
-		
+
 		--> set size, title and portrait
 		f.portrait:SetTexture ([[Interface\CHARACTERFRAME\TEMPORARYPORTRAIT-FEMALE-BLOODELF]])
 		f.TitleText:SetText ("Model Viewer")
 		f:SetSize (800, 350)
-		
+
 		--> drag scripts
 		f:SetMovable (true)
 		f:EnableMouse (true)
 		tinsert (UISpecialFrames, "Lib3DModelListSelectWindow")
 		Lib3DModelList.SelectWindow:SetFrameStrata ("FULLSCREEN")
 		f:SetPoint ("center", UIParent, "center")
-		
+
 		f:SetScript ("OnMouseDown", function (self, button)
 			if (button == "LeftButton" and not self.isMoving) then
 				self:StartMoving()
@@ -57,7 +56,7 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 				end
 			end
 		end)
-		
+
 		f:SetScript ("OnMouseUp", function (self, button)
 			if (button == "LeftButton" and self.isMoving) then
 				self:StopMovingOrSizing()
@@ -69,7 +68,7 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 		local model_path_label = f:CreateFontString (nil, "overlay", "GameFontHighlight")
 		model_path_label:SetPoint ("bottomleft", f, "bottomleft", 10, 9)
 		model_path_label:SetTextColor (1, .8, 0)
-		
+
 		--> model viewer frame
 		local m = CreateFrame ("playermodel", "Lib3DModelListSelectWindowModelViewer", f, "ModelWithControlsTemplate")
 		m:SetSize (500, 250)
@@ -79,7 +78,7 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 		m:EnableMouseWheel (true)
 		m.cur_model = "COLDARRALOCUS.m2"
 		f.ModelBox = m
-	
+
 		--> use button
 		local use_button = CreateFrame ("button", "Lib3DModelListUse", f, "OptionsButtonTemplate")
 		use_button:SetPoint ("bottomright", f, "bottomright", -10, 4)
@@ -90,7 +89,7 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 				print ("error:", _error)
 			end
 		end)
-	
+
 		--> build folder list
 		local folder_scroll = CreateFrame ("scrollframe", "Lib3DModelListFolderBox", f, "FauxScrollFrameTemplate")
 		folder_scroll:SetPoint ("bottomright", f, "bottomright", -36, 32)
@@ -99,17 +98,17 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 		insets = {left = 0, right = 0, top = 0, bottom = 0}})
 		folder_scroll:SetBackdropColor (.1, .1, .1, .2)
 		Lib3DModelList.folder_scroll = folder_scroll
-		
+
 		local folder_buttons = {}
 		local cur_deep = 0
-		
+
 		local button_click = function (self)
 
 			local deep = self.deep
 			local index = self.index
 			local folder = self.isFolder
 			local already_expanded = self.isExpanded
-			
+
 			if (not folder and deep < cur_deep) then
 				for i = #opened, deep, -1 do
 					opened [i] = nil
@@ -117,7 +116,7 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 				Lib3DModelList.LastListBuilt = nil
 				Lib3DModelList:RefreshFolders()
 			end
-			
+
 			if (folder) then
 				if (already_expanded) then
 					for i = #opened, deep, -1 do
@@ -140,11 +139,11 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 				--> is a model
 				local path = ""
 				local t
-				
+
 				for i = 1, #opened do
-				
+
 					local index = opened[i]
-					
+
 					if (not t) then
 						local object = Lib3DModelList.ModelList [index]
 						path = path .. object.N .. "\\"
@@ -155,22 +154,22 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 						t = t.T
 					end
 				end
-				
+
 				path = path .. self.isModel
 				model_path_label:SetText ("Path: " .. path)
-				
+
 				Lib3DModelList.current_model = path
-				
+
 				if (use_on_click) then
 					local success, _error = pcall (Lib3DModelList.callback, path)
 					if (not success) then
 						print ("error:", _error)
 					end
 				end
-				
+
 				m:SetModel (path)
 				m.cur_model = self.isModel
-				
+
 				if (Lib3DModelList.last_button_clicked) then
 					Lib3DModelList.last_button_clicked.text:SetTextColor (1, 1, 1)
 					Lib3DModelList.last_button_clicked.selected = nil
@@ -179,10 +178,10 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 				self.selected = true
 				Lib3DModelList.last_button_clicked = self
 			end
-			
+
 			cur_deep = deep
 		end
-		
+
 		local on_enter = function (self)
 			self.text:SetTextColor (1, 0.8, 0)
 		end
@@ -193,7 +192,7 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 				self.text:SetTextColor (1, 1, 1)
 			end
 		end
-		
+
 		for index = 1, 19 do
 			local b = CreateFrame ("button", "Lib3DModelListFolderBoxButton" .. index, f)
 			b:SetSize (200, 13)
@@ -201,19 +200,19 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 			b:SetScript ("OnEnter", on_enter)
 			b:SetScript ("OnLeave", on_leave)
 			tinsert (folder_buttons, b)
-			
+
 			local text = b:CreateFontString (nil, "overlay", "GameFontHighlightSmall")
 			text:SetPoint ("left", b, "left", 20, 0)
 			text:SetText ("button " .. index)
 			b.text = text
-			
+
 			local texture = b:CreateTexture (nil, "overlay")
 			texture:SetPoint ("left", b, "left", 2, 0)
 			texture:SetSize (13, 13)
 			texture:SetTexture ([[Interface\Buttons\UI-AttributeButton-Encourage-Up]])
 
 			b.texture = texture
-		
+
 			local h = (index-1)*13*-1
 			b:SetPoint ("topleft", folder_scroll, "topleft", 10, h)
 			b.point = h
@@ -221,7 +220,7 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 			--insets = {left = 0, right = 0, top = 0, bottom = 0}})
 			--b:SetBackdropColor (1, 1, 1, 1)
 		end
-		
+
 		local dig = function (list_built, folder, deep, dig)
 			for index, object in ipairs (folder.T) do
 				if (type (object) == "table") then --is a folder
@@ -231,13 +230,13 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 					else
 						tinsert (list_built, {object, deep, false, false, index})
 					end
-					
+
 				elseif (type (object) == "string") then --is a model
 					tinsert (list_built, {object, deep, true, false, index})
 				end
 			end
 		end
-		
+
 		function Lib3DModelList:RefreshFolders()
 
 			--> create the list
@@ -254,16 +253,16 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 						tinsert (list_built, {folder, 1, false, false, index}) --is not a model and not opened
 					end
 				end
-				
+
 				Lib3DModelList.LastListBuilt = list_built
 				Lib3DModelList.last_button_clicked = nil
 			end
-			
+
 			FauxScrollFrame_Update (folder_scroll, #list_built, 19, 13)
-			
+
 			local offset = FauxScrollFrame_GetOffset (folder_scroll)
-			
-			for i = 1, 19 do 
+
+			for i = 1, 19 do
 				local data = list_built [i + offset]
 				local button = folder_buttons [i]
 				if (data) then
@@ -272,21 +271,21 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 					local isModel = data [3]
 					local isExpanded = data [4]
 					local index = data [5]
-					
+
 					button:Show()
 					button.deep = deep
 					button.index = index
-					
+
 					local n
 					if (type (data [1]) == "table") then
 						n = data [1].N
 					else
 						n = name
 					end
-					
+
 					button.text:SetText (n)
 					button:SetPoint ("topleft", folder_scroll, "topleft", 10*deep, button.point)
-					
+
 					if (not isModel) then
 						if (isExpanded) then
 							button.texture:SetTexture ([[Interface\Buttons\UI-MinusButton-Up]])
@@ -303,7 +302,7 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 						button.isExpanded = nil
 						button.isFolder = nil
 						button.isModel = n
-						
+
 						if (m.cur_model == n) then
 							button.text:SetTextColor (.2, 1, .2)
 							Lib3DModelList.last_button_clicked = button
@@ -317,27 +316,27 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 					button:Hide()
 				end
 			end
-			
+
 		end
-		
+
 		folder_scroll:SetScript ("OnVerticalScroll", function (self, offset) FauxScrollFrame_OnVerticalScroll (self, offset, 13, Lib3DModelList.RefreshFolders) end)
-		
+
 	end
 
 	if (current) then
 		table.wipe (opened)
-		
+
 		local path_parts = {strsplit ("\\", current)}
 		local object = Lib3DModelList.ModelList
-		
+
 		for pnumber, part in ipairs (path_parts) do
 			for i = 1, #object do
 				local cobject = object [i]
-				
+
 				if (type (cobject) == "string") then
 					break
 				end
-				
+
 				if (cobject.N == part) then
 					tinsert (opened, i)
 					object = cobject.T
@@ -345,15 +344,15 @@ function Lib3DModelList:SelectModel (callback, current, use_on_click)
 				end
 			end
 		end
-		
+
 		Lib3DModelList.SelectWindow.ModelBox:SetModel (current)
 		Lib3DModelList.SelectWindow.ModelBox.cur_model = path_parts [#path_parts]
 	end
-	
+
 	Lib3DModelList:RefreshFolders()
-	
+
 	Lib3DModelList.SelectWindow:Show()
-	
+
 end
 
 --> list of all models

@@ -5124,7 +5124,7 @@ function _detalhes.janela_info:monta_relatorio (botao)
 
 			--> diferentes tipos de amostragem na caixa da direita
 		     --dano                       --damage done                 --dps                                 --heal
-		if ((atributo == 1 and (sub_atributo == 1 or sub_atributo == 2)) or (atributo == 2)) then
+		if ((atributo == 1 and (sub_atributo == 1 or sub_atributo == 2)) or (atributo == 2 and sub_atributo ~= 4)) then
 			if (not player.detalhes) then
 				print (Loc ["STRING_ACTORFRAME_NOTHING"])
 				return
@@ -5181,7 +5181,7 @@ function _detalhes.janela_info:monta_relatorio (botao)
 			end
 
 			--dano                       --damage tanken (mostra as magias que o alvo usou)
-		elseif ( (atributo == 1 and sub_atributo == 3) or atributo == 3) then
+		elseif ( (atributo == 1 and sub_atributo == 3) or (atributo == 2 and sub_atributo == 4) or atributo == 3) then
 			if (player.detalhes) then
 				report_lines = {"Details! " .. Loc ["STRING_ACTORFRAME_REPORTTO"] .. " " .. _detalhes.sub_atributos [1].lista [1] .. " " .. Loc ["STRING_ACTORFRAME_REPORTOF"] .. " " .. player.detalhes.. " " .. Loc ["STRING_ACTORFRAME_REPORTAT"] .. " " .. player.nome}
 				for index, barra in _ipairs (info.barras3) do

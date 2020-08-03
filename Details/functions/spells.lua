@@ -78,7 +78,6 @@ do
 		[63672] = 255, -- Black Arrow Rank 6
 		[60053] = 255, -- Explosive Shot Rank 4
 		[34503] = 255, -- Expose Weakness Rank 3
-		
 
 		-- Arcane Mage:
 		[12042] = 62, -- Arcane Power

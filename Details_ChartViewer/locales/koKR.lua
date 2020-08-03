@@ -1,5 +1,5 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("Details_ChartViewer", "koKR") 
-if not L then return end 
+local L = LibStub("AceLocale-3.0"):NewLocale("Details_ChartViewer", "koKR")
+if not L then return end
 
 L["STRING_ADDEDOKAY"] = "성공적으로 추가되었습니다."
 L["STRING_CONFIRM"] = "확인"

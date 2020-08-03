@@ -1,8 +1,8 @@
-local Loc = LibStub("AceLocale-3.0"):NewLocale("Details_EncounterDetails", "enUS", true) 
+local Loc = LibStub("AceLocale-3.0"):NewLocale("Details_EncounterDetails", "enUS", true)
 
 if (not Loc) then
-	return 
-end 
+	return
+end
 
 Loc ["STRING_PLUGIN_NAME"] = "Encounter Breakdown"
 Loc ["STRING_WINDOW_TITLE"] = "Details! Encounter Breakdown"

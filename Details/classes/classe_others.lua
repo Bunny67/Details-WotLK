@@ -556,7 +556,7 @@ function atributo_misc:DeadAtualizarBarra (morte, qual_barra, colocacao, instanc
 	local esta_barra = instancia.barras[qual_barra] --> pega a refer�ncia da barra na janela
 
 	if (not esta_barra) then
-		print ("DEBUG: problema com <instancia.esta_barra> "..qual_barra.." "..lugar)
+		print ("DEBUG: problema com <instancia.esta_barra> "..qual_barra)
 		return
 	end
 

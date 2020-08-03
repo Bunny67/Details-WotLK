@@ -1678,7 +1678,7 @@ inspect_frame:RegisterEvent ("UPDATE_MOUSEOVER_UNIT")
 
 local two_hand = {
 	["INVTYPE_2HWEAPON"] = true,
- 	["INVTYPE_RANGED"] = true,
+	["INVTYPE_RANGED"] = true,
 	["INVTYPE_RANGEDRIGHT"] = true,
 }
 
@@ -1779,7 +1779,7 @@ function ilvl_core:CalcItemLevel (unitid, guid, shout)
 					end
 				end
 			end
-		 	average = item_level / item_amount
+			average = item_level / item_amount
 			--print (UnitName (unitid), "ILVL:", average, unitid, "items:", item_amount)
 		end
 

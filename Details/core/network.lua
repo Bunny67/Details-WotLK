@@ -730,9 +730,6 @@ local city_zones = {
 	["ShattrathCity"] = true,
 	["Dalaran"] = true,
 
-	["AshranHordeFactionHub"] = true,
-	["AshranAllianceFactionHub"] = true,
-
 	["Orgrimmar"] = true,
 	["Undercity"] = true,
 	["ThunderBluff"] = true,
@@ -742,36 +739,12 @@ local city_zones = {
 	["Darnassus"] = true,
 	["Ironforge"] = true,
 	["TheExodar"] = true,
-
-	["garrisonffhorde_tier1"] = true,
-	["garrisonffhorde_tier2"] = true,
-	["garrisonffhorde_tier3"] = true,
-
-	["garrisonsmvalliance_tier1"] = true,
-	["garrisonsmvalliance_tier2"] = true,
-	["garrisonsmvalliance_tier3"] = true,
-	["garrisonsmvalliance_tier4"] = true,
-}
-
-local sub_zones = {
-	["ShrineofTwoMoons"] = true,
-	["ShrineofSevenStars"] = true,
 }
 
 function _detalhes:IsInCity()
-	if (SetMapToCurrentZone and SetMapToCurrentZone()) then
-		local mapID = C_Map.GetBestMapForUnit ("player")
-		if (not mapID) then
-			--print ("Details! exeption handled: zone has no map")
-			return
-		end
-		local mapFileName, _, _, _, microDungeonMapName = C_Map.GetMapInfo (mapID)
-
-		if (city_zones [mapFileName]) then
-			return true
-		elseif (microDungeonMapName and type (microDungeonMapName) == "string" and sub_zones [microDungeonMapName]) then
-			return true
-		end
+	SetMapToCurrentZone()
+	if city_zones[GetMapInfo()] then
+		return true
 	end
 end
 

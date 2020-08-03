@@ -1,5 +1,5 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("Details_DeathGraphs", "ruRU") 
-if not L then return end 
+local L = LibStub("AceLocale-3.0"):NewLocale("Details_DeathGraphs", "ruRU")
+if not L then return end
 
 L["STRING_BRESS"] = "Возрождение в бою"
 L["STRING_DEATH_DESC"] = "Показать панель, содержащую смерть игрока."

@@ -969,11 +969,6 @@ function _G._detalhes:Start()
 			_detalhes:DispatchAutoRunCode ("on_groupchange")
 		end)
 
-	--> Plater integration
-		C_Timer.After (2, function()
-			_detalhes:RefreshPlaterIntegration()
-		end)
-
 	--> override the overall data flag on this release only (remove on the next release)
 	--Details.overall_flag = 0x10
 end

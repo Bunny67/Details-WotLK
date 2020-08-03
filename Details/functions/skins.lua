@@ -956,7 +956,7 @@ local _
 			["stretch_button_side"] = 1,
 			["hide_icon"] = true,
 			["bg_b"] = 0.454901960784314,
- 		},
+		},
 
 		skin_options = {
 			{type = "button", name = Loc ["STRING_OPTIONS_SKIN_RESET_TOOLTIP"], func = reset_tooltip, desc = Loc ["STRING_OPTIONS_SKIN_RESET_TOOLTIP_DESC"]},

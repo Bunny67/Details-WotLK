@@ -258,8 +258,8 @@ local _utf8sub = string.utf8sub
 	function _detalhes:AtualizaPontos()
 		local _x, _y = self:GetPositionOnScreen()
 		if (not _x) then
- 			return
- 		end
+			return
+		end
 
 		local _w, _h = self:GetRealSize()
 
@@ -405,8 +405,8 @@ local _utf8sub = string.utf8sub
 		--> calc position
 		local _x, _y = self:GetPositionOnScreen()
 		if (not _x) then
- 			return _detalhes:ScheduleTimer ("SaveMainWindowSize", 1, self)
- 		end
+			return _detalhes:ScheduleTimer ("SaveMainWindowSize", 1, self)
+		end
 
 		--> save the position
 		local _w = baseframe_width
@@ -465,9 +465,9 @@ local _utf8sub = string.utf8sub
 
 		--> calc position
 		local _x, _y = self:GetPositionOnScreen()
-		if (not _x) then
- 			return _detalhes:ScheduleTimer ("SaveMainWindowPosition", 1, self)
- 		end
+			if (not _x) then
+			return _detalhes:ScheduleTimer ("SaveMainWindowPosition", 1, self)
+		end
 
 		if (self.mostrando ~= "solo") then
 			self:SaveLibWindow()
