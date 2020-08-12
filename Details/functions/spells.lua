@@ -1076,7 +1076,6 @@ do
 		[28810] = 30, -- Faith Set Proc Armor of Faith
 		[54808] = 12, -- Noise Machine proc Sonic Shield
 		[55019] = 12, -- Sonic Shield (one of these too ought to be wrong)
-		[64411] = 15, -- Blessing of the Ancient (Val'anyr Hammer of Ancient Kings equip effect)
 		[64413] = 8, -- Val'anyr, Hammer of Ancient Kings proc Protection of Ancient Kings
 		-- Misc
 		[40322] = 30, -- Teron's Vengeful Spirit Ghost - Spirit Shield
