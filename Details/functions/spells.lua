@@ -39,7 +39,7 @@ do
 		[49028] = 250, -- Dancing Rune Weapon
 		[48982] = 250, -- Rune Tap
 		[56222] = 250, -- Dark Command
-		[55262] = 250, -- Heart Strike
+		[55262] = 250, -- Heart Strike, Rank 6
 
 		-- Balance Druid:
 		[53201] = 102, -- Starfall, Rank 4
