@@ -21,11 +21,10 @@ do
 		[55265] = 252, -- Scourge Strike, Rank 2
 		[55270] = 252, -- Scourge Strike, Rank 3
 		[55271] = 252, -- Scourge Strike, Rank 4
-		[46584] = 252, -- Raise Dead
 		[51099] = 252, -- Ebon Plaguebringer, Rank 1
 		[51160] = 252, -- Ebon Plaguebringer, Rank 2
 		[51161] = 252, -- Ebon Plaguebringer, Rank 3
-		[49895] = 252, -- Death Coil
+		[49222] = 252, -- Bone Shield
 
 		-- Frost Death Knight:
 		[51271] = 251, -- Pillar of Frost
@@ -36,12 +35,11 @@ do
 		[51411] = 251, -- Howling Blast, Rank 4
 
 		-- Blood Death Knight:
-		[49222] = 250, -- Bone Shield
 		[55233] = 250, -- Vampiric Blood
 		[49028] = 250, -- Dancing Rune Weapon
 		[48982] = 250, -- Rune Tap
 		[56222] = 250, -- Dark Command
-		[51429] = 250, -- Blood Boil, Rank 5
+		[55262] = 250, -- Heart Strike
 
 		-- Balance Druid:
 		[53201] = 102, -- Starfall, Rank 4
@@ -71,8 +69,7 @@ do
 		[53257] = 253, -- Cobra Strikes
 
 		-- Marksmanship Hunter:
-		[3045] = 254, -- Rapid Fire
-		[49050] = 254, -- Aimed Shot, Rank 9
+		[53209] = 254, -- Chimera Shot
 
 		-- Survival Hunter:
 		[63672] = 255, -- Black Arrow Rank 6
@@ -90,7 +87,6 @@ do
 		-- Fire Mage:
 		[55360] = 63, -- Living Bomb, Rank 3
 		[42950] = 63, -- Dragon's Breath, Rank 6
-		[42926] = 63, -- Flamestrike, Rank 9
 		[42859] = 63, -- Scorch, Rank 11
 		[42833] = 63, -- Fireball, Rank 16
 		[42891] = 63, -- Pyroblast, Rank 12
@@ -100,7 +96,6 @@ do
 		[42842] = 64, -- Frostbolt, Rank 16
 
 		-- Holy Paladin:
-		[31821] = 65, -- Devotion Aura
 		[53563] = 65, -- Beacon of Light
 		[48817] = 65, -- Denounce, Rank 5
 		[48825] = 65, -- Holy Shock, Rank 7
@@ -110,7 +105,7 @@ do
 		[48827] = 66, -- Avenger's Shield, Rank 5
 
 		-- Retribution Paladin:
-		[48801] = 70, -- Exorcism, Rank 9
+		[35395] = 70, -- Crusader Strike
 		[53385] = 70, -- Divine Storm
 
 		-- Discipline Priest:
@@ -162,7 +157,6 @@ do
 		[59156] = 262, -- Thunderstorm, Rank 2
 		[59158] = 262, -- Thunderstorm, Rank 3
 		[59159] = 262, -- Thunderstorm, Rank 4
-		[8042] = 262, -- Earth Shock
 
 		-- Enhancement Shaman:
 		[77223] = 263, -- Mastery: Enhanced Elements
