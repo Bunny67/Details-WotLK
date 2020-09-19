@@ -19,7 +19,6 @@
 	<Include file="LibDeflate\lib.xml"/>
 	<Include file="LibTalentQuery-1.0\lib.xml"/>
 	<Include file="LibGroupTalents-1.0\lib.xml"/>
-	<Include file="LibGroupInSpecT-1.1\lib.xml"/>
 	<Include file="DF\load.xml"/>
 	<Include file="LibTranslit\LibTranslit-1.0.xml"/>
 	

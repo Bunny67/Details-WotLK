@@ -10,7 +10,6 @@ local floor = floor
 
 local GetNumGroupMembers = GetNumGroupMembers
 
-local LibGroupInSpecT = LibStub ("LibGroupInSpecT-1.1") --disabled due to classic wow
 local LibGroupTalents = LibStub ("LibGroupTalents-1.0")
 
 local storageDebug = true
@@ -2150,35 +2149,6 @@ end
 function _detalhes:GetSpecFromSerial (guid)
 	return _detalhes.cached_specs [guid]
 end
-
-function _detalhes:LibGroupInSpecT_UpdateReceived (event, guid, unitid, info)
---[[
-	--> update talents
-	local talents = _detalhes.cached_talents [guid] or {}
-	local i = 1
-	for talentId, _ in pairs (info.talents) do
-		talents [i] = talentId
-		i = i + 1
-	end
-	_detalhes.cached_talents [guid] = talents
-]]
-
-	if (_detalhes.debug) then
-		_detalhes:Msg ("(debug) received GroupInSpecT_Update from user", guid)
-	end
-
-	--> update spec
-	if (info.global_spec_id and info.global_spec_id ~= 0) then
-		if (not _detalhes.class_specs_coords [info.global_spec_id]) then
-			print ("Details! Spec Id Invalid:", info.global_spec_id, info.name)
-		else
-			_detalhes.cached_specs [guid] = info.global_spec_id
-		end
-	end
-
-	--print ("LibGroupInSpecT Received from", info.name, info.global_spec_id)
-end
---LibGroupInSpecT.RegisterCallback (_detalhes, "GroupInSpecT_Update", "LibGroupInSpecT_UpdateReceived")
 
 function _detalhes:LibGroupTalents_Update(event, guid, unit, dominant_tree_id, n1, n2, n3)
 
