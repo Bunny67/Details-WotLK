@@ -3106,6 +3106,7 @@ function _detalhes:monta_relatorio (este_relatorio, custom)
 		elseif (atributo == 5) then --> custom
 
 			if (_detalhes.custom [self.sub_atributo]) then
+				local nm
 				total, container, first, container_amount, nm = _detalhes.atributo_custom:RefreshWindow (self, self.showing, true, true)
 				if (nm) then
 					name_member = nm

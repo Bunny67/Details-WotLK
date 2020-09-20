@@ -3065,7 +3065,7 @@ local energy_types = {
 		if(not spell) then
 			spell = este_jogador.ress_spells:PegaHabilidade(spellid, true, token)
 		end
-		return spell_misc_func(spell, alvo_serial, alvo_name, alvo_flags, who_name, token, extraSpellID, extraSpellName)
+		return spell_misc_func(spell, alvo_serial, alvo_name, alvo_flags, who_name, token, spellid, spellname)
 	end
 
 	--serach key: ~cc

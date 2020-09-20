@@ -872,7 +872,7 @@ function atributo_misc:AtualizaBarra (instancia, barras_container, qual_barra, l
 		return
 	end
 
-	--local porcentagem = meu_total / total * 100
+	local porcentagem
 	if (not percentage_type or percentage_type == 1) then
 		porcentagem = _cstr ("%.1f", meu_total / total * 100)
 	elseif (percentage_type == 2) then

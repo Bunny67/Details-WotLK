@@ -18,7 +18,6 @@ local _math_random = math.random --lua local
 local _type = type --lua local
 local _string_match = string.match --lua local
 local _string_byte = string.byte --lua local
-local _string_len = string.lenv
 local _string_format = string.format --lua local
 local _string_sub = string.sub --lua local
 local loadstring = loadstring --lua local
@@ -511,9 +510,10 @@ local replace_arg = function(i)
 end
 local run_function = function(str)
 	--> cache functions
-	local func, errortext = function_cache[str]
+	local func = function_cache[str]
 	if not func then
-		func = loadstring(str)
+		local errortext
+		func, errortext = loadstring(str)
 		if not func then
 			_detalhes:Msg("|cFFFF9900error compiling script on custom text|r: ", errortext)
 			return 0
@@ -740,7 +740,7 @@ do
 
 	-- logic OR for number values
 	local function lor(x,y)
-		result = 0
+		local result = 0
 		for p=1,8 do result = result +(((bit(x,p) or bit(y,p)) == true) and 2^(p-1) or 0) end
 		return result
 	end

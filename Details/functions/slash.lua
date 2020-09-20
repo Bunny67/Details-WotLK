@@ -672,7 +672,7 @@ function SlashCmdList.DETAILS (msg, editbox)
 		--self:SetFont(fontFile, fontSize, fontFlags);
 
 	elseif (msg == "error") then
-		a = nil + 1
+		local a = nil + 1
 
 	--> debug
 	elseif (command == "resetcapture") then

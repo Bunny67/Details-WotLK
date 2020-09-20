@@ -4165,7 +4165,7 @@ function atributo_damage:MontaInfoDamageDone()
 		local meus_inimigos = {}
 
 		--> my target container
-		conteudo = self.targets
+		local conteudo = self.targets
 		for target_name, amount in _pairs (conteudo) do
 			_table_insert (meus_inimigos, {target_name, amount, amount/total*100})
 		end
