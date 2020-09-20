@@ -527,7 +527,7 @@ function _detalhes:SairDoCombate(bossKilled, from_encounter_end)
 	end
 
 	--> send item level after a combat if is in raid or party group
-	C_Timer.After(1, _detalhes.ScheduleSyncPlayerActorData)
+	_detalhes:ScheduleTimer("ScheduleSyncPlayerActorData", 1)
 
 	--if this segment isn't a boss fight
 	if not _detalhes.tabela_vigente.is_boss then

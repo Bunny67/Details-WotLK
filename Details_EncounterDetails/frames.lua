@@ -2655,7 +2655,7 @@ end
 		BossFrame.MacroEditBox:SetSize (360, 20)
 
 		BossFrame.MacroEditBox:HookScript ("OnEditFocusGained", function()
-			C_Timer.After (0, function() BossFrame.MacroEditBox:HighlightText() end)
+			BossFrame.MacroEditBox:HighlightText()
 		end)
 
 		BossFrame.MacroEditBox.BackgroundLabel = DetailsFrameWork:CreateLabel (BossFrame.MacroEditBox, "macro")

@@ -479,7 +479,7 @@ local function CreatePluginFrames ()
 			end
 		end
 
-		C_Timer.After (3, function() EncounterDetails:ShowTutorial() end)
+		EncounterDetails:ScheduleTimer ("ShowTutorial", 3)
 
 		DetailsPluginContainerWindow.OpenPlugin (EncounterDetails)
 
