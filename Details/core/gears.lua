@@ -1535,21 +1535,21 @@ function _detalhes:StoreEncounter (combat)
 			local role = UnitGroupRolesAssigned("raid" .. i)
 
 			if (UnitIsInMyGuild ("raid" .. i)) then
-				if (role == "NONE") then 
-					-- try and guess role 
+				if (role == "NONE") then
+					-- try and guess role
 					local player_name, player_realm = UnitName ("raid" .. i)
 					if (player_realm and player_realm ~= "") then
 						player_name = player_name .. "-" .. player_realm
 					end
-					
+
 					local damage, healing = 0, 0
 					local damage_actor = damage_container_pool [damage_container_hash [player_name]]
 					if (damage_actor) then
 						damage = damage_actor.total
-					end 
+					end
 
-					local heal_actor = healing_container_pool [healing_container_hash [player_name]] 
-					if (heal_actor) then 
+					local heal_actor = healing_container_pool [healing_container_hash [player_name]]
+					if (heal_actor) then
 						healing = heal_actor.total
 					end
 
@@ -1845,12 +1845,12 @@ _detalhes.ilevel.CalcItemLevel = ilvl_core.CalcItemLevel
 inspect_frame:SetScript ("OnEvent", function (self, event, ...)
 	local guid = ""
 
-	for queue_guid in pairs(inspecting) do -- get first guid 
-		guid = queue_guid 
-		break 
+	for queue_guid in pairs(inspecting) do -- get first guid
+		guid = queue_guid
+		break
 	end
 
-	if guid == "" then 
+	if guid == "" then
 		guid = UnitGUID("mouseover")
 	end
 
@@ -2152,20 +2152,20 @@ end
 
 function _detalhes:LibGroupTalents_Update(event, guid, unit, dominant_tree_id, n1, n2, n3)
 
-	if _detalhes.debug then 
+	if _detalhes.debug then
 		_detalhes:Msg("(debug) received LibGroupTalents Update from user", guid)
 	end
 
 	local talent_string = n1.."/"..n2.."/"..n3
 	_detalhes.cached_talents [guid] = talent_string
-	local class, _, _, _, name = select(2, GetPlayerInfoByGUID(guid)) 
-	local specID = DetailsFramework.GetSpecializationID(class, dominant_tree_id) 
-	if specID then 
+	local class, _, _, _, name = select(2, GetPlayerInfoByGUID(guid))
+	local specID = DetailsFramework.GetSpecializationID(class, dominant_tree_id)
+	if specID then
 		if (not _detalhes.class_specs_coords [specID]) then
 			_detalhes:Msg("(error) Spec ID Invalid: " .. specID .. " for " .. name)
 		else
-			_detalhes.cached_specs [guid] = specID 
-			if _detalhes.debug then 
+			_detalhes.cached_specs [guid] = specID
+			if _detalhes.debug then
 				_detalhes:Msg("(debug) saved spec " .. specID .. " for " .. name)
 			end
 		end
