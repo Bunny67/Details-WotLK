@@ -1049,7 +1049,7 @@ function atributo_heal:ToolTip_HealingDenied (instancia, numero, barra, keydown)
 		_detalhes:AddTooltipSpellHeaderText ("Targets", headerColor, #playerSorted, [[Interface\TUTORIALFRAME\UI-TutorialFrame-LevelUp]], 0.10546875, 0.89453125, 0.05859375, 0.6796875)
 		_detalhes:AddTooltipHeaderStatusbar (r, g, b, barAlha)
 
-		local ismaximized = false
+		ismaximized = false
 		if (keydown == "ctrl" or TooltipMaximizedMethod == 2 or TooltipMaximizedMethod == 4) then
 			GameCooltip:AddIcon ([[Interface\AddOns\Details\images\key_ctrl]], 1, 2, _detalhes.tooltip_key_size_width, _detalhes.tooltip_key_size_height, 0, 1, 0, 0.640625, _detalhes.tooltip_key_overlay2)
 			_detalhes:AddTooltipHeaderStatusbar (r, g, b, 1)
@@ -1095,7 +1095,7 @@ function atributo_heal:ToolTip_HealingDenied (instancia, numero, barra, keydown)
 		_detalhes:AddTooltipSpellHeaderText ("Spells Affected", headerColor, #spellsSorted, [[Interface\TUTORIALFRAME\UI-TutorialFrame-LevelUp]], 0.10546875, 0.89453125, 0.05859375, 0.6796875)
 		_detalhes:AddTooltipHeaderStatusbar (r, g, b, barAlha)
 
-		local ismaximized = false
+		ismaximized = false
 		local tooltip_max_abilities3 = _detalhes.tooltip.tooltip_max_targets
 		if (keydown == "alt" or TooltipMaximizedMethod == 2 or TooltipMaximizedMethod == 5) then
 			tooltip_max_abilities3 = 99

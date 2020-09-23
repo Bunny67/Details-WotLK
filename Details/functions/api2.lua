@@ -57,7 +57,7 @@ local getSpellObject = function (playerObject, spellId, isLiteral)
 
 		elseif (parameterType == "number") then
 			--passed a number but with literal off, transform the spellId into a spell name
-			local spellName = GetSpellInfo (spellid)
+			local spellName = GetSpellInfo (spellId)
 			if (spellName) then
 				passedSpellName = spellName:lower()
 			end
@@ -578,19 +578,19 @@ function Details.UnitTexture (unitId, segment)
 		return textureInfo
 	end
 
-	local texture, left, right, top, bottom = playerObject:GetClassIcon()
-	textureInfo.classTexture = texture
-	textureInfo.classLeft = left
-	textureInfo.classRight = right
-	textureInfo.classTop = top
-	textureInfo.classBottom = bottom
+	local classTexture, classLeft, classRight, classTop, classBottom = playerObject:GetClassIcon()
+	textureInfo.classTexture = classTexture
+	textureInfo.classLeft = classLeft
+	textureInfo.classRight = classRight
+	textureInfo.classTop = classTop
+	textureInfo.classBottom = classBottom
 
-	local texture, left, right, top, bottom = Details:GetSpecIcon (playerObject.spec)
-	textureInfo.specTexture = texture
-	textureInfo.specLeft = left
-	textureInfo.specRight = right
-	textureInfo.specTop = top
-	textureInfo.specBottom = bottom
+	local specTexture, specLeft, specRight, specTop, specBottom = Details:GetSpecIcon(playerObject.spec)
+	textureInfo.specTexture = specTexture
+	textureInfo.specLeft = specLeft
+	textureInfo.specRight = specRight
+	textureInfo.specTop = specTop
+	textureInfo.specBottom = specBottom
 
 	return textureInfo
 end

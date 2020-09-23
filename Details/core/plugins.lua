@@ -476,7 +476,7 @@
 			menuBackground:SetWidth (f.MenuButtonWidth + 6)
 
 			local bigdog = _detalhes.gump:NewImage (menuBackground, [[Interface\MainMenuBar\UI-MainMenuBar-EndCap-Human]], 180*0.7, 200*0.7, "overlay", {0, 1, 0, 1}, "backgroundBigDog", "$parentBackgroundBigDog")
-			bigdog:SetPoint ("BOTTOMLEFT", custom_window, "BOTTOMLEFT", 0, 1)
+			bigdog:SetPoint ("BOTTOMLEFT", menuBackground, "BOTTOMLEFT", 0, 1)
 			bigdog:SetAlpha (0.3)
 
 			local bigdogRow = menuBackground:CreateTexture (nil, "artwork")
@@ -496,9 +496,9 @@
 			titlebar_plugins:SetBackdropColor (.5, .5, .5, 1)
 			titlebar_plugins:SetBackdropBorderColor (0, 0, 0, 1)
 			--> title
-			local titleLabel = _detalhes.gump:NewLabel (titlebar_plugins, titlebar_plugins, nil, "titulo", "Plugins", "GameFontHighlightLeft", 12, {227/255, 186/255, 4/255})
-			titleLabel:SetPoint ("CENTER", titlebar_plugins , "CENTER", 0, 0)
-			titleLabel:SetPoint ("TOP", titlebar_plugins , "TOP", 0, -5)
+			local pluginsLabel = _detalhes.gump:NewLabel (titlebar_plugins, titlebar_plugins, nil, "titulo", "Plugins", "GameFontHighlightLeft", 12, {227/255, 186/255, 4/255})
+			pluginsLabel:SetPoint ("CENTER", titlebar_plugins , "CENTER", 0, 0)
+			pluginsLabel:SetPoint ("TOP", titlebar_plugins , "TOP", 0, -5)
 
 		--> plugins menu title bar
 			local titlebar_tools = CreateFrame ("Frame", nil, menuBackground)
@@ -507,9 +507,9 @@
 			titlebar_tools:SetBackdropColor (.5, .5, .5, 1)
 			titlebar_tools:SetBackdropBorderColor (0, 0, 0, 1)
 			--> title
-			local titleLabel = _detalhes.gump:NewLabel (titlebar_tools, titlebar_tools, nil, "titulo", "Tools", "GameFontHighlightLeft", 12, {227/255, 186/255, 4/255})
-			titleLabel:SetPoint ("CENTER", titlebar_tools , "CENTER", 0, 0)
-			titleLabel:SetPoint ("TOP", titlebar_tools , "TOP", 0, -5)
+			local toolsLabel = _detalhes.gump:NewLabel (titlebar_tools, titlebar_tools, nil, "titulo", "Tools", "GameFontHighlightLeft", 12, {227/255, 186/255, 4/255})
+			toolsLabel:SetPoint ("CENTER", titlebar_tools , "CENTER", 0, 0)
+			toolsLabel:SetPoint ("TOP", titlebar_tools , "TOP", 0, -5)
 
 		--> scripts
 			f:SetScript ("OnShow", function()

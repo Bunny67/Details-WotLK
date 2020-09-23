@@ -6778,7 +6778,7 @@ function Details:ScrollDamage()
 					local line = self:GetLine (i)
 					local time, token, sourceSerial, sourceName, sourceFlag, targetSerial, targetName, targetFlag, spellID, spellName, spellType, amount, overKill, school, resisted, blocked, absorbed, isCritical = unpack (spellTable)
 
-					local spellName, _, spellIcon
+					local _, spellIcon
 
 					if (token ~= "SWING_DAMAGE") then
 						spellName, _, spellIcon = GetSpellInfo (spellID)

@@ -1046,7 +1046,6 @@ function atributo_misc:ToolTipCC (instancia, numero, barra)
 	local icon_size = _detalhes.tooltip.icon_size
 	local icon_border = _detalhes.tooltip.icon_border_texcoord
 	local lineHeight = _detalhes.tooltip.line_height
-	local icon_border = _detalhes.tooltip.icon_border_texcoord
 
 	for _spellid, _tabela in _pairs (habilidades) do
 
@@ -1086,7 +1085,7 @@ function atributo_misc:ToolTipCC (instancia, numero, barra)
 	return true
 end
 
-function atributo_misc:ToolTipDispell (instancia, numero, barra)
+function atributo_misc:ToolTipDispell (instancia, numero, barra, keydown)
 
 	local owner = self.owner
 	if (owner and owner.classe) then
@@ -1853,7 +1852,7 @@ function atributo_misc:ToolTipRess (instancia, numero, barra)
 
 end
 
-function atributo_misc:ToolTipInterrupt (instancia, numero, barra)
+function atributo_misc:ToolTipInterrupt (instancia, numero, barra, keydown)
 
 	local owner = self.owner
 	if (owner and owner.classe) then

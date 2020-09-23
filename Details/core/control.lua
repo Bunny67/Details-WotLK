@@ -132,7 +132,7 @@ local boss_found = function(index, name, zone, mapid, diff, encounterid)
 
 	if _detalhes.in_combat and not _detalhes.leaving_combat then
 		--> catch boss function if any
-		local bossFunction, bossFunctionType = _detalhes:GetBossFunction(ZoneMapID, BossIndex)
+		local bossFunction, bossFunctionType = _detalhes:GetBossFunction(mapID, index)
 		if bossFunction then
 			if _bit_band(bossFunctionType, 0x1) ~= 0 then --realtime
 				_detalhes.bossFunction = bossFunction
@@ -141,7 +141,7 @@ local boss_found = function(index, name, zone, mapid, diff, encounterid)
 		end
 
 		if _detalhes.zone_type ~= "raid" then
-			local endType, endData = _detalhes:GetEncounterEnd(ZoneMapID, BossIndex)
+			local endType, endData = _detalhes:GetEncounterEnd(mapID, index)
 			if endType and endData then
 
 				if _detalhes.debug then

@@ -3034,8 +3034,6 @@ function atributo_damage:ToolTip_DamageDone (instancia, numero, barra, keydown)
 	if (#meus_pets > 0) then --> teve ajudantes
 
 		local quantidade = {} --> armazena a quantidade de pets iguais
-		local danos = {} --> armazena as habilidades
-		local alvos = {} --> armazena os alvos
 		local totais = {} --> armazena o dano total de cada objeto
 
 		for index, nome in _ipairs (meus_pets) do
@@ -3062,7 +3060,6 @@ function atributo_damage:ToolTip_DamageDone (instancia, numero, barra, keydown)
 						_table_insert (meus_danos, {spellid, tabela.total, tabela.total/meu_total*100, {nome, rank, icone}})
 					end
 					_table_sort (meus_danos, _detalhes.Sort2)
-					danos [nome] = meus_danos
 
 					local meus_inimigos = {}
 					tabela = my_self.targets
@@ -3070,7 +3067,6 @@ function atributo_damage:ToolTip_DamageDone (instancia, numero, barra, keydown)
 						_table_insert (meus_inimigos, {target_name, amount, amount/meu_total*100})
 					end
 					_table_sort (meus_inimigos,_detalhes.Sort2)
-					alvos [nome] = meus_inimigos
 				end
 
 			else
@@ -3598,7 +3594,7 @@ function atributo_damage:ToolTip_FriendlyFire (instancia, numero, barra, keydown
 
 	_detalhes:AddTooltipSpellHeaderText (Loc ["STRING_SPELLS"], headerColor, 1, _detalhes.tooltip_spell_icon.file, unpack (_detalhes.tooltip_spell_icon.coords))
 
-	local ismaximized = false
+	ismaximized = false
 	if (keydown == "ctrl" or TooltipMaximizedMethod == 2 or TooltipMaximizedMethod == 4) then
 		GameCooltip:AddIcon ([[Interface\AddOns\Details\images\key_ctrl]], 1, 2, _detalhes.tooltip_key_size_width, _detalhes.tooltip_key_size_height, 0, 1, 0, 0.640625, _detalhes.tooltip_key_overlay2)
 		_detalhes:AddTooltipHeaderStatusbar (r, g, b, 1)
@@ -3991,7 +3987,7 @@ function atributo_damage:MontaInfoDamageDone()
 	local diff = combat:GetDifficulty()
 	local attribute, subattribute = instancia:GetDisplay()
 
-	--> check if is a raid encounter 
+	--> check if is a raid encounter
 	if (diff and (diff == 1 or diff == 2 or diff == 3 or diff == 4)) then
 		local db = _detalhes.OpenStorage()
 		if (db) then
@@ -4037,22 +4033,8 @@ function atributo_damage:MontaInfoDamageDone()
 	local max_ = ActorSkillsSortTable[1] and ActorSkillsSortTable[1][2] or 0 --> dano que a primeiro magia vez
 
 	local barra
-
-	--aura bar
-	if (false) then --> disabled for now
-		barra = barras [1]
-		if (not barra) then
-			barra = gump:CriaNovaBarraInfo1 (instancia, 1)
-		end
-		self:UpdadeInfoBar (barra, "", -51, "Auras", max_, false, max_, 100, [[Interface\BUTTONS\UI-GroupLoot-DE-Up]], true, nil, nil)
-		barra.textura:SetStatusBarColor (_detalhes.gump:ParseColors ("purple"))
-	end
-
 	--spell bars
 	for index, tabela in _ipairs (ActorSkillsSortTable) do
-
-		--index = index + 1 --with the aura bar
-		index = index
 		barra = barras [index]
 		if (not barra) then
 			barra = gump:CriaNovaBarraInfo1 (instancia, index)
@@ -4703,8 +4685,6 @@ function atributo_damage:MontaDetalhesDamageDone (spellid, barra, instancia)
 
 	--> Erros de Ataque	--ability.missType  -- {"ABSORB", "BLOCK", "DEFLECT", "DODGE", "EVADE", "IMMUNE", "MISS", "PARRY", "REFLECT", "RESIST"}
 		local miss = esta_magia["MISS"] or 0
-		local parry = esta_magia["PARRY"] or 0
-		local dodge = esta_magia["DODGE"] or 0
 		local misses = miss + parry + dodge
 
 		if (misses > 0) then
