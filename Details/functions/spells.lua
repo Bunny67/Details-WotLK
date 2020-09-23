@@ -11,49 +11,31 @@ do
 	_detalhes.SpecSpellList = { --~spec
 		-- Unholy Death Knight:
 		[49206] = 252, -- Summon Gargoyle
-		[51099] = 252, -- Dark Transformation, Rank 1
-		[63560] = 252, -- Dark Transformation, Rank 2
-		[51161] = 252, -- Dark Transformation, Rank 3
-		[48965] = 252, -- Shadow Infusion, Rank 1
-		[49571] = 252, -- Shadow Infusion, Rank 2
-		[49572] = 252, -- Shadow Infusion, Rank 3
-		[55090] = 252, -- Scourge Strike, Rank 1
-		[55265] = 252, -- Scourge Strike, Rank 2
-		[55270] = 252, -- Scourge Strike, Rank 3
 		[55271] = 252, -- Scourge Strike, Rank 4
-		[46584] = 252, -- Raise Dead
-		[51099] = 252, -- Ebon Plaguebringer, Rank 1
-		[51160] = 252, -- Ebon Plaguebringer, Rank 2
 		[51161] = 252, -- Ebon Plaguebringer, Rank 3
-		[49895] = 252, -- Death Coil
+		[55271] = 252, -- Scourge Strike, Rank 4
 
 		-- Frost Death Knight:
-		[51271] = 251, -- Pillar of Frost
-		[51425] = 251, -- Obliterate, Rank 4
-		[66974] = 251, -- Obliterate Off-Hand, Rank 4
 		[55268] = 251, -- Frost Strike, Rank 6
 		[66962] = 251, -- Frost Strike Off-Hand, Rank 6
 		[51411] = 251, -- Howling Blast, Rank 4
 
 		-- Blood Death Knight:
-		[49222] = 250, -- Bone Shield
 		[55233] = 250, -- Vampiric Blood
 		[49028] = 250, -- Dancing Rune Weapon
-		[48982] = 250, -- Rune Tap
-		[56222] = 250, -- Dark Command
-		[51429] = 250, -- Blood Boil, Rank 5
+		[55262] = 250, -- Heart Strike
 
 		-- Balance Druid:
 		[53201] = 102, -- Starfall, Rank 4
 		[48465] = 102, -- Starfire, Rank 10
+		[48468] = 102, -- Insect Swarm, Rank 7
 
 		-- Feral Druid:
 		[49802] = 103, -- Maim, Rank 2
-		[16975] = 103, -- Predatory Swiftness, Rank 3
 		[52610] = 103, -- Savage Roar
 		[50213] = 103, -- Tiger's Fury, Rank 6
 		[48574] = 103, -- Rake, Rank 7
-		[49800] = 103, -- Rip, Rank 10
+		[49800] = 103, -- Rip, Rank 9
 
 		-- Guardian Druid:
 		[48568] = 104, -- Lacerate, Rank 3
@@ -61,7 +43,6 @@ do
 		[62606] = 104, -- Savage Defense
 
 		-- Restoration Druid:
-		[48447] = 105, -- Tranquility, Rank 7
 		[48451] = 105, -- Lifebloom, Rank 3
 		[53251] = 105, -- Wild Growth, Rank 4
 		[18562] = 105, -- Swiftmend
@@ -71,26 +52,23 @@ do
 		[53257] = 253, -- Cobra Strikes
 
 		-- Marksmanship Hunter:
-		[3045] = 254, -- Rapid Fire
-		[49050] = 254, -- Aimed Shot, Rank 9
+		[53209] = 254, -- Chimera Shot
+		[19506] = 254, -- Trueshot Aura
 
 		-- Survival Hunter:
 		[63672] = 255, -- Black Arrow Rank 6
 		[60053] = 255, -- Explosive Shot Rank 4
-		[34503] = 255, -- Expose Weakness Rank 3
 
 		-- Arcane Mage:
 		[12042] = 62, -- Arcane Power
 		[31589] = 62, -- Slow
 		[42846] = 62, -- Arcane Missiles, Rank 13
-		[42921] = 62, -- Arcane Explosion, Rank 10
 		[44781] = 62, -- Arcane Barrage, Rank 3
 		[42897] = 62, -- Arcane Blast, Rank 4
 
 		-- Fire Mage:
 		[55360] = 63, -- Living Bomb, Rank 3
 		[42950] = 63, -- Dragon's Breath, Rank 6
-		[42926] = 63, -- Flamestrike, Rank 9
 		[42859] = 63, -- Scorch, Rank 11
 		[42833] = 63, -- Fireball, Rank 16
 		[42891] = 63, -- Pyroblast, Rank 12
@@ -98,37 +76,35 @@ do
 		-- Frost Mage:
 		[42914] = 64, -- Ice Lance, Rank 3
 		[42842] = 64, -- Frostbolt, Rank 16
+		[44572] = 64, -- Deep Freeze
 
 		-- Holy Paladin:
-		[31821] = 65, -- Devotion Aura
 		[53563] = 65, -- Beacon of Light
-		[48817] = 65, -- Denounce, Rank 5
 		[48825] = 65, -- Holy Shock, Rank 7
+		[54937] = 65, -- Glyph of Holy Light
 
 		-- Protection Paladin:
-		[61411] = 66, -- Shield of the Righteous, Rank 2
+		[53595] = 66, -- Hammer of the Righteous
 		[48827] = 66, -- Avenger's Shield, Rank 5
+		[48952] = 66, -- Holy Shield, Rank 6
 
 		-- Retribution Paladin:
-		[48801] = 70, -- Exorcism, Rank 9
 		[53385] = 70, -- Divine Storm
-
+		[35395] = 70, -- Crusader Strike
+		
 		-- Discipline Priest:
 		[10060] = 256, -- Power Infusion
 		[33206] = 256, -- Pain Suppression
 		[52985] = 256, -- Penance, Rank 4
+		[52800] = 256, -- Borrowed Time, Rank 5
 
 		-- Holy Priest:
 		[48089] = 257, -- Circle of Healing, Rank 7
-		-- prayer is used by disc as well for aoe healing
-		--[48072] = 257, -- Prayer of Healing, Rank 7
 		[47788] = 257, -- Guardian Spirit
 
 		-- Shadow Priest:
 		[15286] = 258, -- Vampiric Embrace
-		[48158] = 258, -- Shadow Word: Death, Rank 4
 		[48160] = 258, -- Vampiric Touch, Rank 5
-		[48127] = 258, -- Mind Blast, Rank 13
 		[48156] = 258, -- Mind Flay, Rank 9
 
 		-- Assassination Rogue:
@@ -145,7 +121,6 @@ do
 		[13877] = 260, -- Blade Flurry
 		[14251] = 260, -- Riposte
 
-
 		-- Subtlety Rogue:
 		[48660] = 261, -- Hemorrhage rank 5
 		[14183] = 261, -- Premeditation
@@ -154,96 +129,73 @@ do
 		[14278] = 261, -- Ghostly Strike
 
 		-- Elemental Shaman:
-		[61882] = 262, -- Earthquake
-		[60188] = 262, -- Elemental Fury
-		--[29000] = 262, -- Elemental Reach --removed from the game
-		--[62099] = 262, -- Shamanism --removed from the game
-		[51490] = 262, -- Thunderstorm, Rank 1
-		[59156] = 262, -- Thunderstorm, Rank 2
-		[59158] = 262, -- Thunderstorm, Rank 3
+		[29000] = 262, -- Elemental Reach, Rank 2
 		[59159] = 262, -- Thunderstorm, Rank 4
-		[8042] = 262, -- Earth Shock
+		[16164] = 262, -- Elemental Focus
+		[16246] = 262, -- Elemental Focus Effect
+		[16166] = 262, -- Elemental Mastery
+		[64701] = 262, -- Elemental Mastery Effect
+		[57722] = 262, -- Totem of Wrath, Rank 4
 
 		-- Enhancement Shaman:
-		[77223] = 263, -- Mastery: Enhanced Elements
 		[51533] = 263, -- Feral Spirit
-		[58875] = 263, -- Spirit Walk
-		--[51530] = 263, -- Maelstrom Weapon --removed from the game
-		--[1535] = 263, -- Fire Nova --removed from the game
-		--[8190] = 263, -- Magma Totem --removed from the game
-		[25504] = 263, -- Windfury
+		[51530] = 263, -- Maelstrom Weapon
+		[25504] = 263, -- Windfury attack
 		[17364] = 263, -- Stormstrike
 		[32175] = 263, -- Stormstrike
 		[32176] = 263, -- Stormstrike off hand
-		[16282] = 263, -- Flurry --
+		[16282] = 263, -- Flurry
 		[10444] = 263, -- Flametongue attack
 		[60103] = 263, -- Lava Lash
 		[30812] = 263, -- Mental Quickness, Rank 1
 		[30813] = 263, -- Mental Quickness, Rank 2
 		[30814] = 263, -- Mental Quickness, Rank 3
-		[51521] = 263, -- Primal Wisdom, Rank 2
-		[51522] = 263, -- Primal Wisdom, Rank 2
+		[51521] = 263, -- Improved Stormstrike, Rank 1
+		[51522] = 263, -- Improved Stormstrike, Rank 2
 
 		-- Restoration Shaman:
 		[51566] = 264, -- Tidal Waves, Rank 5
 		[55459] = 264, -- Chain Heal, Rank 7
-		[16196] = 264, -- Resurgence
-		--[974] = 264, -- Earth Shield --can be used by all specs as a talent
-		[52127] = 264, -- Water Shield
---		[57960] = 264, -- Restorative Waves, Rank 9
+		[49284] = 264, -- Earth Shield, Rank 5
 		[61301] = 264, -- Riptide, Rank 4
 
 		-- Affliction :
-		[48181] = 265, -- Haunt
-		[980] = 265, -- Agony
-		[27243] = 265, -- Seed of Corruption
-		[30108] = 265, -- Unstable Affliction
+		[59164] = 265, -- Haunt, Rank 4
+		[47843] = 265, -- Unstable Affliction, Rank 5
 
 		-- Demonology Warlock:
 		[30146] = 266, -- Summon Felguard
-		--[1949] = 266, -- Hellfire --removed from the game
-		--[6353] = 266, -- Soul Fire --destruction talent
+		[47241] = 266, -- Metamorphosis
+		[47240] = 266, -- Demonic Pact, Rank 5
+		[47825] = 266, -- Soul Fire, Rank 6
 
 		-- Destruction Warlock:
-		[17877] = 267, -- Shadowburn
-		[80240] = 267, -- Havoc
-		[5740] = 267, -- Rain of Fire
-		[348] = 267, -- Immolate
+		[59172] = 267, -- Chaos Bolt, Rank 4
 		[17962] = 267, -- Conflagrate
-		[29722] = 267, -- Incinerate
 
 		-- Arms Warrior:
 		[12328] = 71, -- Sweeping Strikes
-		[1464] = 71, -- Slam
 		[56636] = 71, -- Taste for Blood, Rank 1
 		[56637] = 71, -- Taste for Blood, Rank 2
 		[56638] = 71, -- Taste for Blood, Rank 3
 		[12294] = 71, -- Mortal Strike
-		--[12712] = 71, -- Seasoned Soldier --removed from the game
-		[772] = 71, -- Rend
 
 		-- Fury Warrior:
-		[12950] = 72, -- Meat Cleaver
-		[12323] = 72, -- Piercing Howl
 		[23881] = 72, -- Bloodthirst
-		--[23588] = 72, -- Crazed Berserker --removed from the game
-		--[46917] = 72, -- Titan's Grip --removed from the game
+		[29801] = 72, -- Rampage
+		[23588] = 72, -- Dual Wield Specialization, Rank 5
+		[46917] = 72, -- Titan's Grip
+		[49152] = 72, -- Titan's Grip Effect
 
 		-- Protection Warrior:
-		[165393] = 73, -- Shield Mastery
-		[76857] = 73, -- Mastery: Critical Block
-		[1160] = 73, -- Demoralizing Shout
 		[871] = 73, -- Shield Wall
 		[12975] = 73, -- Last Stand
-		[6572] = 73, -- Revenge
-		[20243] = 73, -- Devastate
+		[57823] = 73, -- Revenge
+		[47498] = 73, -- Devastate
 		[2565] = 73, -- Shield Block
-		[23922] = 73, -- Shield Slam
+		[47488] = 73, -- Shield Slam
 		[46953] = 73, -- Sword and Board
-		--[29144] = 73, -- Unwavering Sentinel --removed from the game
-		[6343] = 73, -- Thunder Clap
-		--[71] = 73, -- Defensive Stance --removed from the game
-
+		[50227] = 73, -- Sword and Board Trigger
 	}
 
 	_detalhes.SpecIDToClass = {
