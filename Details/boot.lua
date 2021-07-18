@@ -109,7 +109,7 @@ do
 				[15687] = 2, -- Moroes
 				[16457] = 3, -- Maiden of Virtue
 				[1234567890] = 4,
-				[34437] = 5, -- The Curator
+				[15691] = 5, -- The Curator
 				[15688] = 6, -- Terestian Illhoof
 				[16524] = 7, -- Shade of Aran
 				[15689] = 8, -- Netherspite

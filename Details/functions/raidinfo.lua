@@ -274,12 +274,12 @@ do --> data for Karazhan
 
 	-- TODO: Opera
 	local ENCOUNTER_ID_CL = {
-		16152, 15687, 16457, 17535, 34437, 15688, 16524, 15689, 17225, 15690,
+		16152, 15687, 16457, 17535, 15691, 15688, 16524, 15689, 17225, 15690,
 		[16152] = 1, --Attumen the Huntsman
 		[15687] = 2, --Moroes
 		[16457] = 3, --Maiden of Virtue
 		[17535] = 4, --Opera Event
-		[34437] = 5, --The Curator
+		[15691] = 5, --The Curator
 		[15688] = 6, --Terestian Illhoof
 		[16524] = 7, --Shade of Aran
 		[15689] = 8, --Netherspite
